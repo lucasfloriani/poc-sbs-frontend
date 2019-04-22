@@ -1,20 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { getFontWeight, getSize, getOptionsFrom } from '@theme'
 
 const Paragraph = styled(({
-  color, fontSize, hoverColor, ...props
+  align, color, fontSize, hoverColor, ...props
 }) => <p {...props} />)`
   font-family: ${font('primary')};
   color: ${({ color }) => palette(color.type, color.position)};
   font-size: ${({ fontSize }) => getSize(fontSize)};
   font-weight: ${getFontWeight('light')};
   margin: 0;
+  ${({ align }) => css`text-align: ${align};`}
+  width: 100%;
 `
 
 Paragraph.propTypes = {
+  align: PropTypes.string,
   color: PropTypes.shape({
     type: PropTypes.oneOf(getOptionsFrom('palette')),
     position: PropTypes.number,
@@ -23,8 +26,8 @@ Paragraph.propTypes = {
 }
 
 Paragraph.defaultProps = {
-  color: { type: 'grayscale', position: 4 },
-  fontSize: 'small',
+  color: { type: 'primary', position: 1 },
+  fontSize: 'extraSmall',
 }
 
 export default Paragraph

@@ -32,7 +32,7 @@ const styles = css`
   align-items: center;
   background-color: ${backgroundColor};
   border: none;
-  border-radius: 2px;
+  border-radius: 10px;
   box-sizing: border-box;
   box-shadow: ${({ shadow }) => getShadow(shadow)};
   color: ${foregroundColor};

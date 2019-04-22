@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { palette } from 'styled-theme/dist'
-import { getShadow } from '@theme'
+import { getOptionsFrom, getShadow } from '@theme'
 import { Paragraph } from 'components'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -20,23 +20,31 @@ const StyledToast = styled.div`
 `
 
 const Toast = ({
-  children, id, removeAlert, type,
+  color, children, id, removeAlert, type, ...props
 }) => {
   const remove = () => removeAlert(id)
   setTimeout(remove, 5000)
 
   return (
-    <StyledToast type={type} onClick={remove}>
-      <Paragraph>{children}</Paragraph>
+    <StyledToast type={type} onClick={remove} {...props}>
+      <Paragraph color={color}>{children}</Paragraph>
     </StyledToast>
   )
 }
 
 Toast.propTypes = {
   children: PropTypes.string.isRequired,
+  color: PropTypes.shape({
+    type: PropTypes.oneOf(getOptionsFrom('palette')).isRequired,
+    position: PropTypes.number.isRequired,
+  }).isRequired,
   id: PropTypes.string.isRequired,
   removeAlert: PropTypes.any.isRequired,
   type: PropTypes.oneOf(['success', 'error']),
+}
+
+Toast.defaultProps = {
+  color: { type: 'grayscale', position: 4 },
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators(AlertActions, dispatch)

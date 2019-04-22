@@ -12,7 +12,7 @@ export const theme = {
     error: ['#d32f2f', '#f44336', '#f18f8f', '#ffcdd2'],
     alert: ['#ffa000', '#ffc107', '#ffd761', '#ffecb3'],
     success: ['#388e3c', '#4caf50', '#7cc47f', '#c8e6c9'],
-    grayscale: ['#fff', 'transparent'],
+    grayscale: ['#000000', '#333333', '#666666', '#bfbebe', '#fff', 'transparent'],
   },
   fonts: {
     primary: 'Montserrat, sans-serif',

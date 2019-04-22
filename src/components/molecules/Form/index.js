@@ -6,7 +6,7 @@ import { getShadow } from '@theme'
 
 const StyledForm = styled.form`
   ${({ onlyWrapper }) => !onlyWrapper && css`
-    border-radius: 3px;
+    border-radius: 10px;
     box-shadow: ${getShadow()};
   `}
   background-color: ${palette('grayscale', 4)};

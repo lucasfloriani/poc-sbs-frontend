@@ -12,6 +12,10 @@ const StyledLink = styled(({ color, ...props }) => <Link {...props} />)`
   font-weight: 500;
   text-decoration: none;
   transition: .3s color ${getCubicBezier()};
+
+  :hover {
+    text-decoration: underline;
+  }
 `
 
 StyledLink.propTypes = {
@@ -22,7 +26,7 @@ StyledLink.propTypes = {
 }
 
 StyledLink.defaultProps = {
-  color: { type: 'secondary', position: 1 },
+  color: { type: 'primary', position: 2 },
 }
 
 export default StyledLink
