@@ -3,7 +3,9 @@ import { Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { theme, GlobalStyles } from '@theme'
 import ToastContainer from '@molecules/ToastContainer'
-import PrivateRouter from '@molecules/PrivateRouter'
+import UserRouter from '@molecules/UserRouter'
+import GasStationRouter from '@molecules/GasStationRouter'
+import AdminRouter from '@molecules/AdminRouter'
 import PublicRouter from '@molecules/PublicRouter'
 import { ScreenLoader } from './index'
 
@@ -28,6 +30,7 @@ import { ScreenLoader } from './index'
  * - CRUD dos postos de gasolina
  */
 const HomePage = lazy(() => import('@pages/HomePage/index'))
+const RegisterPage = lazy(() => import('@pages/RegisterPage/index'))
 const NotFoundPage = lazy(() => import('@pages/NotFoundPage/index'))
 // User pages
 const UserHomePage = lazy(() => import('@pages/UserHomePage/index'))
@@ -40,7 +43,6 @@ const UserEdit = lazy(() => import('@pages/UserEdit/index'))
 const GasStationHomePage = lazy(() => import('@pages/GasStationHomePage/index'))
 const GasStationEdit = lazy(() => import('@pages/GasStationEdit/index'))
 // Admin pages
-const AdminHomePage = lazy(() => import('@pages/AdminHomePage/index'))
 const AdminDashboard = lazy(() => import('@pages/AdminDashboard/index'))
 const AdminListGasStations = lazy(() => import('@pages/AdminListGasStations/index'))
 
@@ -49,23 +51,23 @@ const App = () => (
     <React.Fragment>
       <GlobalStyles />
       <ToastContainer />
-      <Suspense fallback={ScreenLoader}>
+      <Suspense fallback={<ScreenLoader />}>
         <Switch>
           <PublicRouter path="/" exact component={props => <HomePage {...props} />} />
+          <PublicRouter path="/register" exact component={props => <RegisterPage {...props} />} />
 
-          <PrivateRouter path="/user" exact component={props => <UserHomePage {...props} />} />
-          <PrivateRouter path="/user/gas-stations" exact component={props => <UserListGasStations {...props} />} />
-          <PrivateRouter path="/user/bookmarks" exact component={props => <UserBookmarks {...props} />} />
-          <PrivateRouter path="/user/complaints" exact component={props => <UserComplaints {...props} />} />
-          <PrivateRouter path="/user/ratings" exact component={props => <UserRatings {...props} />} />
-          <PrivateRouter path="/user/edit" exact component={props => <UserEdit {...props} />} />
+          <UserRouter path="/user" exact component={props => <UserHomePage {...props} />} />
+          <UserRouter path="/user/gas-stations" exact component={props => <UserListGasStations {...props} />} />
+          <UserRouter path="/user/bookmarks" exact component={props => <UserBookmarks {...props} />} />
+          <UserRouter path="/user/complaints" exact component={props => <UserComplaints {...props} />} />
+          <UserRouter path="/user/ratings" exact component={props => <UserRatings {...props} />} />
+          <UserRouter path="/user/edit" exact component={props => <UserEdit {...props} />} />
 
-          <PrivateRouter path="/gas-station" exact component={props => <GasStationHomePage {...props} />} />
-          <PrivateRouter path="/gas-station/edit" exact component={props => <GasStationEdit {...props} />} />
+          <GasStationRouter path="/gas-station" exact component={props => <GasStationHomePage {...props} />} />
+          <GasStationRouter path="/gas-station/edit" exact component={props => <GasStationEdit {...props} />} />
 
-          <PublicRouter path="/admin" exact component={props => <AdminHomePage {...props} />} />
-          <PrivateRouter path="/admin/dashboard" exact component={props => <AdminDashboard {...props} />} />
-          <PrivateRouter path="/admin/gas-stations" exact component={props => <AdminListGasStations {...props} />} />
+          <AdminRouter path="/admin/dashboard" exact component={props => <AdminDashboard {...props} />} />
+          <AdminRouter path="/admin/gas-stations" exact component={props => <AdminListGasStations {...props} />} />
 
           <Route path="*" component={props => <NotFoundPage {...props} />} />
         </Switch>
