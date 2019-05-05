@@ -5,30 +5,18 @@ import { getShadow, getSize } from '@theme'
 import { Container, Copyright } from 'components'
 
 const StyledFooter = styled.footer`
-  background-color: ${palette('secondary', 0)};
+  background-color: ${palette('primary', 1)};
   box-shadow: ${getShadow('small')};
   padding: ${getSize('small')};
 `
 const Wrapper = styled(Container)`
   display: grid;
   grid-gap: 30px;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas:
-    'contato endereco'
-    'linha linha'
-    'copyright copyright';
+  grid-template-columns: 1fr;
   margin: auto;
-
-  > hr {
-    grid-area: linha;
-  }
-
-  > p {
-    grid-area: copyright;
-  }
 `
 
-const Footer = ({ ...props }) => {
+const UserFooter = ({ ...props }) => {
   return (
     <StyledFooter>
       <Wrapper>
@@ -42,4 +30,4 @@ const Footer = ({ ...props }) => {
   )
 }
 
-export default Footer
+export default UserFooter

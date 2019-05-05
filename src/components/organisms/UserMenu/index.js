@@ -34,7 +34,7 @@ const HeaderActions = styled.div`
   `}
 `
 
-const ControlPanelHeader = (props) => {
+const UserMenu = (props) => {
   const iconStyle = {
     color: { type: 'grayscale', position: 4 },
     hoverColor: { type: 'grayscale', position: 3 },
@@ -44,10 +44,14 @@ const ControlPanelHeader = (props) => {
   return (
     <Wrapper {...props}>
       <InnerWrapper>
-        <ImageLink alt="Logo" to="/" src={logo} />
+        <ImageLink height="50px" alt="Logo" to="/user" src={logo} />
         <HeaderActions>
           <Menu toogleComponent={onClick => (<Icon icon="menu" onClick={onClick} {...iconStyle} />)}>
-            <MenuItem to="/">Home</MenuItem>
+            <MenuItem to="/user">Home</MenuItem>
+            <MenuItem to="/user/bookmarks">Favoritos</MenuItem>
+            <MenuItem to="/user/complaints">Denuncias</MenuItem>
+            <MenuItem to="/user/ratings">Avaliações</MenuItem>
+            <MenuItem to="/user/edit">Editar Usuário</MenuItem>
           </Menu>
           <IconLink to="/user" icon="user" {...iconStyle} />
           <IconLink to="/logout" icon="logout" {...iconStyle} />
@@ -57,4 +61,4 @@ const ControlPanelHeader = (props) => {
   )
 }
 
-export default ControlPanelHeader
+export default UserMenu
