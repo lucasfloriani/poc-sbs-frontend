@@ -23,7 +23,7 @@ Block.propTypes = {
 }
 
 Block.defaultProps = {
-  backgroundColor: { type: 'secondary', position: 0 },
+  backgroundColor: { type: 'primary', position: 1 },
   color: { type: 'grayscale', position: 4 },
 }
 
