@@ -5,7 +5,7 @@ import { getOptionsFrom, getShadow, getSize } from '@theme'
 
 const Card = styled.div`
   background-color: ${({ backgroundColor }) => palette(backgroundColor.type, backgroundColor.position)};
-  border-radius: 3px;
+  border-radius: 10px;
   box-shadow: ${({ shadowSize }) => getShadow(shadowSize)};
   ${({ margin }) => margin && css`margin: ${getSize(margin)};`};
   ${({ padding }) => padding && css`padding: ${getSize(padding)};`};
