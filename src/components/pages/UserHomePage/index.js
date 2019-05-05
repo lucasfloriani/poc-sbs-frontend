@@ -1,10 +1,25 @@
 import React from 'react'
-import { Container, FullPageTemplate } from 'components'
+import {
+  Container,
+  FullPageTemplate,
+  FilterGasStation,
+  Grid,
+  ListGasStations,
+  UserFooter,
+  UserMenu,
+} from 'components'
 
 const UserHomePage = () => (
-  <FullPageTemplate style={{ backgroundImage: 'linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%)' }}>
-    <Container align="center" windowHeight>
-      Homepage do usuário
+  <FullPageTemplate
+    header={<UserMenu />}
+    footer={<UserFooter />}
+    style={{ backgroundImage: 'linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%)' }}
+  >
+    <Container align="center">
+      <Grid>
+        <FilterGasStation />
+        <ListGasStations />
+      </Grid>
     </Container>
   </FullPageTemplate>
 )
