@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { palette } from 'styled-theme'
 import PropTypes from 'prop-types'
@@ -17,11 +17,11 @@ const Wrapper = styled.div`
 `
 
 const StyledMenu = styled.nav`
-  background-color: ${palette('secondary', 0)};
+  background-color: ${palette('primary', 2)};
   display: flex;
   flex-direction: column;
   height: 100vh;
-  padding: 10px;
+  padding: 0;
   overflow-y: auto;
   position: absolute;
   right: 0;
@@ -39,55 +39,51 @@ const Modal = styled.div`
 
 const MenuList = styled.ul`
   list-style: none;
-  margin: 10px 0;
+  margin: 0;
   padding: 0;
 `
 
 const BackButton = styled(Button)`
+  border-radius: 0;
   flex-basis: auto;
   flex-shrink: 0;
 `
 
-class Menu extends React.Component {
-  static propTypes = {
-    children: PropTypes.any,
-    toogleComponent: PropTypes.func,
-  }
+const Menu = ({ children, toogleComponent, ...props }) => {
+  const [open, setOpen] = useState(false)
+  const openMenu = () => setOpen(true)
+  const closeMenu = () => setOpen(false)
 
-  state = { open: false }
+  return (
+    <React.Fragment>
+      { toogleComponent(openMenu) }
+      <Wrapper open={open}>
+        <Modal onClick={closeMenu} />
+        <StyledMenu {...props} open={open}>
+          <BackButton
+            backgroundColor={{ type: 'primary', position: 1 }}
+            hoverBackgroundColor={{ type: 'primary', position: 0 }}
+            onClick={closeMenu}
+          >
+            <Icon
+              icon="leftArrow"
+              color={{ type: 'grayscale', position: 4 }}
+              size="extraSmall"
+            />
+            Voltar
+          </BackButton>
+          <MenuList>
+            {children}
+          </MenuList>
+        </StyledMenu>
+      </Wrapper>
+    </React.Fragment>
+  )
+}
 
-  handleClick = () => this.setState(state => ({ open: !state.open }))
-
-  render() {
-    const { open } = this.state
-    const { children, toogleComponent } = this.props
-
-    return (
-      <React.Fragment>
-        { toogleComponent(this.handleClick) }
-        <Wrapper open={open}>
-          <Modal onClick={this.handleClick} />
-          <StyledMenu {...this.props} open={open}>
-            <BackButton
-              backgroundColor={{ type: 'primary', position: 0 }}
-              hoverBackgroundColor={{ type: 'primary', position: 1 }}
-              onClick={this.handleClick}
-            >
-              <Icon
-                icon="leftArrow"
-                color={{ type: 'grayscale', position: 4 }}
-                size="extraSmall"
-              />
-              Voltar
-            </BackButton>
-            <MenuList>
-              {children}
-            </MenuList>
-          </StyledMenu>
-        </Wrapper>
-      </React.Fragment>
-    )
-  }
+Menu.propTypes = {
+  children: PropTypes.any.isRequired,
+  toogleComponent: PropTypes.func.isRequired,
 }
 
 export default Menu

@@ -8,38 +8,25 @@ import { getCubicBezier, getSize } from '@theme'
 const Wrapper = styled.li`
   align-items: center;
   display: flex;
+  overflow: hidden;
+  transition: .3s background-color ${getCubicBezier()};
+
+  &:hover {
+    background-color: rgba(219, 227, 244, 0.30);
+  }
 
   > a {
     color: ${palette('grayscale', 4)};
     font-family: ${font('primary')};
     font-size: ${getSize('small')};
-    overflow: hidden;
-    padding: 8px;
-    position: relative;
+    padding: .8em;
     text-decoration: none;
-    transition: .3s transform ${getCubicBezier()}, .3s background-image ${getCubicBezier()};
+    transition: .3s transform ${getCubicBezier()};
     width: 100%;
   }
 
   > a:hover {
     transform: translateX(10px);
-  }
-
-  > a::before {
-    background-color: rgba(219, 227, 244, 0.30);
-    content: "";
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    transform: translateX(-100%);
-    transition: .3s transform ${getCubicBezier()};
-    width: 100%;
-    z-index: 10;
-  }
-
-  > a:hover::before {
-    transform: translateX(0);
   }
 `
 
