@@ -13,7 +13,7 @@ const styles = css`
   color: ${({ color }) => palette(color.type, color.position)};
   font-family: ${font('primary')};
   font-size: ${({ fontSize }) => getSize(fontSize)};
-  font-weight: ${({ level }) => [1, 2].includes(level) ? getFontWeight('semiBold') : getFontWeight('medium')};
+  font-weight: ${getFontWeight('medium')};
   margin: ${({ margin }) => margin};
   transition: color .3s ${getCubicBezier()};
 
@@ -42,9 +42,9 @@ Heading.propTypes = {
 }
 
 Heading.defaultProps = {
-  color: { type: 'grayscale', position: 4 },
+  color: { type: 'grayscale', position: 0 },
   fontSize: 'extraLarge',
-  hoverColor: { type: 'grayscale', position: 4 },
+  hoverColor: { type: 'grayscale', position: 1 },
   level: 1,
   margin: '0',
 }
