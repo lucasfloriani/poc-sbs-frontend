@@ -6,11 +6,12 @@ import {
   Flex,
   Grid,
   Heading,
+  Link,
   Paragraph,
 } from 'components'
 
 const GasStationCard = ({
-  cnpj, fantasyName, cep, address, complement, neighborhood, cityName, stateName,
+  actions, cnpj, fantasyName, cep, address, complement, neighborhood, cityName, stateName, id,
 }) => (
   <Card padding="medium">
     <Grid valign="flex-start" column="1fr auto">
@@ -20,15 +21,21 @@ const GasStationCard = ({
         <Paragraph>{`${stateName}/${cityName}, CEP ${cep}`}</Paragraph>
       </Flex>
       <Flex>
-        <BadgeIcon icon="alert" />
-        <BadgeIcon icon="bookmark" />
-        <BadgeIcon icon="navigation" />
+        {actions.includes('edit') && <Link to={`/admin/gas-stations/${id}`}><BadgeIcon icon="edit" /></Link>}
+        {actions.includes('alert') && <BadgeIcon icon="alert" />}
+        {actions.includes('bookmark') && <BadgeIcon icon="bookmark" />}
+        {actions.includes('navigation') && <BadgeIcon icon="navigation" />}
       </Flex>
     </Grid>
   </Card>
 )
 
 GasStationCard.propTypes = {
+  id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]).isRequired,
+  actions: PropTypes.array.isRequired,
   cnpj: PropTypes.string.isRequired,
   fantasyName: PropTypes.string.isRequired,
   cep: PropTypes.string.isRequired,
@@ -37,6 +44,10 @@ GasStationCard.propTypes = {
   neighborhood: PropTypes.string.isRequired,
   cityName: PropTypes.string.isRequired,
   stateName: PropTypes.string.isRequired,
+}
+
+GasStationCard.defaultProps = {
+  actions: ['alert', 'bookmark', 'navigation'],
 }
 
 export default GasStationCard
