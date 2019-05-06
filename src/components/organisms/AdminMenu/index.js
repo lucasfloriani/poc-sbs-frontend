@@ -50,7 +50,8 @@ const AdminMenu = ({ logout }) => {
         <ImageLink height="50px" alt="Logo" to="/user" src={logo} />
         <HeaderActions>
           <Menu toogleComponent={onClick => (<Icon icon="menu" onClick={onClick} {...iconStyle} />)}>
-            <MenuItem to="/admin/gas-stations">Home</MenuItem>
+            <MenuItem to="/admin">Home</MenuItem>
+            <MenuItem to="/admin/gas-stations">Criar Posto</MenuItem>
           </Menu>
           <Icon to="/logout" icon="logout" onClick={() => logout()} {...iconStyle} />
         </HeaderActions>

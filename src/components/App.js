@@ -66,7 +66,8 @@ const App = () => (
           <GasStationRouter path="/gas-station" exact component={props => <GasStationHomePage {...props} />} />
           <GasStationRouter path="/gas-station/:gasStationID" exact component={props => <GasStationEdit {...props} />} />
 
-          <AdminRouter path="/admin/gas-stations" exact component={props => <AdminListGasStations {...props} />} />
+          <AdminRouter path="/admin" exact component={props => <AdminListGasStations {...props} />} />
+          <AdminRouter path="/admin/gas-stations" exact component={props => <AdminEditGasStations {...props} />} />
           <AdminRouter path="/admin/gas-stations/:gasStationID" exact component={props => <AdminEditGasStations {...props} />} />
 
           <Route path="*" component={props => <NotFoundPage {...props} />} />
