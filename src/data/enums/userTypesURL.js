@@ -1,7 +1,7 @@
 const UserTypesURL = Object.freeze({
   user: '/user',
   'gas-station': '/gas-station',
-  admin: '/admin',
+  admin: '/admin/gas-stations',
 })
 
 export default UserTypesURL
