@@ -10,7 +10,9 @@ import {
   ScreenLoader,
 } from 'components'
 
-const ListGasStations = ({ gasStations, gasStationsRequest, isFetching }) => {
+const ListGasStations = ({
+  actions, gasStations, gasStationsRequest, isFetching,
+}) => {
   useEffect(() => {
     const filterValues = {
       name: '',
@@ -41,7 +43,9 @@ const ListGasStations = ({ gasStations, gasStationsRequest, isFetching }) => {
         state,
       }) => (
         <GasStationCard
+          actions={actions}
           key={id}
+          id={id}
           cnpj={cnpj}
           fantasyName={fantasyName}
           cep={cep}
@@ -58,9 +62,14 @@ const ListGasStations = ({ gasStations, gasStationsRequest, isFetching }) => {
 }
 
 ListGasStations.propTypes = {
+  actions: PropTypes.array.isRequired,
   gasStations: PropTypes.array.isRequired,
   gasStationsRequest: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
+}
+
+ListGasStations.defaultProps = {
+  actions: ['alert', 'bookmark', 'navigation'],
 }
 
 const mapStateToProps = ({ gasStation: { gasStations, isFetching } }) => ({ gasStations, isFetching })
