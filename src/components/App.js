@@ -43,7 +43,7 @@ const UserEdit = lazy(() => import('@pages/UserEdit/index'))
 const GasStationHomePage = lazy(() => import('@pages/GasStationHomePage/index'))
 const GasStationEdit = lazy(() => import('@pages/GasStationEdit/index'))
 // Admin pages
-const AdminDashboard = lazy(() => import('@pages/AdminDashboard/index'))
+const AdminEditGasStations = lazy(() => import('@pages/AdminEditGasStations/index'))
 const AdminListGasStations = lazy(() => import('@pages/AdminListGasStations/index'))
 
 const App = () => (
@@ -61,13 +61,13 @@ const App = () => (
           <UserRouter path="/user/bookmarks" exact component={props => <UserBookmarks {...props} />} />
           <UserRouter path="/user/complaints" exact component={props => <UserComplaints {...props} />} />
           <UserRouter path="/user/ratings" exact component={props => <UserRatings {...props} />} />
-          <UserRouter path="/user/edit" exact component={props => <UserEdit {...props} />} />
+          <UserRouter path="/user/:userID" exact component={props => <UserEdit {...props} />} />
 
           <GasStationRouter path="/gas-station" exact component={props => <GasStationHomePage {...props} />} />
-          <GasStationRouter path="/gas-station/edit" exact component={props => <GasStationEdit {...props} />} />
+          <GasStationRouter path="/gas-station/:gasStationID" exact component={props => <GasStationEdit {...props} />} />
 
-          <AdminRouter path="/admin/dashboard" exact component={props => <AdminDashboard {...props} />} />
           <AdminRouter path="/admin/gas-stations" exact component={props => <AdminListGasStations {...props} />} />
+          <AdminRouter path="/admin/gas-stations/:gasStationID" exact component={props => <AdminEditGasStations {...props} />} />
 
           <Route path="*" component={props => <NotFoundPage {...props} />} />
         </Switch>
