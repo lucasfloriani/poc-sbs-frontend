@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as GasStationActions } from '@store/ducks/gasStation'
 import {
+  Block,
   GasStationCard,
   Grid,
   Paragraph,
@@ -30,7 +31,7 @@ const ListGasStations = ({
   if (isFetching) return (<ScreenLoader />)
 
   return (
-    <Grid column="1fr 1fr">
+    <Grid column={gasStations.length ? '1fr 1fr' : '1fr'}>
       {gasStations && gasStations.map(({
         id,
         cnpj,
@@ -56,7 +57,11 @@ const ListGasStations = ({
           stateName={state.name}
         />
       ))}
-      {!gasStations && <Paragraph>Não foi encontrado nenhum posto de gasolina</Paragraph>}
+      {!gasStations.length && (
+        <Block>
+          <Paragraph color={{ type: 'grayscale', position: 4 }}>Não foi encontrado nenhum posto de gasolina</Paragraph>
+        </Block>
+      )}
     </Grid>
   )
 }
