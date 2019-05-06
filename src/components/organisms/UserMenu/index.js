@@ -2,6 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import logo from '@public/img/logo.png'
 import { getShadow, media } from '@theme'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { Creators as AuthActions } from '@store/ducks/auth'
 import {
   Block, Icon, IconLink, ImageLink, Menu, MenuItem,
 } from 'components'
@@ -34,7 +37,7 @@ const HeaderActions = styled.div`
   `}
 `
 
-const UserMenu = (props) => {
+const UserMenu = ({ logout }) => {
   const iconStyle = {
     color: { type: 'grayscale', position: 4 },
     hoverColor: { type: 'grayscale', position: 3 },
@@ -42,7 +45,7 @@ const UserMenu = (props) => {
   }
 
   return (
-    <Wrapper {...props}>
+    <Wrapper>
       <InnerWrapper>
         <ImageLink height="50px" alt="Logo" to="/user" src={logo} />
         <HeaderActions>
@@ -51,14 +54,16 @@ const UserMenu = (props) => {
             <MenuItem to="/user/bookmarks">Favoritos</MenuItem>
             <MenuItem to="/user/complaints">Denuncias</MenuItem>
             <MenuItem to="/user/ratings">Avaliações</MenuItem>
-            <MenuItem to="/user/edit">Editar Usuário</MenuItem>
+            <MenuItem to="/user/:userID">Editar Usuário</MenuItem>
           </Menu>
           <IconLink to="/user" icon="user" {...iconStyle} />
-          <IconLink to="/logout" icon="logout" {...iconStyle} />
+          <Icon to="/logout" icon="logout" onClick={() => logout()} {...iconStyle} />
         </HeaderActions>
       </InnerWrapper>
     </Wrapper>
   )
 }
 
-export default UserMenu
+const mapDispatchToProps = dispatch => bindActionCreators(AuthActions, dispatch)
+
+export default connect(null, mapDispatchToProps)(UserMenu)

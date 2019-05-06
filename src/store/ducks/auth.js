@@ -53,7 +53,13 @@ const loginFailure = (state = INITIAL_STATE) => ({
 })
 const logout = () => {
   sessionStorage.removeItem('token')
-  return INITIAL_STATE
+  sessionStorage.removeItem('user')
+  return {
+    isAuthenticated: false,
+    isFetching: false,
+    token: '',
+    user: {},
+  }
 }
 
 export default createReducer(INITIAL_STATE, {
