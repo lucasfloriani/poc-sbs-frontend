@@ -4,6 +4,7 @@ const maskTypes = Object.freeze({
   PHONE: '(99) 99999-9999',
   CPF: '999.999.999-99',
   CEP: '99999-999',
+  CNPJ: '99.999.999/9999-99',
 })
 
 export default maskTypes
