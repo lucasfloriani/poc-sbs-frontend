@@ -2,25 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { useLastLocation } from 'react-router-last-location'
 import UserTypesURL from '@enums/userTypesURL'
 
 const PublicRouter = ({
   component: Component, isAuthenticated, user, ...rest
-}) => {
-  const lastLocation = useLastLocation()
-
-  return (
-    <Route
-      {...rest}
-      render={
-        props => isAuthenticated && user.type
-          ? <Redirect to={{ pathname: lastLocation ? lastLocation.pathname : UserTypesURL[user.type] }} />
-          : <Component {...props} />
-      }
-    />
-  )
-}
+}) => (
+  <Route
+    {...rest}
+    render={
+      props => isAuthenticated && user.type
+        ? <Redirect to={{ pathname: UserTypesURL[user.type] }} />
+        : <Component {...props} />
+    }
+  />
+)
 
 PublicRouter.propTypes = {
   component: PropTypes.any.isRequired,
