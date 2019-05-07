@@ -18,7 +18,7 @@ export function* gasStationsRequest({ filter }) {
 
 export function* getGasStationRequest({ gasStationID }) {
   try {
-    const response = yield call(api.get, `gas-station/${gasStationID}`)
+    const response = yield call(api.get, `gas-stations/${gasStationID}`)
     const gasStation = response.data
     yield put(GasStationActions.getGasStationSuccess(gasStation))
   } catch (err) {
@@ -44,10 +44,10 @@ export function* updateGasStationRequest({ gasStationData }) {
   try {
     yield call(api.put, `gas-stations/${gasStationData.id}`, gasStationData)
     yield put(GasStationActions.updateGasStationSuccess())
-    yield put(AlertActions.updateSuccessAlert('Posto atualizado com successo'))
+    yield put(AlertActions.createSuccessAlert('Posto atualizado com successo'))
   } catch (err) {
     console.log('SAGA GAS STATION ERR:', err)
     yield put(GasStationActions.updateGasStationFailure())
-    yield put(AlertActions.updateErrorAlert('Erro ao atualizar o posto de gasolina, verifique os campos e tente novamente'))
+    yield put(AlertActions.createErrorAlert('Erro ao atualizar o posto de gasolina, verifique os campos e tente novamente'))
   }
 }
