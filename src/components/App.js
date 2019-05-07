@@ -41,10 +41,12 @@ const UserRatings = lazy(() => import('@pages/UserRatings/index'))
 const UserEdit = lazy(() => import('@pages/UserEdit/index'))
 // Gas Station pages
 const GasStationHomePage = lazy(() => import('@pages/GasStationHomePage/index'))
-const GasStationEdit = lazy(() => import('@pages/GasStationEdit/index'))
+const GasStationCreatePriceFuel = lazy(() => import('@pages/GasStationCreatePriceFuel/index'))
+const GasStationEditPriceFuel = lazy(() => import('@pages/GasStationEditPriceFuel/index'))
 // Admin pages
-const AdminEditGasStations = lazy(() => import('@pages/AdminEditGasStations/index'))
 const AdminListGasStations = lazy(() => import('@pages/AdminListGasStations/index'))
+const AdminCreateGasStations = lazy(() => import('@pages/AdminCreateGasStations/index'))
+const AdminEditGasStations = lazy(() => import('@pages/AdminEditGasStations/index'))
 
 const App = () => (
   <ThemeProvider theme={theme}>
@@ -64,10 +66,11 @@ const App = () => (
           <UserRouter path="/user/:userID" exact component={props => <UserEdit {...props} />} />
 
           <GasStationRouter path="/gas-station" exact component={props => <GasStationHomePage {...props} />} />
-          <GasStationRouter path="/gas-station/:gasStationID" exact component={props => <GasStationEdit {...props} />} />
+          <GasStationRouter path="/gas-station/price-fuel" exact component={props => <GasStationCreatePriceFuel {...props} />} />
+          <GasStationRouter path="/gas-station/price-fuel/:priceFuelID" exact component={props => <GasStationEditPriceFuel {...props} />} />
 
           <AdminRouter path="/admin" exact component={props => <AdminListGasStations {...props} />} />
-          <AdminRouter path="/admin/gas-stations" exact component={props => <AdminEditGasStations {...props} />} />
+          <AdminRouter path="/admin/gas-stations" exact component={props => <AdminCreateGasStations {...props} />} />
           <AdminRouter path="/admin/gas-stations/:gasStationID" exact component={props => <AdminEditGasStations {...props} />} />
 
           <Route path="*" component={props => <NotFoundPage {...props} />} />
