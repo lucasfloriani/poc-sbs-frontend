@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { Label } from 'components'
-import { font, palette } from 'styled-theme'
-import { getOptionsFrom, getShadow } from '@theme'
+import { Error, Label } from 'components'
+import { getOptionsFrom } from '@theme'
 
 const Wrapper = styled.div`
   align-items: center;
@@ -11,20 +10,6 @@ const Wrapper = styled.div`
   ${({ type }) => type !== 'number' && css`flex-direction: column;`}
   justify-items: center;
   position: relative;
-`
-
-const Error = styled.div`
-  background-color: ${palette('danger', 2)};
-  border-left: 5px solid ${palette('danger', 0)};
-  border-radius: 0 0 3px 3px;
-  box-shadow: ${getShadow()};
-  box-sizing: border-box;
-  color: ${palette('grayscale', 4)};
-  font-family: ${font('primary')};
-  font-size: .8em;
-  letter-spacing: 0.4px;
-  padding: 6px;
-  width: 100%;
 `
 
 function withFormWrapper(WrappedComponent) {
