@@ -5,6 +5,7 @@ const Grid = styled.div`
   display: grid;
   grid-gap: ${({ gap }) => gap};
   grid-template-columns: ${({ column }) => column};
+  ${({ halign }) => halign && css`justify-content: ${halign};`}
   ${({ valign }) => valign && css`align-items: ${valign};`}
   ${({ columnLength }) => columnLength && css`grid-column: ${columnLength};`}
   ${({ rows }) => rows && css`grid-template-rows: ${rows}`};
@@ -14,8 +15,10 @@ const Grid = styled.div`
 Grid.propTypes = {
   column: PropTypes.any,
   columnLength: PropTypes.any,
+  halign: PropTypes.string,
   gap: PropTypes.string,
   rows: PropTypes.any,
+  valign: PropTypes.string,
 }
 
 Grid.defaultProps = {
