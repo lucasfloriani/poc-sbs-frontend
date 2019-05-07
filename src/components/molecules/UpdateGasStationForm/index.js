@@ -4,7 +4,7 @@ import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Creators as AuthActions } from '@store/ducks/auth'
+import { Creators as GasStationActions } from '@store/ducks/gasStation'
 import {
   Button,
   Block,
@@ -13,6 +13,7 @@ import {
   Heading,
   Form,
   Grid,
+  MapInput,
   StateSelect,
   Text,
 } from 'components'
@@ -22,33 +23,41 @@ const UpdateGasStationForm = ({
 }) => {
   useEffect(() => { getGasStationRequest(gasStationID) }, [])
   if (isFetching) return (<ContentLoader />)
-  console.log(gasStation)
+
+  const geoLocation = gasStation.geo_location
+    ? gasStation.geo_location.split(',').map(value => parseFloat(value))
+    : [-26.244383377008926, -49.384092876981356]
 
   return (
     <Formik
       initialValues={{
-        id: '',
-        email: '',
-        password: '',
-        cnpj: '',
-        business_name: '',
-        fantasy_name: '',
-        state_registration: '',
-        anp: '',
-        cep: '',
-        address: '',
-        complement: '',
-        neighborhood: '',
-        geo_location: '',
-        city_id: '',
-        state_id: '',
+        id: gasStationID,
+        cnpj: gasStation.cnpj,
+        business_name: gasStation.business_name,
+        fantasy_name: gasStation.fantasy_name,
+        state_registration: gasStation.state_registration,
+        anp: gasStation.anp,
+        cep: gasStation.cep,
+        address: gasStation.address,
+        complement: gasStation.complement,
+        neighborhood: gasStation.neighborhood,
+        geo_location: geoLocation,
+        city_id: gasStation.city_id,
+        state_id: gasStation.state_id,
       }}
       onSubmit={(values, { setSubmitting }) => {
-        updateGasStationRequest(values)
+        const filtredValues = {
+          ...values,
+          geo_location: values.geo_location.join(','),
+        }
+        updateGasStationRequest(filtredValues)
         setSubmitting(false)
       }}
       validationSchema={
         Yup.object().shape({
+          id: Yup.string()
+            .typeError('Identificador precisa ser um texto')
+            .required('Identificador do posto é obrigatório'),
           cnpj: Yup.string()
             .typeError('CNPJ precisa ser um texto')
             .matches(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}-?[0-9]{2}/, 'CNPJ é inválido')
@@ -60,7 +69,7 @@ const UpdateGasStationForm = ({
           fantasy_name: Yup.string()
             .typeError('Nome fantasia precisa ser um texto')
             .required('Campo nome fantasia é obrigatório'),
-          stateRegistration: Yup.string()
+          state_registration: Yup.string()
             .typeError('Registro estadual precisa ser um texto')
             .required('Campo registro estadual é obrigatório'),
           anp: Yup.string()
@@ -80,9 +89,10 @@ const UpdateGasStationForm = ({
           neighborhood: Yup.string()
             .typeError('Bairro precisa ser um texto')
             .required('Campo bairro é obrigatório'),
-          geo_location: Yup.string()
-            .typeError('Localização precisa ser um texto')
-            .matches(/^[-+]?([1-8]?d(.d+)?|90(.0+)?),s*[-+]?(180(.0+)?|((1[0-7]d)|([1-9]?d))(.d+)?)$/, 'Localização é inválida')
+          geo_location: Yup.array()
+            .of(Yup.number().typeError('Localização informada é inválida'))
+            .min(2, 'Localização informada é inválida')
+            .max(2, 'Localização informada é inválida')
             .required('Campo localização é obrigatório'),
           city_id: Yup.string()
             .typeError('Cidade precisa ser um texto')
@@ -102,6 +112,7 @@ const UpdateGasStationForm = ({
         handleReset,
         handleSubmit,
         isSubmitting,
+        setFieldValue,
       }) => {
         const commomEvents = {
           onChange: handleChange,
@@ -142,7 +153,7 @@ const UpdateGasStationForm = ({
                     fontSize="small"
                     disabled={!dirty || isSubmitting}
                   >
-                    Criar
+                    Atualizar
                   </Button>
                 </Grid>
               </Block>
@@ -155,7 +166,7 @@ const UpdateGasStationForm = ({
                 name="cnpj"
                 labelTitle="CNPJ"
                 error={touched.cnpj && errors.cnpj}
-                active={touched.cnpj}
+                active={touched.cnpj || values.cnpj !== ''}
                 value={values.cnpj}
                 {...commomEvents}
               />
@@ -164,7 +175,7 @@ const UpdateGasStationForm = ({
                 name="business_name"
                 labelTitle="Razão Social"
                 error={touched.business_name && errors.business_name}
-                active={touched.business_name}
+                active={touched.business_name || values.business_name !== ''}
                 value={values.business_name}
                 required
                 {...commomEvents}
@@ -174,7 +185,7 @@ const UpdateGasStationForm = ({
                 name="fantasy_name"
                 labelTitle="Nome Fantasia"
                 error={touched.fantasy_name && errors.fantasy_name}
-                active={touched.fantasy_name}
+                active={touched.fantasy_name || values.fantasy_name !== ''}
                 value={values.fantasy_name}
                 required
                 {...commomEvents}
@@ -184,7 +195,7 @@ const UpdateGasStationForm = ({
                 name="state_registration"
                 labelTitle="Registro Estadual"
                 error={touched.state_registration && errors.state_registration}
-                active={touched.state_registration}
+                active={touched.state_registration || values.state_registration !== ''}
                 value={values.state_registration}
                 required
                 {...commomEvents}
@@ -194,7 +205,7 @@ const UpdateGasStationForm = ({
                 name="anp"
                 labelTitle="ANP"
                 error={touched.anp && errors.anp}
-                active={touched.anp}
+                active={touched.anp || values.anp !== ''}
                 value={values.anp}
                 required
                 {...commomEvents}
@@ -205,7 +216,7 @@ const UpdateGasStationForm = ({
                 name="cep"
                 labelTitle="CEP"
                 error={touched.cep && errors.cep}
-                active={touched.cep}
+                active={touched.cep || values.cep !== ''}
                 value={values.cep}
                 {...commomEvents}
               />
@@ -214,7 +225,7 @@ const UpdateGasStationForm = ({
                 name="address"
                 labelTitle="Endereço"
                 error={touched.address && errors.address}
-                active={touched.address}
+                active={touched.address || values.address !== ''}
                 value={values.address}
                 required
                 {...commomEvents}
@@ -224,7 +235,7 @@ const UpdateGasStationForm = ({
                 name="complement"
                 labelTitle="Complemento"
                 error={touched.complement && errors.complement}
-                active={touched.complement}
+                active={touched.complement || values.complement !== ''}
                 value={values.complement}
                 required
                 {...commomEvents}
@@ -234,7 +245,7 @@ const UpdateGasStationForm = ({
                 name="neighborhood"
                 labelTitle="Bairro"
                 error={touched.neighborhood && errors.neighborhood}
-                active={touched.neighborhood}
+                active={touched.neighborhood || values.neighborhood !== ''}
                 value={values.neighborhood}
                 required
                 {...commomEvents}
@@ -244,8 +255,9 @@ const UpdateGasStationForm = ({
                 name="state_id"
                 labelTitle="Estado"
                 error={touched.state_id && errors.state_id}
-                active={touched.state_id}
+                active={touched.state_id || values.state_id !== ''}
                 value={values.state_id}
+                required
                 {...commomEvents}
               />
               <CitySelect
@@ -254,11 +266,26 @@ const UpdateGasStationForm = ({
                 name="city_id"
                 labelTitle="Cidade"
                 error={touched.city_id && errors.city_id}
-                active={touched.city_id}
+                active={touched.city_id || values.city_id !== ''}
                 value={values.city_id}
+                required
                 {...commomEvents}
               />
-              {/* geo_location */}
+              <Grid style={{ gridColumn: '1/-1' }}>
+                <Heading
+                  color={{ type: 'grayscale', position: 0 }}
+                  fontSize="normal"
+                  hoverColor={{ type: 'grayscale', position: 0 }}
+                  level={3}
+                >
+                  Selecione a localização do posto
+                </Heading>
+                <MapInput
+                  value={values.geo_location}
+                  error={touched.geo_location && errors.geo_location}
+                  setValue={value => setFieldValue('geo_location', value)}
+                />
+              </Grid>
             </Grid>
           </Form>
         )
@@ -268,10 +295,10 @@ const UpdateGasStationForm = ({
 }
 
 UpdateGasStationForm.propTypes = {
-  createUserRequest: PropTypes.func.isRequired,
+  updateGasStationRequest: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = ({ gasStation: { gasStation, isFetching } }) => ({ gasStation, isFetching })
-const mapDispatchToProps = dispatch => bindActionCreators(AuthActions, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators(GasStationActions, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpdateGasStationForm)
