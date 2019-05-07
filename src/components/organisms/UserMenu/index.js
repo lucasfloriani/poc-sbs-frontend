@@ -57,7 +57,7 @@ const UserMenu = ({ logout }) => {
             <MenuItem to="/user/:userID">Editar Usuário</MenuItem>
           </Menu>
           <IconLink to="/user" icon="user" {...iconStyle} />
-          <Icon to="/logout" icon="logout" onClick={() => logout()} {...iconStyle} />
+          <Icon icon="logout" onClick={() => logout()} {...iconStyle} />
         </HeaderActions>
       </InnerWrapper>
     </Wrapper>
