@@ -13,26 +13,33 @@ const Wrapper = styled.div`
 const Header = styled.header``
 
 const MainContent = styled.main`
+  box-sizing: border-box;
+  padding: ${({ mainPadding }) => mainPadding};
   width: 100%;
 `
 
-const PageTemplate = ({
-  children, footer, header, hero, ...props
+const FullPageTemplate = ({
+  children, footer, header, hero, mainPadding, ...props
 }) => {
   return (
     <Wrapper {...props} id="outer-container">
       {header && <Header>{header}</Header>}
-      <MainContent>{children}</MainContent>
+      <MainContent mainPadding={mainPadding}>{children}</MainContent>
       {footer && footer}
     </Wrapper>
   )
 }
 
-PageTemplate.propTypes = {
+FullPageTemplate.propTypes = {
   children: PropTypes.any,
   footer: PropTypes.node,
   header: PropTypes.node,
   hero: PropTypes.node,
+  mainPadding: PropTypes.string.isRequired,
 }
 
-export default PageTemplate
+FullPageTemplate.defaultProps = {
+  mainPadding: '15px 0',
+}
+
+export default FullPageTemplate
