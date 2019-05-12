@@ -12,7 +12,7 @@ export const { Types, Creators } = createActions({
   createPriceFuelSuccess: null,
   createPriceFuelFailure: null,
   updatePriceFuelRequest: ['priceFuelData'],
-  updatePriceFuelSuccess: null,
+  updatePriceFuelSuccess: ['priceFuel'],
   updatePriceFuelFailure: null,
   deletePriceFuelRequest: ['priceFuelID'],
   deletePriceFuelSuccess: null,
@@ -73,9 +73,10 @@ const updatePriceFuelRequest = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: true,
 })
-const updatePriceFuelSuccess = (state = INITIAL_STATE) => ({
+const updatePriceFuelSuccess = (state = INITIAL_STATE, { priceFuel }) => ({
   ...state,
   isFetching: false,
+  priceFuel,
 })
 const updatePriceFuelFailure = (state = INITIAL_STATE) => ({
   ...state,

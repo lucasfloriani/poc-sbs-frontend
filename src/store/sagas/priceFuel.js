@@ -6,8 +6,7 @@ import api from '../../services'
 export function* priceFuelsRequest({ gasStationID }) {
   try {
     const response = yield call(api.get, `gas-stations/${gasStationID}/price-fuels`)
-    const priceFuels = response.data
-    yield put(PriceFuelActions.priceFuelsSuccess(priceFuels))
+    yield put(PriceFuelActions.priceFuelsSuccess(response.data))
   } catch (err) {
     console.log('SAGA CITY ERR: ', err)
     yield put(PriceFuelActions.priceFuelsFailure())
@@ -15,12 +14,10 @@ export function* priceFuelsRequest({ gasStationID }) {
   }
 }
 
-
 export function* getPriceFuelRequest({ priceFuelID }) {
   try {
     const response = yield call(api.get, `gas-stations/price-fuel/${priceFuelID}`)
-    const priceFuel = response.data
-    yield put(PriceFuelActions.getPriceFuelSuccess(priceFuel))
+    yield put(PriceFuelActions.getPriceFuelSuccess(response.data))
   } catch (err) {
     console.log('SAGA PRICE FUEL ERR:', err)
     yield put(PriceFuelActions.getPriceFuelFailure())
@@ -42,8 +39,8 @@ export function* createPriceFuelRequest({ priceFuelData }) {
 
 export function* updatePriceFuelRequest({ priceFuelData }) {
   try {
-    yield call(api.put, `gas-stations/price-fuel/${priceFuelData.id}`, priceFuelData)
-    yield put(PriceFuelActions.updatePriceFuelSuccess())
+    const response = yield call(api.put, `gas-stations/price-fuel/${priceFuelData.id}`, priceFuelData)
+    yield put(PriceFuelActions.updatePriceFuelSuccess(response.data))
     yield put(AlertActions.createSuccessAlert('Preço de combustivel atualizado com successo'))
   } catch (err) {
     console.log('SAGA PRICE FUEL ERR:', err)
