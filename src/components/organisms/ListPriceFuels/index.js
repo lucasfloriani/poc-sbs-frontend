@@ -30,7 +30,23 @@ const ListPriceFuels = ({
 
   return (
     <Grid>
-      <Heading>Preços de combustível</Heading>
+      <Block>
+        <Flex halign="space-between" valign="center">
+          <Heading
+            color={{ type: 'grayscale', position: 4 }}
+            hoverColor={{ type: 'grayscale', position: 4 }}
+          >
+            Preços de combustível
+          </Heading>
+          <Button
+            to="/gas-station/price-fuel"
+            backgroundColor={{ type: 'primary', position: 2 }}
+            hoverBackgroundColor={{ type: 'primary', position: 0 }}
+          >
+            Criar Preço
+          </Button>
+        </Flex>
+      </Block>
       <Grid column={priceFuels.length ? '1fr 1fr' : '1fr'}>
         {priceFuels && priceFuels.map(({
           id, fuelType, paymentType, price,
