@@ -52,7 +52,7 @@ export function* updatePriceFuelRequest({ priceFuelData }) {
 export function* deletePriceFuelRequest({ priceFuelID }) {
   try {
     yield call(api.delete, `gas-stations/price-fuel/${priceFuelID}`)
-    yield put(PriceFuelActions.deletePriceFuelSuccess())
+    yield put(PriceFuelActions.deletePriceFuelSuccess(priceFuelID))
     yield put(AlertActions.createSuccessAlert('Preço de combustivel excluido com successo'))
   } catch (err) {
     console.log('SAGA PRICE FUEL ERR:', err)

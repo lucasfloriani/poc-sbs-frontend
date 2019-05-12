@@ -15,7 +15,7 @@ export const { Types, Creators } = createActions({
   updatePriceFuelSuccess: ['priceFuel'],
   updatePriceFuelFailure: null,
   deletePriceFuelRequest: ['priceFuelID'],
-  deletePriceFuelSuccess: null,
+  deletePriceFuelSuccess: ['priceFuelID'],
   deletePriceFuelFailure: null,
 })
 
@@ -87,9 +87,10 @@ const deletePriceFuelRequest = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: true,
 })
-const deletePriceFuelSuccess = (state = INITIAL_STATE) => ({
+const deletePriceFuelSuccess = (state = INITIAL_STATE, { priceFuelID }) => ({
   ...state,
   isFetching: false,
+  priceFuels: state.priceFuels.filter(priceFuel => priceFuel.id.toString() !== priceFuelID),
 })
 const deletePriceFuelFailure = (state = INITIAL_STATE) => ({
   ...state,

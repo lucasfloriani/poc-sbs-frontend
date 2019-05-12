@@ -17,7 +17,11 @@ import {
 } from 'components'
 
 const ListPriceFuels = ({
-  gasStationID, priceFuels, priceFuelsRequest, isFetching,
+  deletePriceFuelRequest,
+  gasStationID,
+  priceFuels,
+  priceFuelsRequest,
+  isFetching,
 }) => {
   useEffect(() => {
     priceFuelsRequest(gasStationID)
@@ -40,7 +44,7 @@ const ListPriceFuels = ({
               </Flex>
               <Flex>
                 <Link to={`/gas-station/price-fuel/${id}`}><BadgeIcon icon="edit" /></Link>
-                <BadgeIcon icon="delete" />
+                <BadgeIcon icon="delete" onClick={() => deletePriceFuelRequest(`${id}`)} />
               </Flex>
             </Grid>
           </Card>
@@ -61,6 +65,7 @@ const ListPriceFuels = ({
 }
 
 ListPriceFuels.propTypes = {
+  deletePriceFuelRequest: PropTypes.func.isRequired,
   gasStationID: PropTypes.string.isRequired,
   priceFuels: PropTypes.array.isRequired,
   priceFuelsRequest: PropTypes.func.isRequired,
