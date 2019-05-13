@@ -13,6 +13,8 @@ export const { Types, Creators } = createActions({
   updateGasStationRequest: ['gasStationData'],
   updateGasStationSuccess: null,
   updateGasStationFailure: null,
+  updateGasStationsBookmark: ['bookmark'],
+  deleteGasStationsBookmark: ['bookmark'],
 })
 
 const INITIAL_STATE = {
@@ -77,6 +79,25 @@ const updateGasStationFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+// Another reducers
+const updateGasStationsBookmark = (state = INITIAL_STATE, { bookmark }) => ({
+  ...state,
+  gasStations: state.gasStations.map(gasStation => gasStation.id.toString() !== bookmark.gas_station_id
+    ? gasStation
+    : { ...gasStation, bookmarks: [...gasStation.bookmarks, bookmark] }),
+})
+const deleteGasStationsBookmark = (state = INITIAL_STATE, { bookmark }) => {
+  const updatedGasStations = state.gasStations.map((gasStation) => {
+    if (gasStation.id !== bookmark.gas_station_id) return gasStation
+
+    return {
+      ...gasStation,
+      bookmarks: gasStation.bookmarks.filter(stateBookmark => stateBookmark.id !== bookmark.id),
+    }
+  })
+
+  return { ...state, gasStations: updatedGasStations }
+}
 
 export default createReducer(INITIAL_STATE, {
   [Types.GAS_STATIONS_REQUEST]: gasStationsRequest,
@@ -91,4 +112,6 @@ export default createReducer(INITIAL_STATE, {
   [Types.UPDATE_GAS_STATION_REQUEST]: updateGasStationRequest,
   [Types.UPDATE_GAS_STATION_SUCCESS]: updateGasStationSuccess,
   [Types.UPDATE_GAS_STATION_FAILURE]: updateGasStationFailure,
+  [Types.UPDATE_GAS_STATIONS_BOOKMARK]: updateGasStationsBookmark,
+  [Types.DELETE_GAS_STATIONS_BOOKMARK]: deleteGasStationsBookmark,
 })
