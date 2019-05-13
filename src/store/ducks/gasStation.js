@@ -13,8 +13,11 @@ export const { Types, Creators } = createActions({
   updateGasStationRequest: ['gasStationData'],
   updateGasStationSuccess: null,
   updateGasStationFailure: null,
-  updateGasStationsBookmark: ['bookmark'],
+  createGasStationsBookmark: ['bookmark'],
   deleteGasStationsBookmark: ['bookmark'],
+  createGasStationsRating: ['rating'],
+  updateGasStationsRating: ['rating'],
+  deleteGasStationsRating: ['rating'],
 })
 
 const INITIAL_STATE = {
@@ -79,8 +82,8 @@ const updateGasStationFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
-// Another reducers
-const updateGasStationsBookmark = (state = INITIAL_STATE, { bookmark }) => ({
+// Bookmark updates
+const createGasStationsBookmark = (state = INITIAL_STATE, { bookmark }) => ({
   ...state,
   gasStations: state.gasStations.map(gasStation => gasStation.id.toString() !== bookmark.gas_station_id
     ? gasStation
@@ -93,6 +96,39 @@ const deleteGasStationsBookmark = (state = INITIAL_STATE, { bookmark }) => {
     return {
       ...gasStation,
       bookmarks: gasStation.bookmarks.filter(stateBookmark => stateBookmark.id !== bookmark.id),
+    }
+  })
+
+  return { ...state, gasStations: updatedGasStations }
+}
+// Rating updates
+const createGasStationsRating = (state = INITIAL_STATE, { rating }) => ({
+  ...state,
+  gasStations: state.gasStations.map(gasStation => gasStation.id.toString() !== rating.gas_station_id
+    ? gasStation
+    : { ...gasStation, ratings: [...gasStation.ratings, rating] }),
+})
+const updateGasStationsRating = (state = INITIAL_STATE, { rating }) => {
+  const updatedGasStations = state.gasStations.map((gasStation) => {
+    if (gasStation.id !== rating.gas_station_id) return gasStation
+
+    return {
+      ...gasStation,
+      ratings: gasStation.ratings.map(stateRating => stateRating.id !== rating.id
+        ? stateRating
+        : { ...stateRating, ...rating }),
+    }
+  })
+
+  return { ...state, gasStations: updatedGasStations }
+}
+const deleteGasStationsRating = (state = INITIAL_STATE, { rating }) => {
+  const updatedGasStations = state.gasStations.map((gasStation) => {
+    if (gasStation.id !== rating.gas_station_id) return gasStation
+
+    return {
+      ...gasStation,
+      ratings: gasStation.ratings.filter(stateRating => stateRating.id !== rating.id),
     }
   })
 
@@ -112,6 +148,9 @@ export default createReducer(INITIAL_STATE, {
   [Types.UPDATE_GAS_STATION_REQUEST]: updateGasStationRequest,
   [Types.UPDATE_GAS_STATION_SUCCESS]: updateGasStationSuccess,
   [Types.UPDATE_GAS_STATION_FAILURE]: updateGasStationFailure,
-  [Types.UPDATE_GAS_STATIONS_BOOKMARK]: updateGasStationsBookmark,
+  [Types.CREATE_GAS_STATIONS_BOOKMARK]: createGasStationsBookmark,
   [Types.DELETE_GAS_STATIONS_BOOKMARK]: deleteGasStationsBookmark,
+  [Types.CREATE_GAS_STATIONS_RATING]: createGasStationsRating,
+  [Types.UPDATE_GAS_STATIONS_RATING]: updateGasStationsRating,
+  [Types.DELETE_GAS_STATIONS_RATING]: deleteGasStationsRating,
 })

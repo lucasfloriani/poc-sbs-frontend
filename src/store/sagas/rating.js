@@ -1,6 +1,7 @@
 import { put, call } from 'redux-saga/effects'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as RatingActions } from '../ducks/rating'
+import { Creators as GasStationAction } from '../ducks/gasStation'
 import api from '../../services'
 
 export function* getRatingRequest({ ratingID }) {
@@ -16,8 +17,10 @@ export function* getRatingRequest({ ratingID }) {
 
 export function* createRatingRequest({ ratingData }) {
   try {
-    yield call(api.post, 'users/ratings', ratingData)
-    yield put(RatingActions.createRatingSuccess())
+    const response = yield call(api.post, 'users/ratings', ratingData)
+    const rating = response.data
+    yield put(RatingActions.createRatingSuccess(rating))
+    yield put(GasStationAction.createGasStationsBookmark(rating))
     yield put(AlertActions.createSuccessAlert('Avaliação criada com successo'))
   } catch (err) {
     console.log('SAGA RATING ERR:', err)
@@ -29,7 +32,9 @@ export function* createRatingRequest({ ratingData }) {
 export function* updateRatingRequest({ ratingData }) {
   try {
     const response = yield call(api.put, `users/ratings/${ratingData.id}`, ratingData)
-    yield put(RatingActions.updateRatingSuccess(response.data))
+    const rating = response.data
+    yield put(RatingActions.updateRatingSuccess(rating))
+    yield put(GasStationAction.updateGasStationsBookmark(rating))
     yield put(AlertActions.createSuccessAlert('Avaliação atualizada com successo'))
   } catch (err) {
     console.log('SAGA RATING ERR:', err)
@@ -40,8 +45,9 @@ export function* updateRatingRequest({ ratingData }) {
 
 export function* deleteRatingRequest({ ratingID }) {
   try {
-    yield call(api.delete, `users/ratings/${ratingID}`)
+    const response = yield call(api.delete, `users/ratings/${ratingID}`)
     yield put(RatingActions.deleteRatingSuccess(ratingID))
+    yield put(GasStationAction.deleteGasStationsBookmark(response.data))
     yield put(AlertActions.createSuccessAlert('Avaliação excluida com successo'))
   } catch (err) {
     console.log('SAGA RATING ERR:', err)
