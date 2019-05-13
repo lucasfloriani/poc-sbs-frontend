@@ -33,27 +33,29 @@ const ListGasStations = ({
   return (
     <Grid column={gasStations.length ? '1fr 1fr' : '1fr'}>
       {gasStations && gasStations.map(({
-        id,
-        cnpj,
-        fantasy_name: fantasyName,
-        cep,
         address,
-        complement,
-        neighborhood,
+        bookmarks,
+        cep,
         city,
+        cnpj,
+        complement,
+        fantasy_name: fantasyName,
+        id,
+        neighborhood,
         state,
       }) => (
         <GasStationCard
           actions={actions}
+          address={address}
+          bookmarks={bookmarks}
+          cep={cep}
+          cityName={city.name}
+          cnpj={cnpj}
+          complement={complement}
+          fantasyName={fantasyName}
           key={id}
           id={id}
-          cnpj={cnpj}
-          fantasyName={fantasyName}
-          cep={cep}
-          address={address}
-          complement={complement}
           neighborhood={neighborhood}
-          cityName={city.name}
           stateName={state.name}
         />
       ))}
