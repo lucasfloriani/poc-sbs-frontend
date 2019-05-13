@@ -20,7 +20,7 @@ export function* createBookmarkRequest({ bookmarkData }) {
     const response = yield call(api.post, 'users/bookmarks', bookmarkData)
     const bookmark = response.data
     yield put(BookmarkActions.createBookmarkSuccess(bookmark))
-    yield put(GasStationAction.updateGasStationsBookmark(bookmark))
+    yield put(GasStationAction.createGasStationsBookmark(bookmark))
     yield put(AlertActions.createSuccessAlert('Posto adicionado aos favoritos'))
   } catch (err) {
     console.log('SAGA BOOKMARK ERR:', err)
