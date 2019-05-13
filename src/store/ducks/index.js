@@ -7,6 +7,7 @@ import fuelType from './fuelType'
 import gasStation from './gasStation'
 import paymentType from './paymentType'
 import priceFuel from './priceFuel'
+import rating from './rating'
 import state from './state'
 
 export default combineReducers({
@@ -18,5 +19,6 @@ export default combineReducers({
   gasStation,
   priceFuel,
   paymentType,
+  rating,
   state,
 })

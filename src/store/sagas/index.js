@@ -17,7 +17,14 @@ import {
   updatePriceFuelRequest,
   deletePriceFuelRequest,
 } from './priceFuel'
+import {
+  getRatingRequest,
+  createRatingRequest,
+  updateRatingRequest,
+  deleteRatingRequest,
+} from './rating'
 import { statesRequest } from './state'
+
 import { Types as AuthTypes } from '../ducks/auth'
 import { Types as BookmarkTypes } from '../ducks/bookmark'
 import { Types as CityTypes } from '../ducks/city'
@@ -25,6 +32,7 @@ import { Types as FuelTypes } from '../ducks/fuelType'
 import { Types as GasStationTypes } from '../ducks/gasStation'
 import { Types as PaymentTypes } from '../ducks/paymentType'
 import { Types as PriceFuelTypes } from '../ducks/priceFuel'
+import { Types as RatingTypes } from '../ducks/rating'
 import { Types as StatesTypes } from '../ducks/state'
 
 export default function* root() {
@@ -52,6 +60,11 @@ export default function* root() {
     takeLatest(PriceFuelTypes.CREATE_PRICE_FUEL_REQUEST, createPriceFuelRequest),
     takeLatest(PriceFuelTypes.UPDATE_PRICE_FUEL_REQUEST, updatePriceFuelRequest),
     takeLatest(PriceFuelTypes.DELETE_PRICE_FUEL_REQUEST, deletePriceFuelRequest),
+
+    takeLatest(RatingTypes.GET_RATING_REQUEST, getRatingRequest),
+    takeLatest(RatingTypes.CREATE_RATING_REQUEST, createRatingRequest),
+    takeLatest(RatingTypes.UPDATE_RATING_REQUEST, updateRatingRequest),
+    takeLatest(RatingTypes.DELETE_RATING_REQUEST, deleteRatingRequest),
 
     takeLatest(StatesTypes.STATES_REQUEST, statesRequest),
   ])
