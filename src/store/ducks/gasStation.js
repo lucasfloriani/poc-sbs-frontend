@@ -9,6 +9,9 @@ export const { Types, Creators } = createActions({
   bookmarkedGasStationsRequest: null,
   bookmarkedGasStationsSuccess: ['gasStations'],
   bookmarkedGasStationsFailure: null,
+  complaintGasStationsRequest: null,
+  complaintGasStationsSuccess: ['gasStations'],
+  complaintGasStationsFailure: null,
   ratingGasStationsRequest: null,
   ratingGasStationsSuccess: ['gasStations'],
   ratingGasStationsFailure: null,
@@ -33,6 +36,7 @@ export const { Types, Creators } = createActions({
 
 const INITIAL_STATE = {
   bookmarkedGasStations: [],
+  complaintGasStations: [],
   gasStationLocation: {
     location: '',
     name: '',
@@ -81,6 +85,20 @@ const bookmarkedGasStationsSuccess = (state = INITIAL_STATE, { gasStations }) =>
   bookmarkedGasStations: gasStations,
 })
 const bookmarkedGasStationsFailure = (state = INITIAL_STATE) => ({
+  ...state,
+  isFetching: false,
+})
+// Get All Complaint GasStations
+const complaintGasStationsRequest = (state = INITIAL_STATE) => ({
+  ...state,
+  isFetching: true,
+})
+const complaintGasStationsSuccess = (state = INITIAL_STATE, { gasStations }) => ({
+  ...state,
+  isFetching: false,
+  complaintGasStations: gasStations,
+})
+const complaintGasStationsFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
@@ -211,7 +229,7 @@ const deleteGasStationsRating = (state = INITIAL_STATE, { rating }) => {
 
   const updatedRatingGasStations = state.ratingGasStations.filter((gasStation) => {
     if (gasStation.id !== rating.gas_station_id) return true
-    return !gasStation.ratings.some(stateBookmark => stateBookmark.id === rating.id)
+    return !gasStation.ratings.some(stateRating => stateRating.id === rating.id)
   })
 
   return {
@@ -230,7 +248,6 @@ const createGasStationsComplaint = (state = INITIAL_STATE, { complaint }) => ({
 const updateGasStationsComplaint = (state = INITIAL_STATE, { complaint }) => {
   const updatedGasStations = state.gasStations.map((gasStation) => {
     if (gasStation.id !== complaint.gas_station_id) return gasStation
-
     return {
       ...gasStation,
       complaints: gasStation.complaints.map(stateComplaint => stateComplaint.id !== complaint.id
@@ -239,19 +256,41 @@ const updateGasStationsComplaint = (state = INITIAL_STATE, { complaint }) => {
     }
   })
 
-  return { ...state, gasStations: updatedGasStations }
+  const updatedComplaintGasStations = state.complaintGasStations.map((gasStation) => {
+    if (gasStation.id !== complaint.gas_station_id) return gasStation
+    return {
+      ...gasStation,
+      complaints: gasStation.complaints.map(stateComplaint => stateComplaint.id !== complaint.id
+        ? stateComplaint
+        : { ...stateComplaint, ...complaint }),
+    }
+  })
+
+  return {
+    ...state,
+    complaintGasStations: updatedComplaintGasStations,
+    gasStations: updatedGasStations,
+  }
 }
 const deleteGasStationsComplaint = (state = INITIAL_STATE, { complaint }) => {
   const updatedGasStations = state.gasStations.map((gasStation) => {
     if (gasStation.id !== complaint.gas_station_id) return gasStation
-
     return {
       ...gasStation,
       complaints: gasStation.complaints.filter(stateComplaint => stateComplaint.id !== complaint.id),
     }
   })
 
-  return { ...state, gasStations: updatedGasStations }
+  const updatedComplaintGasStations = state.complaintGasStations.filter((gasStation) => {
+    if (gasStation.id !== complaint.gas_station_id) return true
+    return !gasStation.complaints.some(stateComplaint => stateComplaint.id === complaint.id)
+  })
+
+  return {
+    ...state,
+    gasStations: updatedGasStations,
+    complaintGasStations: updatedComplaintGasStations,
+  }
 }
 
 export default createReducer(INITIAL_STATE, {
@@ -263,6 +302,9 @@ export default createReducer(INITIAL_STATE, {
   [Types.BOOKMARKED_GAS_STATIONS_REQUEST]: bookmarkedGasStationsRequest,
   [Types.BOOKMARKED_GAS_STATIONS_SUCCESS]: bookmarkedGasStationsSuccess,
   [Types.BOOKMARKED_GAS_STATIONS_FAILURE]: bookmarkedGasStationsFailure,
+  [Types.COMPLAINT_GAS_STATIONS_REQUEST]: complaintGasStationsRequest,
+  [Types.COMPLAINT_GAS_STATIONS_SUCCESS]: complaintGasStationsSuccess,
+  [Types.COMPLAINT_GAS_STATIONS_FAILURE]: complaintGasStationsFailure,
   [Types.RATING_GAS_STATIONS_REQUEST]: ratingGasStationsRequest,
   [Types.RATING_GAS_STATIONS_SUCCESS]: ratingGasStationsSuccess,
   [Types.RATING_GAS_STATIONS_FAILURE]: ratingGasStationsFailure,
