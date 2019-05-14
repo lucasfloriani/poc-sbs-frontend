@@ -6,6 +6,9 @@ export const { Types, Creators } = createActions({
   gasStationsRequest: ['filter'],
   gasStationsSuccess: ['gasStations'],
   gasStationsFailure: null,
+  bookmarkedGasStationsRequest: null,
+  bookmarkedGasStationsSuccess: ['gasStations'],
+  bookmarkedGasStationsFailure: null,
   getGasStationRequest: ['gasStationID'],
   getGasStationSuccess: ['gasStation'],
   getGasStationFailure: null,
@@ -26,6 +29,7 @@ export const { Types, Creators } = createActions({
 })
 
 const INITIAL_STATE = {
+  bookmarkedGasStations: [],
   gasStationLocation: {
     location: '',
     name: '',
@@ -59,6 +63,20 @@ const gasStationsSuccess = (state = INITIAL_STATE, { gasStations }) => ({
   gasStations,
 })
 const gasStationsFailure = (state = INITIAL_STATE) => ({
+  ...state,
+  isFetching: false,
+})
+// Get All Bookmarked GasStations
+const bookmarkedGasStationsRequest = (state = INITIAL_STATE) => ({
+  ...state,
+  isFetching: true,
+})
+const bookmarkedGasStationsSuccess = (state = INITIAL_STATE, { gasStations }) => ({
+  ...state,
+  isFetching: false,
+  bookmarkedGasStations: gasStations,
+})
+const bookmarkedGasStationsFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
@@ -113,14 +131,22 @@ const createGasStationsBookmark = (state = INITIAL_STATE, { bookmark }) => ({
 const deleteGasStationsBookmark = (state = INITIAL_STATE, { bookmark }) => {
   const updatedGasStations = state.gasStations.map((gasStation) => {
     if (gasStation.id !== bookmark.gas_station_id) return gasStation
-
     return {
       ...gasStation,
       bookmarks: gasStation.bookmarks.filter(stateBookmark => stateBookmark.id !== bookmark.id),
     }
   })
 
-  return { ...state, gasStations: updatedGasStations }
+  const updatedBookmarkedGasStations = state.bookmarkedGasStations.filter((gasStation) => {
+    if (gasStation.id !== bookmark.gas_station_id) return true
+    return !gasStation.bookmarks.some(stateBookmark => stateBookmark.id === bookmark.id)
+  })
+
+  return {
+    ...state,
+    bookmarkedGasStations: updatedBookmarkedGasStations,
+    gasStations: updatedGasStations,
+  }
 }
 // Rating updates
 const createGasStationsRating = (state = INITIAL_STATE, { rating }) => ({
@@ -195,6 +221,9 @@ export default createReducer(INITIAL_STATE, {
   [Types.GAS_STATIONS_REQUEST]: gasStationsRequest,
   [Types.GAS_STATIONS_SUCCESS]: gasStationsSuccess,
   [Types.GAS_STATIONS_FAILURE]: gasStationsFailure,
+  [Types.BOOKMARKED_GAS_STATIONS_REQUEST]: bookmarkedGasStationsRequest,
+  [Types.BOOKMARKED_GAS_STATIONS_SUCCESS]: bookmarkedGasStationsSuccess,
+  [Types.BOOKMARKED_GAS_STATIONS_FAILURE]: bookmarkedGasStationsFailure,
   [Types.GET_GAS_STATION_REQUEST]: getGasStationRequest,
   [Types.GET_GAS_STATION_SUCCESS]: getGasStationSuccess,
   [Types.GET_GAS_STATION_FAILURE]: getGasStationFailure,
