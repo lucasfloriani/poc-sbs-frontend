@@ -6,13 +6,13 @@ export const { Types, Creators } = createActions({
   getRatingSuccess: ['rating'],
   getRatingFailure: null,
   createRatingRequest: ['ratingData'],
-  createRatingSuccess: null,
+  createRatingSuccess: ['rating'],
   createRatingFailure: null,
   updateRatingRequest: ['ratingData'],
   updateRatingSuccess: ['rating'],
   updateRatingFailure: null,
   deleteRatingRequest: ['ratingID'],
-  deleteRatingSuccess: ['ratingID'],
+  deleteRatingSuccess: null,
   deleteRatingFailure: null,
 })
 
@@ -41,9 +41,10 @@ const createRatingRequest = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: true,
 })
-const createRatingSuccess = (state = INITIAL_STATE) => ({
+const createRatingSuccess = (state = INITIAL_STATE, { rating }) => ({
   ...state,
   isFetching: false,
+  rating,
 })
 const createRatingFailure = (state = INITIAL_STATE) => ({
   ...state,
@@ -68,10 +69,10 @@ const deleteRatingRequest = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: true,
 })
-const deleteRatingSuccess = (state = INITIAL_STATE, { ratingID }) => ({
+const deleteRatingSuccess = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
-  ratings: state.ratings.filter(rating => rating.id.toString() !== ratingID),
+  rating: {},
 })
 const deleteRatingFailure = (state = INITIAL_STATE) => ({
   ...state,
