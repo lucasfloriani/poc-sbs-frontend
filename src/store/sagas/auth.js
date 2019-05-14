@@ -38,6 +38,21 @@ export function* createUserRequest({
   } catch (err) {
     console.log('SAGA CREATE USER ACCOUNT ERR:', err)
     yield put(AuthActions.createUserFailure())
-    yield put(AlertActions.createErrorAlert('Erro criar a conta, tente novamente mais tarde'))
+    yield put(AlertActions.createErrorAlert('Erro ao criar a conta, tente novamente mais tarde'))
+  }
+}
+
+export function* updateUserRequest({ userData }) {
+  try {
+    const response = yield call(api.put, `users/${userData.id}`, userData)
+    const user = response.data
+    const storageUser = JSON.parse(sessionStorage.getItem('user'))
+    sessionStorage.setItem('user', JSON.stringify({ ...storageUser, ...user }))
+    yield put(AuthActions.updateUserSuccess(user))
+    yield put(AlertActions.createSuccessAlert('Conta atualizada com successo'))
+  } catch (err) {
+    console.log('SAGA UPDATE USER ACCOUNT ERR:', err)
+    yield put(AuthActions.createUserFailure())
+    yield put(AlertActions.createErrorAlert('Erro ao atualizar a conta, tente novamente mais tarde'))
   }
 }

@@ -1,5 +1,5 @@
 import { all, takeLatest } from 'redux-saga/effects'
-import { createUserRequest, loginRequest } from './auth'
+import { createUserRequest, loginRequest, updateUserRequest } from './auth'
 import { bookmarksRequest, createBookmarkRequest, deleteBookmarkRequest } from './bookmark'
 import { citiesRequest } from './city'
 import {
@@ -49,6 +49,7 @@ export default function* root() {
   return yield all([
     takeLatest(AuthTypes.LOGIN_REQUEST, loginRequest),
     takeLatest(AuthTypes.CREATE_USER_REQUEST, createUserRequest),
+    takeLatest(AuthTypes.UPDATE_USER_REQUEST, updateUserRequest),
 
     takeLatest(BookmarkTypes.BOOKMARKS_REQUEST, bookmarksRequest),
     takeLatest(BookmarkTypes.CREATE_BOOKMARK_REQUEST, createBookmarkRequest),
