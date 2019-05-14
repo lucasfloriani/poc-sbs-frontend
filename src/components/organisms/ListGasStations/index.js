@@ -35,6 +35,7 @@ const ListGasStations = ({
       {gasStations && gasStations.map(({
         address,
         bookmarks,
+        complaints,
         cep,
         city,
         cnpj,
@@ -42,6 +43,7 @@ const ListGasStations = ({
         fantasy_name: fantasyName,
         id,
         neighborhood,
+        ratings,
         state,
       }) => (
         <GasStationCard
@@ -51,11 +53,13 @@ const ListGasStations = ({
           cep={cep}
           cityName={city.name}
           cnpj={cnpj}
+          complaints={complaints}
           complement={complement}
           fantasyName={fantasyName}
           key={id}
           id={id}
           neighborhood={neighborhood}
+          ratings={ratings}
           stateName={state.name}
         />
       ))}
@@ -76,7 +80,7 @@ ListGasStations.propTypes = {
 }
 
 ListGasStations.defaultProps = {
-  actions: ['alert', 'bookmark', 'navigation'],
+  actions: ['alert', 'bookmark', 'navigation', 'rating'],
 }
 
 const mapStateToProps = ({ gasStation: { gasStations, isFetching } }) => ({ gasStations, isFetching })
