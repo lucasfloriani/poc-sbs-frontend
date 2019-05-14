@@ -63,11 +63,11 @@ const FilterGasStation = ({ gasStationsRequest }) => (
     }
     render={({
       values,
-      dirty,
       touched,
       errors,
       handleBlur,
       handleChange,
+      handleReset,
       handleSubmit,
       isSubmitting,
       setFieldValue,
@@ -183,13 +183,23 @@ const FilterGasStation = ({ gasStationsRequest }) => (
                 value={values.rating}
               />
             </Grid>
-            <Button
-              type="submit"
-              fontSize="small"
-              disabled={!dirty || isSubmitting}
-            >
-              Filtrar
-            </Button>
+            <Grid column="1fr 1fr">
+              <Button
+                type="reset"
+                fontSize="small"
+                onClick={handleReset}
+                disabled={isSubmitting}
+              >
+                Limpar
+              </Button>
+              <Button
+                type="submit"
+                fontSize="small"
+                disabled={isSubmitting}
+              >
+                Filtrar
+              </Button>
+            </Grid>
           </Grid>
         </Form>
       )
