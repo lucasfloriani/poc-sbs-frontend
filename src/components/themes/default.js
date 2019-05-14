@@ -8,7 +8,7 @@ export const theme = {
     standard: 'cubic-bezier(0.4, 0.0, 0.2, 1)',
   },
   palette: {
-    primary: ['#193336', '#57737C', '#6E9496', '#5C7B85', 'EAEDE6'],
+    primary: ['#193336', '#57737C', '#6E9496', '#5C7B85', '#EAEDE6'],
     error: ['#d32f2f', '#f44336', '#f18f8f', '#ffcdd2'],
     alert: ['#ffa000', '#ffc107', '#ffd761', '#ffecb3'],
     success: ['#388e3c', '#4caf50', '#7cc47f', '#c8e6c9'],
