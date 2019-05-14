@@ -13,7 +13,6 @@ const BookmarkBadge = ({
   userID,
 }) => {
   const hasUserBookmark = bookmarks.find(bookmark => bookmark.user_id.toString() === userID)
-  console.log(gasStationID, userID, hasUserBookmark)
   const onToggle = hasUserBookmark
     ? () => deleteBookmarkRequest(hasUserBookmark.id)
     : () => createBookmarkRequest({ gas_station_id: gasStationID })
