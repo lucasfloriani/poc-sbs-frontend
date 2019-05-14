@@ -42,7 +42,6 @@ const RatingForm = ({
       }
       render={({
         values,
-        dirty,
         handleSubmit,
         isSubmitting,
         setFieldValue,
@@ -74,7 +73,7 @@ const RatingForm = ({
           footer={(
             <Block as="div" fontSize="small" backgroundColor={{ type: 'primary', position: 0 }}>
               <Flex halign="flex-end">
-                <Button type="submit" fontSize="small" disabled={!dirty || isSubmitting}>
+                <Button type="submit" fontSize="small" disabled={isSubmitting}>
                   {`${queryType === QueryTypes.Create ? 'Adicionar' : 'Atualizar'}`}
                 </Button>
               </Flex>

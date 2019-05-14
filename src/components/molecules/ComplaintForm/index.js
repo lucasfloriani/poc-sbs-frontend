@@ -39,7 +39,6 @@ const ComplaintForm = ({
       }
       render={({
         values,
-        dirty,
         touched,
         errors,
         handleBlur,
@@ -91,12 +90,12 @@ const ComplaintForm = ({
                       type="reset"
                       fontSize="small"
                       onClick={handleReset}
-                      disabled={!dirty || isSubmitting}
+                      disabled={isSubmitting}
                     >
                       Limpar
                     </Button>
                   )}
-                  <Button type="submit" fontSize="small" disabled={!dirty || isSubmitting}>
+                  <Button type="submit" fontSize="small" disabled={isSubmitting}>
                     {`${queryType === QueryTypes.Create ? 'Criar' : 'Atualizar'}`}
                   </Button>
                 </Flex>
