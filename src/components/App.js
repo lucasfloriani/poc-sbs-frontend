@@ -63,7 +63,7 @@ const App = () => (
           <UserRouter path="/user/bookmarks" exact component={props => <UserBookmarks {...props} />} />
           <UserRouter path="/user/complaints" exact component={props => <UserComplaints {...props} />} />
           <UserRouter path="/user/ratings" exact component={props => <UserRatings {...props} />} />
-          <UserRouter path="/user/:userID" exact component={props => <UserEdit {...props} />} />
+          <UserRouter path="/user/edit" exact component={props => <UserEdit {...props} />} />
 
           <GasStationRouter path="/gas-station" exact component={props => <GasStationHomePage {...props} />} />
           <GasStationRouter path="/gas-station/price-fuel" exact component={props => <GasStationCreatePriceFuel {...props} />} />
