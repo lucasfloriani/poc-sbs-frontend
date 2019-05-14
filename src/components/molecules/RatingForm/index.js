@@ -31,6 +31,7 @@ const RatingForm = ({
       onSubmit={async (values, { setSubmitting }) => {
         onSubmit(values)
         setSubmitting(false)
+        toggleModal()
       }}
       validationSchema={
         Yup.object().shape({
@@ -51,7 +52,12 @@ const RatingForm = ({
           header={(
             <Block backgroundColor={{ type: 'primary', position: 0 }}>
               <Grid column="auto 1fr" gap="30px" valign="center">
-                <Heading>{`${queryType === QueryTypes.Create ? 'Adicionar' : 'Atualizar'} Avaliação`}</Heading>
+                <Heading
+                  color={{ type: 'grayscale', position: 4 }}
+                  hoverColor={{ type: 'grayscale', position: 4 }}
+                >
+                  {`${queryType === QueryTypes.Create ? 'Adicionar' : 'Atualizar'} Avaliação`}
+                </Heading>
                 {onDelete && (
                   <Badge
                     onClick={() => {
