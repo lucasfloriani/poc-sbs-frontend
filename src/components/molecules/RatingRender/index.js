@@ -4,10 +4,7 @@ import { connect } from 'react-redux'
 import { CreateRatingForm, UpdateRatingForm, Modal } from 'components'
 
 const RatingRender = ({
-  children,
-  gasStationID,
-  ratings,
-  userID,
+  children, gasStationID, ratings, userID,
 }) => {
   const [open, setOpen] = useState(false)
   const toggleModal = () => setOpen(!open)
@@ -20,8 +17,8 @@ const RatingRender = ({
         {userRating ? (
           <UpdateRatingForm
             initialValues={{
+              id: userRating ? `${userRating.id}` : '',
               rating: userRating ? userRating.rating : 0,
-              id: userRating ? userRating.id : '',
             }}
             toggleModal={toggleModal}
           />
@@ -43,6 +40,6 @@ RatingRender.propTypes = {
   userID: PropTypes.string.isRequired,
 }
 
-const mapStateToProps = ({ auth: { user: { id } } }) => ({ userID: id })
+const mapStateToProps = ({ auth: { user: { id } } }) => ({ userID: `${id}` })
 
 export default connect(mapStateToProps)(RatingRender)
