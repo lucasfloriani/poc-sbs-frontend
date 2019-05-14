@@ -18,6 +18,9 @@ export const { Types, Creators } = createActions({
   createGasStationsRating: ['rating'],
   updateGasStationsRating: ['rating'],
   deleteGasStationsRating: ['rating'],
+  createGasStationsComplaint: ['complaint'],
+  updateGasStationsComplaint: ['complaint'],
+  deleteGasStationsComplaint: ['complaint'],
 })
 
 const INITIAL_STATE = {
@@ -134,6 +137,39 @@ const deleteGasStationsRating = (state = INITIAL_STATE, { rating }) => {
 
   return { ...state, gasStations: updatedGasStations }
 }
+// Complaint updates
+const createGasStationsComplaint = (state = INITIAL_STATE, { complaint }) => ({
+  ...state,
+  gasStations: state.gasStations.map(gasStation => gasStation.id.toString() !== complaint.gas_station_id
+    ? gasStation
+    : { ...gasStation, complaints: [...gasStation.complaints, complaint] }),
+})
+const updateGasStationsComplaint = (state = INITIAL_STATE, { complaint }) => {
+  const updatedGasStations = state.gasStations.map((gasStation) => {
+    if (gasStation.id !== complaint.gas_station_id) return gasStation
+
+    return {
+      ...gasStation,
+      complaints: gasStation.complaints.map(stateComplaint => stateComplaint.id !== complaint.id
+        ? stateComplaint
+        : { ...stateComplaint, ...complaint }),
+    }
+  })
+
+  return { ...state, gasStations: updatedGasStations }
+}
+const deleteGasStationsComplaint = (state = INITIAL_STATE, { complaint }) => {
+  const updatedGasStations = state.gasStations.map((gasStation) => {
+    if (gasStation.id !== complaint.gas_station_id) return gasStation
+
+    return {
+      ...gasStation,
+      complaints: gasStation.complaints.filter(stateComplaint => stateComplaint.id !== complaint.id),
+    }
+  })
+
+  return { ...state, gasStations: updatedGasStations }
+}
 
 export default createReducer(INITIAL_STATE, {
   [Types.GAS_STATIONS_REQUEST]: gasStationsRequest,
@@ -153,4 +189,7 @@ export default createReducer(INITIAL_STATE, {
   [Types.CREATE_GAS_STATIONS_RATING]: createGasStationsRating,
   [Types.UPDATE_GAS_STATIONS_RATING]: updateGasStationsRating,
   [Types.DELETE_GAS_STATIONS_RATING]: deleteGasStationsRating,
+  [Types.CREATE_GAS_STATIONS_COMPLAINT]: createGasStationsComplaint,
+  [Types.UPDATE_GAS_STATIONS_COMPLAINT]: updateGasStationsComplaint,
+  [Types.DELETE_GAS_STATIONS_COMPLAINT]: deleteGasStationsComplaint,
 })

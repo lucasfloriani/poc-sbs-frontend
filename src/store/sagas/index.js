@@ -2,6 +2,12 @@ import { all, takeLatest } from 'redux-saga/effects'
 import { createUserRequest, loginRequest } from './auth'
 import { bookmarksRequest, createBookmarkRequest, deleteBookmarkRequest } from './bookmark'
 import { citiesRequest } from './city'
+import {
+  getComplaintRequest,
+  createComplaintRequest,
+  updateComplaintRequest,
+  deleteComplaintRequest,
+} from './complaint'
 import { fuelTypesRequest } from './fuelType'
 import {
   gasStationsRequest,
@@ -28,6 +34,7 @@ import { statesRequest } from './state'
 import { Types as AuthTypes } from '../ducks/auth'
 import { Types as BookmarkTypes } from '../ducks/bookmark'
 import { Types as CityTypes } from '../ducks/city'
+import { Types as ComplaintTypes } from '../ducks/complaint'
 import { Types as FuelTypes } from '../ducks/fuelType'
 import { Types as GasStationTypes } from '../ducks/gasStation'
 import { Types as PaymentTypes } from '../ducks/paymentType'
@@ -45,6 +52,11 @@ export default function* root() {
     takeLatest(BookmarkTypes.DELETE_BOOKMARK_REQUEST, deleteBookmarkRequest),
 
     takeLatest(CityTypes.CITIES_REQUEST, citiesRequest),
+
+    takeLatest(ComplaintTypes.GET_COMPLAINT_REQUEST, getComplaintRequest),
+    takeLatest(ComplaintTypes.CREATE_COMPLAINT_REQUEST, createComplaintRequest),
+    takeLatest(ComplaintTypes.UPDATE_COMPLAINT_REQUEST, updateComplaintRequest),
+    takeLatest(ComplaintTypes.DELETE_COMPLAINT_REQUEST, deleteComplaintRequest),
 
     takeLatest(FuelTypes.FUEL_TYPES_REQUEST, fuelTypesRequest),
 

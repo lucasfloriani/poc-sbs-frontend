@@ -3,6 +3,7 @@ import alert from './alert'
 import auth from './auth'
 import bookmark from './bookmark'
 import city from './city'
+import complaint from './complaint'
 import fuelType from './fuelType'
 import gasStation from './gasStation'
 import paymentType from './paymentType'
@@ -15,6 +16,7 @@ export default combineReducers({
   auth,
   bookmark,
   city,
+  complaint,
   fuelType,
   gasStation,
   priceFuel,
