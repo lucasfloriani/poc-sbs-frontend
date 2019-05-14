@@ -41,6 +41,7 @@ const ListGasStations = ({
         cnpj,
         complement,
         fantasy_name: fantasyName,
+        geo_location: geoLocation,
         id,
         neighborhood,
         ratings,
@@ -56,6 +57,7 @@ const ListGasStations = ({
           complaints={complaints}
           complement={complement}
           fantasyName={fantasyName}
+          geoLocation={geoLocation}
           key={id}
           id={id}
           neighborhood={neighborhood}

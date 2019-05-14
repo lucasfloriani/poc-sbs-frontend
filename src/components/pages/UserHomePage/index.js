@@ -1,15 +1,18 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import {
   Container,
   FullPageTemplate,
   FilterGasStation,
   Grid,
   ListGasStations,
+  MapDirections,
   UserFooter,
   UserMenu,
 } from 'components'
 
-const UserHomePage = () => (
+const UserHomePage = ({ gasStationLocation }) => (
   <FullPageTemplate
     header={<UserMenu />}
     footer={<UserFooter />}
@@ -17,6 +20,7 @@ const UserHomePage = () => (
   >
     <Container align="center">
       <Grid>
+        {gasStationLocation.location && <MapDirections gasStationLocation={gasStationLocation} />}
         <FilterGasStation />
         <ListGasStations />
       </Grid>
@@ -24,4 +28,13 @@ const UserHomePage = () => (
   </FullPageTemplate>
 )
 
-export default UserHomePage
+UserHomePage.propTypes = {
+  gasStationLocation: PropTypes.shape({
+    location: PropTypes.string,
+    name: PropTypes.string,
+  }),
+}
+
+const mapStateToProps = ({ gasStation: { gasStationLocation } }) => ({ gasStationLocation })
+
+export default connect(mapStateToProps)(UserHomePage)
