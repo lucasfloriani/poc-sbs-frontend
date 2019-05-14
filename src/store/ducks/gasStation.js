@@ -9,6 +9,9 @@ export const { Types, Creators } = createActions({
   bookmarkedGasStationsRequest: null,
   bookmarkedGasStationsSuccess: ['gasStations'],
   bookmarkedGasStationsFailure: null,
+  ratingGasStationsRequest: null,
+  ratingGasStationsSuccess: ['gasStations'],
+  ratingGasStationsFailure: null,
   getGasStationRequest: ['gasStationID'],
   getGasStationSuccess: ['gasStation'],
   getGasStationFailure: null,
@@ -37,6 +40,7 @@ const INITIAL_STATE = {
   gasStation: {},
   gasStations: [],
   isFetching: false,
+  ratingGasStations: [],
 }
 
 // GasStation location
@@ -77,6 +81,20 @@ const bookmarkedGasStationsSuccess = (state = INITIAL_STATE, { gasStations }) =>
   bookmarkedGasStations: gasStations,
 })
 const bookmarkedGasStationsFailure = (state = INITIAL_STATE) => ({
+  ...state,
+  isFetching: false,
+})
+// Get All Rating GasStations
+const ratingGasStationsRequest = (state = INITIAL_STATE) => ({
+  ...state,
+  isFetching: true,
+})
+const ratingGasStationsSuccess = (state = INITIAL_STATE, { gasStations }) => ({
+  ...state,
+  isFetching: false,
+  ratingGasStations: gasStations,
+})
+const ratingGasStationsFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
@@ -158,7 +176,6 @@ const createGasStationsRating = (state = INITIAL_STATE, { rating }) => ({
 const updateGasStationsRating = (state = INITIAL_STATE, { rating }) => {
   const updatedGasStations = state.gasStations.map((gasStation) => {
     if (gasStation.id !== rating.gas_station_id) return gasStation
-
     return {
       ...gasStation,
       ratings: gasStation.ratings.map(stateRating => stateRating.id !== rating.id
@@ -167,19 +184,41 @@ const updateGasStationsRating = (state = INITIAL_STATE, { rating }) => {
     }
   })
 
-  return { ...state, gasStations: updatedGasStations }
+  const updatedRatingGasStations = state.ratingGasStations.map((gasStation) => {
+    if (gasStation.id !== rating.gas_station_id) return gasStation
+    return {
+      ...gasStation,
+      ratings: gasStation.ratings.map(stateRating => stateRating.id !== rating.id
+        ? stateRating
+        : { ...stateRating, ...rating }),
+    }
+  })
+
+  return {
+    ...state,
+    gasStations: updatedGasStations,
+    ratingGasStations: updatedRatingGasStations,
+  }
 }
 const deleteGasStationsRating = (state = INITIAL_STATE, { rating }) => {
   const updatedGasStations = state.gasStations.map((gasStation) => {
     if (gasStation.id !== rating.gas_station_id) return gasStation
-
     return {
       ...gasStation,
       ratings: gasStation.ratings.filter(stateRating => stateRating.id !== rating.id),
     }
   })
 
-  return { ...state, gasStations: updatedGasStations }
+  const updatedRatingGasStations = state.ratingGasStations.filter((gasStation) => {
+    if (gasStation.id !== rating.gas_station_id) return true
+    return !gasStation.ratings.some(stateBookmark => stateBookmark.id === rating.id)
+  })
+
+  return {
+    ...state,
+    gasStations: updatedGasStations,
+    ratingGasStations: updatedRatingGasStations,
+  }
 }
 // Complaint updates
 const createGasStationsComplaint = (state = INITIAL_STATE, { complaint }) => ({
@@ -224,6 +263,9 @@ export default createReducer(INITIAL_STATE, {
   [Types.BOOKMARKED_GAS_STATIONS_REQUEST]: bookmarkedGasStationsRequest,
   [Types.BOOKMARKED_GAS_STATIONS_SUCCESS]: bookmarkedGasStationsSuccess,
   [Types.BOOKMARKED_GAS_STATIONS_FAILURE]: bookmarkedGasStationsFailure,
+  [Types.RATING_GAS_STATIONS_REQUEST]: ratingGasStationsRequest,
+  [Types.RATING_GAS_STATIONS_SUCCESS]: ratingGasStationsSuccess,
+  [Types.RATING_GAS_STATIONS_FAILURE]: ratingGasStationsFailure,
   [Types.GET_GAS_STATION_REQUEST]: getGasStationRequest,
   [Types.GET_GAS_STATION_SUCCESS]: getGasStationSuccess,
   [Types.GET_GAS_STATION_FAILURE]: getGasStationFailure,

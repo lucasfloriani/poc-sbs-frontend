@@ -28,6 +28,18 @@ export function* bookmarkedGasStationsRequest() {
   }
 }
 
+export function* ratingGasStationsRequest() {
+  try {
+    const response = yield call(api.get, 'users/gas-stations/rating')
+    const gasStations = response.data
+    yield put(GasStationActions.ratingGasStationsSuccess(gasStations))
+  } catch (err) {
+    console.log('SAGA GAS STATION ERR: ', err)
+    yield put(GasStationActions.ratingGasStationsFailure())
+    yield put(AlertActions.createErrorAlert('Erro ao carregar as avaliações, tente novamente mais tarde'))
+  }
+}
+
 export function* getGasStationRequest({ gasStationID }) {
   try {
     const response = yield call(api.get, `gas-stations/${gasStationID}`)
