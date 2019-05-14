@@ -4,15 +4,15 @@ import QueryTypes from '@enums/queryTypes'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as RatingActions } from '@store/ducks/rating'
-import { ComplaintForm } from 'components'
+import { RatingForm } from 'components'
 
-const UpdateComplaintForm = ({
+const UpdateRatingForm = ({
   deleteRatingRequest,
   initialValues,
   updateRatingRequest,
   toggleModal,
 }) => (
-  <ComplaintForm
+  <RatingForm
     initialValues={initialValues}
     onDelete={values => deleteRatingRequest(values)}
     onSubmit={values => updateRatingRequest(values)}
@@ -21,7 +21,7 @@ const UpdateComplaintForm = ({
   />
 )
 
-UpdateComplaintForm.propTypes = {
+UpdateRatingForm.propTypes = {
   deleteRatingRequest: PropTypes.func.isRequired,
   initialValues: PropTypes.shape({
     id: PropTypes.string.isRequired,
@@ -33,4 +33,4 @@ UpdateComplaintForm.propTypes = {
 
 const mapDispatchToProps = dispatch => bindActionCreators(RatingActions, dispatch)
 
-export default connect(null, mapDispatchToProps)(UpdateComplaintForm)
+export default connect(null, mapDispatchToProps)(UpdateRatingForm)
