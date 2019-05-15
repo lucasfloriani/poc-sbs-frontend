@@ -66,7 +66,7 @@ export function* getGasStationRequest({ gasStationID }) {
 
 export function* createGasStationRequest({ gasStationData }) {
   try {
-    yield call(api.post, 'gas-stations', gasStationData)
+    yield call(api.post, 'admin/gas-stations', gasStationData)
     yield put(GasStationActions.createGasStationSuccess())
     yield put(AlertActions.createSuccessAlert('Posto criado com successo'))
   } catch (err) {
@@ -78,7 +78,7 @@ export function* createGasStationRequest({ gasStationData }) {
 
 export function* updateGasStationRequest({ gasStationData }) {
   try {
-    yield call(api.put, `gas-stations/${gasStationData.id}`, gasStationData)
+    yield call(api.put, `admin/gas-stations/${gasStationData.id}`, gasStationData)
     yield put(GasStationActions.updateGasStationSuccess())
     yield put(AlertActions.createSuccessAlert('Posto atualizado com successo'))
   } catch (err) {
