@@ -2,6 +2,9 @@ import { createActions, createReducer } from 'reduxsauce'
 
 
 export const { Types, Creators } = createActions({
+  complaintsRequest: null,
+  complaintsSuccess: ['complaints'],
+  complaintsFailure: null,
   getComplaintRequest: ['complaintID'],
   getComplaintSuccess: ['complaint'],
   getComplaintFailure: null,
@@ -17,9 +20,26 @@ export const { Types, Creators } = createActions({
 })
 
 const INITIAL_STATE = {
+  complaints: [],
   complaint: {},
   isFetching: false,
 }
+
+// All Complaints
+const complaintsRequest = (state = INITIAL_STATE) => ({
+  ...state,
+  isFetching: true,
+  complaints: [],
+})
+const complaintsSuccess = (state = INITIAL_STATE, { complaints }) => ({
+  ...state,
+  isFetching: false,
+  complaints,
+})
+const complaintsFailure = (state = INITIAL_STATE) => ({
+  ...state,
+  isFetching: false,
+})
 
 // Get Complaint
 const getComplaintRequest = (state = INITIAL_STATE) => ({
@@ -80,6 +100,9 @@ const deleteComplaintFailure = (state = INITIAL_STATE) => ({
 })
 
 export default createReducer(INITIAL_STATE, {
+  [Types.COMPLAINTS_REQUEST]: complaintsRequest,
+  [Types.COMPLAINTS_SUCCESS]: complaintsSuccess,
+  [Types.COMPLAINTS_FAILURE]: complaintsFailure,
   [Types.GET_COMPLAINT_REQUEST]: getComplaintRequest,
   [Types.GET_COMPLAINT_SUCCESS]: getComplaintSuccess,
   [Types.GET_COMPLAINT_FAILURE]: getComplaintFailure,

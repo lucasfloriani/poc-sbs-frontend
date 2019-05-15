@@ -3,6 +3,7 @@ import { createUserRequest, loginRequest, updateUserRequest } from './auth'
 import { bookmarksRequest, createBookmarkRequest, deleteBookmarkRequest } from './bookmark'
 import { citiesRequest } from './city'
 import {
+  complaintsRequest,
   getComplaintRequest,
   createComplaintRequest,
   updateComplaintRequest,
@@ -57,6 +58,7 @@ export default function* root() {
 
     takeLatest(CityTypes.CITIES_REQUEST, citiesRequest),
 
+    takeLatest(ComplaintTypes.COMPLAINTS_REQUEST, complaintsRequest),
     takeLatest(ComplaintTypes.GET_COMPLAINT_REQUEST, getComplaintRequest),
     takeLatest(ComplaintTypes.CREATE_COMPLAINT_REQUEST, createComplaintRequest),
     takeLatest(ComplaintTypes.UPDATE_COMPLAINT_REQUEST, updateComplaintRequest),

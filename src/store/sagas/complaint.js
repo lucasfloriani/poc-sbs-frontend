@@ -4,6 +4,18 @@ import { Creators as ComplaintActions } from '../ducks/complaint'
 import { Creators as GasStationAction } from '../ducks/gasStation'
 import api from '../../services'
 
+export function* complaintsRequest() {
+  try {
+    const response = yield call(api.get, 'admin/complaints')
+    const complaints = response.data
+    yield put(ComplaintActions.complaintsSuccess(complaints))
+  } catch (err) {
+    console.log('SAGA COMPLAINT ERR: ', err)
+    yield put(ComplaintActions.complaintsFailure())
+    yield put(AlertActions.createErrorAlert('Erro ao carregar as denúncias, tente novamente mais tarde'))
+  }
+}
+
 export function* getComplaintRequest({ complaintID }) {
   try {
     const response = yield call(api.get, `users/complaints/${complaintID}`)
