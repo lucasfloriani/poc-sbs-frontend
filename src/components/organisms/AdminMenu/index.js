@@ -51,6 +51,7 @@ const AdminMenu = ({ logout }) => {
         <HeaderActions>
           <Menu toogleComponent={onClick => (<Icon icon="menu" onClick={onClick} {...iconStyle} />)}>
             <MenuItem to="/admin">Home</MenuItem>
+            <MenuItem to="/admin/complaints">Denúncias</MenuItem>
             <MenuItem to="/admin/gas-stations">Criar Posto</MenuItem>
           </Menu>
           <Icon icon="logout" onClick={() => logout()} {...iconStyle} />
