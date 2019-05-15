@@ -45,8 +45,10 @@ const GasStationCreatePriceFuel = lazy(() => import('@pages/GasStationCreatePric
 const GasStationEditPriceFuel = lazy(() => import('@pages/GasStationEditPriceFuel/index'))
 // Admin pages
 const AdminListGasStations = lazy(() => import('@pages/AdminListGasStations/index'))
+const AdminComplaints = lazy(() => import('@pages/AdminComplaints/index'))
 const AdminCreateGasStations = lazy(() => import('@pages/AdminCreateGasStations/index'))
 const AdminEditGasStations = lazy(() => import('@pages/AdminEditGasStations/index'))
+const AdminGasStationPriceHistoric = lazy(() => import('@pages/AdminGasStationPriceHistoric/index'))
 
 const App = () => (
   <ThemeProvider theme={theme}>
@@ -70,8 +72,10 @@ const App = () => (
           <GasStationRouter path="/gas-station/price-fuel/:priceFuelID" exact component={props => <GasStationEditPriceFuel {...props} />} />
 
           <AdminRouter path="/admin" exact component={props => <AdminListGasStations {...props} />} />
+          <AdminRouter path="/admin/complaints" exact component={props => <AdminComplaints {...props} />} />
           <AdminRouter path="/admin/gas-stations" exact component={props => <AdminCreateGasStations {...props} />} />
           <AdminRouter path="/admin/gas-stations/:gasStationID" exact component={props => <AdminEditGasStations {...props} />} />
+          <AdminRouter path="/admin/gas-stations/:gasStationID/price-historic" exact component={props => <AdminGasStationPriceHistoric {...props} />} />
 
           <Route path="*" component={props => <NotFoundPage {...props} />} />
         </Switch>
