@@ -35,9 +35,7 @@ const FilterGasStation = ({ gasStationsRequest }) => (
       rating: 0,
     }}
     onSubmit={(filterValues, { setSubmitting }) => {
-      console.log('onSubmit:', filterValues)
       gasStationsRequest(filterValues)
-      console.log('onSubmit:', filterValues)
       setSubmitting(false)
     }}
     validationSchema={
@@ -50,10 +48,10 @@ const FilterGasStation = ({ gasStationsRequest }) => (
           .oneOf(Object.keys(orderType), 'Selecione um dos tipos de ordenação corretamente'),
         paymentType: Yup.string()
           .typeError('Tipo de pagamento precisa ser um texto')
-          .oneOf(Object.keys(paymentType), 'Selecione um dos tipos de pagamento corretamente'),
+          .oneOf(Object.values(paymentType), 'Selecione um dos tipos de pagamento corretamente'),
         fuelType: Yup.string()
           .typeError('Tipo de combustível precisa ser um texto')
-          .oneOf(Object.keys(fuelType), 'Selecione um dos tipos de combustível corretamente'),
+          .oneOf(Object.values(fuelType), 'Selecione um dos tipos de combustível corretamente'),
         minPrice: Yup.number().typeError('Preço mínimo precisa ser um número'),
         maxPrice: Yup.number().typeError('Preço máximo precisa ser um número'),
         rating: Yup.number()
@@ -135,7 +133,7 @@ const FilterGasStation = ({ gasStationsRequest }) => (
                 {...commomEvents}
               />
               <Select
-                options={Object.entries(paymentType).map(([value, id]) => [id, value])}
+                options={Object.entries(paymentType).map(type => [type[1], type[1]])}
                 id="paymentType"
                 name="paymentType"
                 labelTitle="Tipo de pagamento"
@@ -145,7 +143,7 @@ const FilterGasStation = ({ gasStationsRequest }) => (
                 {...commomEvents}
               />
               <Select
-                options={Object.entries(fuelType).map(([value, id]) => [id, value])}
+                options={Object.entries(fuelType).map(type => [type[1], type[1]])}
                 id="fuelType"
                 name="fuelType"
                 labelTitle="Tipo de combustível"
