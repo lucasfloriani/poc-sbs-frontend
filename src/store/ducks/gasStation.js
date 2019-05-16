@@ -22,7 +22,7 @@ export const { Types, Creators } = createActions({
   createGasStationSuccess: null,
   createGasStationFailure: null,
   updateGasStationRequest: ['gasStationData'],
-  updateGasStationSuccess: null,
+  updateGasStationSuccess: ['gasStation'],
   updateGasStationFailure: null,
   createGasStationsBookmark: ['bookmark'],
   deleteGasStationsBookmark: ['bookmark'],
@@ -149,9 +149,10 @@ const updateGasStationRequest = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: true,
 })
-const updateGasStationSuccess = (state = INITIAL_STATE) => ({
+const updateGasStationSuccess = (state = INITIAL_STATE, { gasStation }) => ({
   ...state,
   isFetching: false,
+  gasStation,
 })
 const updateGasStationFailure = (state = INITIAL_STATE) => ({
   ...state,

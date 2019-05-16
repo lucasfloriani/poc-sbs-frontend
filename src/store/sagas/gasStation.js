@@ -7,8 +7,7 @@ import api from '../../services'
 export function* gasStationsRequest({ filter }) {
   try {
     const response = yield call(api.get, `gas-stations${encodeQueryData(cleanFalsy(filter))}`)
-    const gasStations = response.data
-    yield put(GasStationActions.gasStationsSuccess(gasStations))
+    yield put(GasStationActions.gasStationsSuccess(response.data))
   } catch (err) {
     console.log('SAGA GAS STATION ERR: ', err)
     yield put(GasStationActions.gasStationFailure())
@@ -19,8 +18,7 @@ export function* gasStationsRequest({ filter }) {
 export function* bookmarkedGasStationsRequest() {
   try {
     const response = yield call(api.get, 'users/gas-stations/bookmark')
-    const gasStations = response.data
-    yield put(GasStationActions.bookmarkedGasStationsSuccess(gasStations))
+    yield put(GasStationActions.bookmarkedGasStationsSuccess(response.data))
   } catch (err) {
     console.log('SAGA GAS STATION ERR: ', err)
     yield put(GasStationActions.bookmarkedGasStationsFailure())
@@ -31,8 +29,7 @@ export function* bookmarkedGasStationsRequest() {
 export function* complaintGasStationsRequest() {
   try {
     const response = yield call(api.get, 'users/gas-stations/complaint')
-    const gasStations = response.data
-    yield put(GasStationActions.complaintGasStationsSuccess(gasStations))
+    yield put(GasStationActions.complaintGasStationsSuccess(response.data))
   } catch (err) {
     console.log('SAGA GAS STATION ERR: ', err)
     yield put(GasStationActions.complaintGasStationsFailure())
@@ -43,8 +40,7 @@ export function* complaintGasStationsRequest() {
 export function* ratingGasStationsRequest() {
   try {
     const response = yield call(api.get, 'users/gas-stations/rating')
-    const gasStations = response.data
-    yield put(GasStationActions.ratingGasStationsSuccess(gasStations))
+    yield put(GasStationActions.ratingGasStationsSuccess(response.data))
   } catch (err) {
     console.log('SAGA GAS STATION ERR: ', err)
     yield put(GasStationActions.ratingGasStationsFailure())
@@ -55,8 +51,7 @@ export function* ratingGasStationsRequest() {
 export function* getGasStationRequest({ gasStationID }) {
   try {
     const response = yield call(api.get, `gas-stations/${gasStationID}`)
-    const gasStation = response.data
-    yield put(GasStationActions.getGasStationSuccess(gasStation))
+    yield put(GasStationActions.getGasStationSuccess(response.data))
   } catch (err) {
     console.log('SAGA GAS STATION ERR:', err)
     yield put(GasStationActions.getGasStationFailure())
@@ -78,8 +73,8 @@ export function* createGasStationRequest({ gasStationData }) {
 
 export function* updateGasStationRequest({ gasStationData }) {
   try {
-    yield call(api.put, `admin/gas-stations/${gasStationData.id}`, gasStationData)
-    yield put(GasStationActions.updateGasStationSuccess())
+    const response = yield call(api.put, `admin/gas-stations/${gasStationData.id}`, gasStationData)
+    yield put(GasStationActions.updateGasStationSuccess(response.data))
     yield put(AlertActions.createSuccessAlert('Posto atualizado com successo'))
   } catch (err) {
     console.log('SAGA GAS STATION ERR:', err)
