@@ -21,11 +21,11 @@ const MapInput = ({
           setCenter(bounds.center)
           setZoom(bounds.zoom)
         }}
-        defaultWidth={600}
         height={400}
       >
         <Draggable
           anchor={dragAnchor}
+          offset={[25, 50]}
           onDragEnd={(anchor) => {
             setDragAnchor(anchor)
             setValue(anchor)

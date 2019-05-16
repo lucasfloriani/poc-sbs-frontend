@@ -51,7 +51,6 @@ const MapDirections = ({ clearGasStationLocation, gasStationLocation: { location
           setCenter(bounds.center)
           setZoom(bounds.zoom)
         }}
-        defaultWidth={600}
         height={400}
       >
         <Marker
