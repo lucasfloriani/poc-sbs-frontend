@@ -2,7 +2,7 @@ import { createActions, createReducer } from 'reduxsauce'
 
 export const { Types, Creators } = createActions({
   createUserRequest: ['name', 'cpf', 'email', 'password'],
-  createUserSuccess: ['token', 'user'],
+  createUserSuccess: null,
   createUserFailure: null,
   updateUserRequest: ['userData'],
   updateUserSuccess: ['user'],
@@ -26,17 +26,13 @@ const createUserRequest = (state = INITIAL_STATE) => ({
   isFetching: true,
   isAuthenticated: false,
 })
-const createUserSuccess = (state = INITIAL_STATE, { token, user }) => ({
+const createUserSuccess = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
-  isAuthenticated: true,
-  token,
-  user,
 })
 const createUserFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
-  isAuthenticated: false,
 })
 // Update User
 const updateUserRequest = (state = INITIAL_STATE) => ({

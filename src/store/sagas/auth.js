@@ -25,15 +25,10 @@ export function* createUserRequest({
   name, cpf, email, password,
 }) {
   try {
-    const response = yield call(api.post, 'users', {
+    yield call(api.post, 'users', {
       name, cpf, email, password,
     })
-    const { token, user } = response.data
-    const userInfo = { ...user, type: accessType(user) }
-    if (!token) throw new Error('Token de acesso é inválido')
-    sessionStorage.setItem('token', token.token)
-    sessionStorage.setItem('user', JSON.stringify(userInfo))
-    yield put(AuthActions.createUserSuccess(token.token, userInfo))
+    yield put(AuthActions.createUserSuccess())
     yield put(AlertActions.createSuccessAlert('Conta criada com successo'))
   } catch (err) {
     console.log('SAGA CREATE USER ACCOUNT ERR:', err)
