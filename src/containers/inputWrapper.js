@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Error, Label } from 'components'
 import { getOptionsFrom } from '@theme'
 
 const Wrapper = styled.div`
   align-items: center;
   display: flex;
-  flex-direction: column;
+  ${({ type }) => type !== 'number' && css`flex-direction: column;`}
   justify-items: center;
   position: relative;
 `
@@ -21,9 +21,10 @@ function withFormWrapper(WrappedComponent) {
       error,
       focusBorderColor,
       labelTitle,
+      type,
     } = props
     return (
-      <Wrapper>
+      <Wrapper type={type}>
         <WrappedComponent {...props} active={active} id={id} />
         <Label
           htmlFor={id}
