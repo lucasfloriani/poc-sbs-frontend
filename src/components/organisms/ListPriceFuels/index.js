@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { media } from '@theme'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as PriceFuelActions } from '@store/ducks/priceFuel'
@@ -15,6 +17,12 @@ import {
   Paragraph,
   ScreenLoader,
 } from 'components'
+
+const ListWrapper = styled(({ length, ...props }) => <Grid column={length ? '1fr 1fr' : '1fr'} {...props} />)`
+  ${media.lessThan('medium')`
+    grid-template-columns: 1fr;
+  `}
+`
 
 const ListPriceFuels = ({
   deletePriceFuelRequest,
@@ -47,7 +55,7 @@ const ListPriceFuels = ({
           </Button>
         </Flex>
       </Block>
-      <Grid column={priceFuels.length ? '1fr 1fr' : '1fr'}>
+      <ListWrapper length={priceFuels.length}>
         {priceFuels && priceFuels.map(({
           id, fuelType, paymentType, price,
         }) => (
@@ -75,7 +83,7 @@ const ListPriceFuels = ({
             <Button to="/gas-station/price-fuel">Adicionar preço de combustível</Button>
           </>
         )}
-      </Grid>
+      </ListWrapper>
     </Grid>
   )
 }
