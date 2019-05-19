@@ -1,17 +1,13 @@
 import React from 'react'
 import {
-  Footer,
   FullPageTemplate,
-  Header,
   NotFound,
 } from 'components'
 
-const NotFoundPage = () => {
-  return (
-    <FullPageTemplate header={<Header />} footer={<Footer />}>
-      <NotFound />
-    </FullPageTemplate>
-  )
-}
+const NotFoundPage = () => (
+  <FullPageTemplate mainPadding="0" style={{ backgroundImage: 'linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%)' }}>
+    <NotFound />
+  </FullPageTemplate>
+)
 
 export default NotFoundPage
