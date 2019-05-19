@@ -11,6 +11,7 @@ export const { Types, Creators } = createActions({
   loginSuccess: ['token', 'user'],
   loginFailure: null,
   logout: null,
+  updateFuelType: ['fuelTypeName'],
 })
 
 const INITIAL_STATE = {
@@ -18,6 +19,7 @@ const INITIAL_STATE = {
   isFetching: false,
   token: sessionStorage.getItem('token') || '',
   user: (sessionStorage.getItem('user') && JSON.parse(sessionStorage.getItem('user'))) || {},
+  fuelTypeName: '',
 }
 
 // Create User
@@ -70,12 +72,19 @@ const logout = () => {
   sessionStorage.removeItem('token')
   sessionStorage.removeItem('user')
   return {
+    ...INITIAL_STATE,
     isAuthenticated: false,
     isFetching: false,
     token: '',
     user: {},
+    fuelTypeName: '',
   }
 }
+// FuelType selected
+const updateFuelType = (state = INITIAL_STATE, { fuelTypeName }) => ({
+  ...state,
+  fuelTypeName,
+})
 
 export default createReducer(INITIAL_STATE, {
   [Types.CREATE_USER_REQUEST]: createUserRequest,
@@ -88,4 +97,5 @@ export default createReducer(INITIAL_STATE, {
   [Types.LOGIN_SUCCESS]: loginSuccess,
   [Types.LOGIN_FAILURE]: loginFailure,
   [Types.LOGOUT]: logout,
+  [Types.UPDATE_FUEL_TYPE]: updateFuelType,
 })
