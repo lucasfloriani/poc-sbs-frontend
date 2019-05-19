@@ -52,7 +52,7 @@ const LoginForm = ({ loginRequest }) => (
 
       return (
         <Form onSubmit={handleSubmit} style={{ margin: 'auto', maxWidth: '400px', width: '100%' }}>
-          <Grid valign="flex-start" column="1fr" halign="stretch">
+          <Grid valign="flex-start" column="1fr">
             <Image alt="POC SBS" src={logo} style={{ justifySelf: 'center' }} />
             <Text
               type="email"

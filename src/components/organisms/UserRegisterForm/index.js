@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as AuthActions } from '@store/ducks/auth'
@@ -10,20 +9,12 @@ import logo from '@public/img/logo.png'
 import {
   Button,
   Form,
+  Grid,
   Image,
   Link,
   Paragraph,
   Text,
 } from 'components'
-
-const FieldWrapper = styled.div`
-  align-items: flex-start;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 15px;
-  justify-items: stretch;
-  width: 400px;
-`
 
 const UserRegisterForm = ({ createUserRequest }) => (
   <Formik
@@ -76,8 +67,8 @@ const UserRegisterForm = ({ createUserRequest }) => (
       }
 
       return (
-        <Form onSubmit={handleSubmit} style={{ margin: 'auto', width: 'auto' }}>
-          <FieldWrapper>
+        <Form onSubmit={handleSubmit} style={{ margin: 'auto', maxWidth: '400px', width: '100%' }}>
+          <Grid valign="flex-start" column="1fr">
             <Image alt="POC SBS" src={logo} style={{ justifySelf: 'center' }} />
             <Text
               id="name"
@@ -132,7 +123,7 @@ const UserRegisterForm = ({ createUserRequest }) => (
             >
               Criar conta
             </Button>
-          </FieldWrapper>
+          </Grid>
         </Form>
       )
     }}
