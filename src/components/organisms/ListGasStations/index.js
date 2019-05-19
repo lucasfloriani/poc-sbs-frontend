@@ -44,6 +44,7 @@ const ListGasStations = ({
         geo_location: geoLocation,
         id,
         neighborhood,
+        priceFuels,
         ratings,
         state,
       }) => (
@@ -61,6 +62,7 @@ const ListGasStations = ({
           key={id}
           id={id}
           neighborhood={neighborhood}
+          priceFuels={priceFuels}
           ratings={ratings}
           stateName={state.name}
         />
