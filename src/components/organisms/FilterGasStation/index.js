@@ -5,6 +5,7 @@ import * as Yup from 'yup'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as GasStationActions } from '@store/ducks/gasStation'
+import { Creators as AuthActions } from '@store/ducks/auth'
 import orderType from '@enums/orderType'
 import paymentType from '@enums/paymentType'
 import fuelType from '@enums/fuelType'
@@ -21,7 +22,7 @@ import {
   Text,
 } from 'components'
 
-const FilterGasStation = ({ gasStationsRequest }) => (
+const FilterGasStation = ({ gasStationsRequest, updateFuelType }) => (
   <Formik
     initialValues={{
       name: '',
@@ -151,6 +152,10 @@ const FilterGasStation = ({ gasStationsRequest }) => (
                 active={touched.fuelType}
                 value={values.fuelType}
                 {...commomEvents}
+                onChange={(e) => {
+                  handleChange(e)
+                  updateFuelType(e.currentTarget.value)
+                }}
               />
               <Text
                 type="number"
@@ -207,8 +212,9 @@ const FilterGasStation = ({ gasStationsRequest }) => (
 
 FilterGasStation.propTypes = {
   gasStationsRequest: PropTypes.func.isRequired,
+  updateFuelType: PropTypes.func.isRequired,
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators(GasStationActions, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ ...GasStationActions, ...AuthActions }, dispatch)
 
 export default connect(null, mapDispatchToProps)(FilterGasStation)
