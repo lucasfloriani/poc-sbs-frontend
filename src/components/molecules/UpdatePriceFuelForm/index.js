@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { media } from '@theme'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { connect } from 'react-redux'
@@ -16,6 +18,12 @@ import {
   ScreenLoader,
   Text,
 } from 'components'
+
+const FieldWapper = styled(({ ...props }) => <Grid column="1fr 1fr 1fr" {...props} />)`
+  ${media.lessThan('extraSmall')`
+    grid-template-columns: 1fr;
+  `}
+`
 
 const UpdatePriceFuelForm = ({
   updatePriceFuelRequest,
@@ -115,7 +123,7 @@ const UpdatePriceFuelForm = ({
               </Block>
             )}
           >
-            <Grid valign="flex-start" column="1fr 1fr 1fr">
+            <FieldWapper>
               <Text
                 type="number"
                 id="price"
@@ -147,7 +155,7 @@ const UpdatePriceFuelForm = ({
                 required
                 {...commomEvents}
               />
-            </Grid>
+            </FieldWapper>
           </Form>
         )
       }}
