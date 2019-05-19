@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   align-items: center;
   display: flex;
   ${({ type }) => type !== 'number' && css`flex-direction: column;`}
+  flex-wrap: wrap;
   justify-items: center;
   position: relative;
 `
