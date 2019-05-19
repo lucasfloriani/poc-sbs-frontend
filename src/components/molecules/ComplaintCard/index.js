@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { media } from '@theme'
 import {
   Button,
   Card,
@@ -7,6 +9,12 @@ import {
   Heading,
   Paragraph,
 } from 'components'
+
+const HeaderWrapper = styled(({ ...props }) => <Grid column="1fr auto" valign="center" {...props} />)`
+  ${media.lessThan('extraSmall')`
+    grid-template-columns: 1fr;
+  `}
+`
 
 const ComplaintCard = ({
   gasStationID,
@@ -16,10 +24,10 @@ const ComplaintCard = ({
 }) => (
   <Card padding="medium">
     <Grid gap="25px">
-      <Grid column="1fr auto" valign="center">
+      <HeaderWrapper>
         <Heading margin="0">{gasStationName}</Heading>
         <Paragraph fontSize="small">{createdAt}</Paragraph>
-      </Grid>
+      </HeaderWrapper>
       <Paragraph>{message}</Paragraph>
       <Button to={`/admin/gas-stations/${gasStationID}/price-historic`}>Ver histórico de preço</Button>
     </Grid>
