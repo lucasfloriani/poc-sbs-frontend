@@ -52,7 +52,7 @@ const AdminGasStationPriceHistoric = lazy(() => import('@pages/AdminGasStationPr
 
 const App = () => (
   <ThemeProvider theme={theme}>
-    <React.Fragment>
+    <>
       <GlobalStyles />
       <ToastContainer />
       <Suspense fallback={<ScreenLoader />}>
@@ -80,7 +80,7 @@ const App = () => (
           <Route path="*" component={props => <NotFoundPage {...props} />} />
         </Switch>
       </Suspense>
-    </React.Fragment>
+    </>
   </ThemeProvider>
 )
 
