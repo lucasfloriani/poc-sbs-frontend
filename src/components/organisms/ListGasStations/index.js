@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { media } from '@theme'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as GasStationActions } from '@store/ducks/gasStation'
@@ -10,6 +12,12 @@ import {
   Paragraph,
   ScreenLoader,
 } from 'components'
+
+const ListWrapper = styled(({ length, ...props }) => <Grid column={length ? '1fr 1fr' : '1fr'} {...props} />)`
+  ${media.lessThan('medium')`
+    grid-template-columns: 1fr;
+  `}
+`
 
 const ListGasStations = ({
   actions, gasStations, gasStationsRequest, isFetching,
@@ -31,7 +39,7 @@ const ListGasStations = ({
   if (isFetching) return (<ScreenLoader />)
 
   return (
-    <Grid column={gasStations.length ? '1fr 1fr' : '1fr'}>
+    <ListWrapper length={gasStations.length}>
       {gasStations && gasStations.map(({
         address,
         bookmarks,
@@ -72,7 +80,7 @@ const ListGasStations = ({
           <Paragraph color={{ type: 'grayscale', position: 4 }}>Não foi encontrado nenhum posto de gasolina</Paragraph>
         </Block>
       )}
-    </Grid>
+    </ListWrapper>
   )
 }
 

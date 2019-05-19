@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { media } from '@theme'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as GasStationActions } from '@store/ducks/gasStation'
@@ -18,6 +20,12 @@ import {
   Paragraph,
   RatingRender,
 } from 'components'
+
+const CardWrapper = styled(({ length, ...props }) => <Grid column="1fr auto" valign="flex-start" {...props} />)`
+  ${media.lessThan('extraSmall')`
+    grid-template-columns: 1fr;
+  `}
+`
 
 const GasStationCard = ({
   actions,
@@ -48,7 +56,7 @@ const GasStationCard = ({
 
   return (
     <Card padding="medium">
-      <Grid valign="flex-start" column="1fr auto">
+      <CardWrapper>
         <Flex flow="column">
           <Heading margin="0">{fantasyName}</Heading>
           <Heading margin="0 0 8px">{cnpj}</Heading>
@@ -95,7 +103,7 @@ const GasStationCard = ({
             />
           )}
         </Flex>
-      </Grid>
+      </CardWrapper>
       {fuelTypeName && (
         <Grid column="1fr 1fr 1fr" gap="10px" style={{ marginTop: '20px' }}>
           <Paragraph fontSize="large" style={{ gridColumn: '1 / -1' }}>{fuelTypeName}</Paragraph>

@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
+import styled from 'styled-components'
+import { media } from '@theme'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as GasStationActions } from '@store/ducks/gasStation'
@@ -21,6 +23,12 @@ import {
   StateSelect,
   Text,
 } from 'components'
+
+const WrapperForm = styled(({ ...props }) => <Grid column="1fr 1fr 1fr" {...props} />)`
+  ${media.lessThan('small')`
+    grid-template-columns: 1fr;
+  `}
+`
 
 const FilterGasStation = ({ gasStationsRequest, updateFuelType }) => (
   <Formik
@@ -93,7 +101,7 @@ const FilterGasStation = ({ gasStationsRequest, updateFuelType }) => (
           style={{ margin: 'auto' }}
         >
           <Grid>
-            <Grid column="1fr 1fr 1fr">
+            <WrapperForm>
               <Text
                 id="name"
                 name="name"
@@ -185,7 +193,7 @@ const FilterGasStation = ({ gasStationsRequest, updateFuelType }) => (
                 onChange={value => setFieldValue('rating', value)}
                 value={values.rating}
               />
-            </Grid>
+            </WrapperForm>
             <Grid column="1fr 1fr">
               <Button
                 type="reset"
