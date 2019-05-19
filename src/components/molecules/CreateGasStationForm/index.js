@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { media } from '@theme'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { connect } from 'react-redux'
@@ -16,6 +18,12 @@ import {
   StateSelect,
   Text,
 } from 'components'
+
+const FieldWapper = styled(({ ...props }) => <Grid column="1fr 1fr 1fr" valign="flex-start" {...props} />)`
+  ${media.lessThan('small')`
+    grid-template-columns: 1fr;
+  `}
+`
 
 const CreateGasStationForm = ({ createGasStationRequest }) => (
   <Formik
@@ -153,7 +161,7 @@ const CreateGasStationForm = ({ createGasStationRequest }) => (
             </Block>
           )}
         >
-          <Grid valign="flex-start" column="1fr 1fr 1fr">
+          <FieldWapper>
             <Text
               type="email"
               id="email"
@@ -302,7 +310,7 @@ const CreateGasStationForm = ({ createGasStationRequest }) => (
                 setValue={value => setFieldValue('geo_location', value)}
               />
             </Grid>
-          </Grid>
+          </FieldWapper>
         </Form>
       )
     }}
