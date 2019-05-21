@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as AuthActions } from '@store/ducks/auth'
 import {
-  Block, Icon, IconLink, ImageLink, Menu, MenuItem,
+  Block, Flex, Icon, IconLink, ImageLink, Menu, MenuItem,
 } from 'components'
 
 const Wrapper = styled(Block)`
@@ -25,16 +25,6 @@ const InnerWrapper = styled.div`
   justify-content: space-between;
   max-width: 1200px;
   width: 100%;
-
-  ${media.lessThan('extraSmall')`
-    flex-direction: column;
-  `}
-`
-
-const HeaderActions = styled.div`
-  ${media.lessThan('extraSmall')`
-    margin-top: 10px;
-  `}
 `
 
 const UserMenu = ({ logout }) => {
@@ -48,7 +38,7 @@ const UserMenu = ({ logout }) => {
     <Wrapper>
       <InnerWrapper>
         <ImageLink height="50px" alt="Logo" to="/user" src={logo} />
-        <HeaderActions>
+        <Flex width="auto">
           <Menu toogleComponent={onClick => (<Icon icon="menu" onClick={onClick} {...iconStyle} />)}>
             <MenuItem to="/user">Home</MenuItem>
             <MenuItem to="/user/bookmarks">Favoritos</MenuItem>
@@ -58,7 +48,7 @@ const UserMenu = ({ logout }) => {
           </Menu>
           <IconLink to="/user/edit" icon="user" {...iconStyle} />
           <Icon icon="logout" onClick={() => logout()} {...iconStyle} />
-        </HeaderActions>
+        </Flex>
       </InnerWrapper>
     </Wrapper>
   )

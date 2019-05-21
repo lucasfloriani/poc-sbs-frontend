@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as AuthActions } from '@store/ducks/auth'
 import {
-  Block, Icon, ImageLink, Menu, MenuItem,
+  Block, Flex, Icon, ImageLink, Menu, MenuItem,
 } from 'components'
 
 const Wrapper = styled(Block)`
@@ -25,16 +25,6 @@ const InnerWrapper = styled.div`
   justify-content: space-between;
   max-width: 1200px;
   width: 100%;
-
-  ${media.lessThan('extraSmall')`
-    flex-direction: column;
-  `}
-`
-
-const HeaderActions = styled.div`
-  ${media.lessThan('extraSmall')`
-    margin-top: 10px;
-  `}
 `
 
 const GasStationMenu = ({ logout }) => {
@@ -48,13 +38,13 @@ const GasStationMenu = ({ logout }) => {
     <Wrapper>
       <InnerWrapper>
         <ImageLink height="50px" alt="Logo" to="/gas-station" src={logo} />
-        <HeaderActions>
+        <Flex width="auto">
           <Menu toogleComponent={onClick => (<Icon icon="menu" onClick={onClick} {...iconStyle} />)}>
             <MenuItem to="/gas-station">Home</MenuItem>
             <MenuItem to="/gas-station/price-fuel">Criar Preço de Combustível</MenuItem>
           </Menu>
           <Icon icon="logout" onClick={() => logout()} {...iconStyle} />
-        </HeaderActions>
+        </Flex>
       </InnerWrapper>
     </Wrapper>
   )
