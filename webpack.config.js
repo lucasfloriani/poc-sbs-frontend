@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const {
   addPlugins,
   babel,
@@ -90,7 +90,8 @@ const config = {
           splitChunks: {
             chunks: 'all',
           },
-          minimize: [new UglifyJsPlugin()],
+          // minimize: [new UglifyJsPlugin()],
+          minimize: true,
         },
       }),
     ]),
