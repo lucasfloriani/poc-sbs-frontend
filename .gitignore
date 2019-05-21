@@ -1,7 +1,7 @@
 .DS_Store
 .happypack
-dist
 *.log
+dist/*.map
 node_modules
 coverage
 webpack/webpack-assets.json
