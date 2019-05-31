@@ -1,4 +1,4 @@
-import { put, call } from 'redux-saga/effects'
+import { call, put } from 'redux-saga/effects'
 import { accessType } from '@helpers/auth'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as AuthActions } from '../ducks/auth'
