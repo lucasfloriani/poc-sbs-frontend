@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import Store from './store'
 import { basename } from './config'
 import App from './components/App'
+import registerServiceWorker from './registerServiceWorker'
 
 load({
   google: {
@@ -25,3 +26,4 @@ const renderApp = () => (
 )
 
 render(renderApp(), document.getElementById('app'))
+registerServiceWorker()
