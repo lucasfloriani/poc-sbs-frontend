@@ -32,9 +32,7 @@ const UpdatePriceFuelForm = ({
   priceFuel,
   priceFuelID,
 }) => {
-  useEffect(() => {
-    getPriceFuelRequest(priceFuelID)
-  }, [])
+  useEffect(() => { getPriceFuelRequest(priceFuelID) }, [])
   if (isFetching) return (<ScreenLoader />)
 
   return (
@@ -46,10 +44,7 @@ const UpdatePriceFuelForm = ({
         payment_type_id: priceFuel.payment_type_id,
         fuel_type_id: priceFuel.fuel_type_id,
       }}
-      onSubmit={(values, { setSubmitting }) => {
-        updatePriceFuelRequest(values)
-        setSubmitting(false)
-      }}
+      onSubmit={values => updatePriceFuelRequest(values)}
       validationSchema={
         Yup.object().shape({
           price: Yup.number()
@@ -76,7 +71,6 @@ const UpdatePriceFuelForm = ({
         handleChange,
         handleReset,
         handleSubmit,
-        isSubmitting,
       }) => {
         const commomEvents = {
           onChange: handleChange,
@@ -108,14 +102,14 @@ const UpdatePriceFuelForm = ({
                     type="reset"
                     fontSize="small"
                     onClick={handleReset}
-                    disabled={!dirty || isSubmitting}
+                    disabled={!dirty || isFetching}
                   >
                     Limpar
                   </Button>
                   <Button
                     type="submit"
                     fontSize="small"
-                    disabled={!dirty || isSubmitting}
+                    disabled={!dirty || isFetching}
                   >
                     Atualizar
                   </Button>

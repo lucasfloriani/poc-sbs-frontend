@@ -14,7 +14,7 @@ import {
   Text,
 } from 'components'
 
-const UserRegisterForm = ({ user, updateUserRequest }) => {
+const UserRegisterForm = ({ isFetching, user, updateUserRequest }) => {
   return (
     <Formik
       initialValues={{
@@ -22,10 +22,7 @@ const UserRegisterForm = ({ user, updateUserRequest }) => {
         name: user.name,
         cpf: user.cpf,
       }}
-      onSubmit={(values, { setSubmitting }) => {
-        updateUserRequest(values)
-        setSubmitting(false)
-      }}
+      onSubmit={values => updateUserRequest(values)}
       validationSchema={
         Yup.object().shape({
           name: Yup.string()
@@ -47,7 +44,6 @@ const UserRegisterForm = ({ user, updateUserRequest }) => {
         handleChange,
         handleReset,
         handleSubmit,
-        isSubmitting,
       }) => {
         const commomEvents = {
           onChange: handleChange,
@@ -79,14 +75,14 @@ const UserRegisterForm = ({ user, updateUserRequest }) => {
                     type="reset"
                     fontSize="small"
                     onClick={handleReset}
-                    disabled={!dirty || isSubmitting}
+                    disabled={!dirty || isFetching}
                   >
                     Limpar
                   </Button>
                   <Button
                     type="submit"
                     fontSize="small"
-                    disabled={!dirty || isSubmitting}
+                    disabled={!dirty || isFetching}
                   >
                     Atualizar
                   </Button>
@@ -128,7 +124,7 @@ UserRegisterForm.propTypes = {
   createUserRequest: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = ({ auth: { user } }) => ({ user })
+const mapStateToProps = ({ auth: { isFetching, user } }) => ({ isFetching, user })
 const mapDispatchToProps = dispatch => bindActionCreators(AuthActions, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserRegisterForm)

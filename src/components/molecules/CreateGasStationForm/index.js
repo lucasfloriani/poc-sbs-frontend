@@ -25,7 +25,7 @@ const FieldWapper = styled(({ ...props }) => <Grid column="1fr 1fr 1fr" valign="
   `}
 `
 
-const CreateGasStationForm = ({ createGasStationRequest }) => (
+const CreateGasStationForm = ({ createGasStationRequest, isFetching }) => (
   <Formik
     initialValues={{
       email: '',
@@ -43,13 +43,12 @@ const CreateGasStationForm = ({ createGasStationRequest }) => (
       city_id: '',
       state_id: '',
     }}
-    onSubmit={(values, { setSubmitting }) => {
+    onSubmit={(values) => {
       const filtredValues = {
         ...values,
         geo_location: values.geo_location.join(','),
       }
       createGasStationRequest(filtredValues)
-      setSubmitting(false)
     }}
     validationSchema={
       Yup.object().shape({
@@ -113,7 +112,6 @@ const CreateGasStationForm = ({ createGasStationRequest }) => (
       handleChange,
       handleReset,
       handleSubmit,
-      isSubmitting,
       setFieldValue,
     }) => {
       const commomEvents = {
@@ -146,14 +144,14 @@ const CreateGasStationForm = ({ createGasStationRequest }) => (
                   type="reset"
                   fontSize="small"
                   onClick={handleReset}
-                  disabled={!dirty || isSubmitting}
+                  disabled={!dirty || isFetching}
                 >
                   Limpar
                 </Button>
                 <Button
                   type="submit"
                   fontSize="small"
-                  disabled={!dirty || isSubmitting}
+                  disabled={!dirty || isFetching}
                 >
                   Criar
                 </Button>
@@ -321,6 +319,7 @@ CreateGasStationForm.propTypes = {
   createGasStationRequest: PropTypes.func.isRequired,
 }
 
+const mapStateToProps = ({ gasStation: { isFetching } }) => ({ isFetching })
 const mapDispatchToProps = dispatch => bindActionCreators(GasStationActions, dispatch)
 
-export default connect(null, mapDispatchToProps)(CreateGasStationForm)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateGasStationForm)

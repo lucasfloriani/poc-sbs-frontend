@@ -24,7 +24,7 @@ const FieldWapper = styled(({ ...props }) => <Grid column="1fr 1fr 1fr" {...prop
   `}
 `
 
-const CreatePriceFuelForm = ({ createPriceFuelRequest, gasStationID }) => (
+const CreatePriceFuelForm = ({ createPriceFuelRequest, gasStationID, isFetching }) => (
   <Formik
     initialValues={{
       price: '',
@@ -32,10 +32,7 @@ const CreatePriceFuelForm = ({ createPriceFuelRequest, gasStationID }) => (
       payment_type_id: '',
       fuel_type_id: '',
     }}
-    onSubmit={(values, { setSubmitting }) => {
-      createPriceFuelRequest(values)
-      setSubmitting(false)
-    }}
+    onSubmit={values => createPriceFuelRequest(values)}
     validationSchema={
       Yup.object().shape({
         price: Yup.number()
@@ -62,7 +59,6 @@ const CreatePriceFuelForm = ({ createPriceFuelRequest, gasStationID }) => (
       handleChange,
       handleReset,
       handleSubmit,
-      isSubmitting,
     }) => {
       const commomEvents = {
         onChange: handleChange,
@@ -94,14 +90,14 @@ const CreatePriceFuelForm = ({ createPriceFuelRequest, gasStationID }) => (
                   type="reset"
                   fontSize="small"
                   onClick={handleReset}
-                  disabled={!dirty || isSubmitting}
+                  disabled={!dirty || isFetching}
                 >
                   Limpar
                 </Button>
                 <Button
                   type="submit"
                   fontSize="small"
-                  disabled={!dirty || isSubmitting}
+                  disabled={!dirty || isFetching}
                 >
                   Criar
                 </Button>
@@ -153,7 +149,7 @@ CreatePriceFuelForm.propTypes = {
   gasStationID: PropTypes.string.isRequired,
 }
 
-const mapStateToProps = ({ auth: { user } }) => ({ gasStationID: `${user.id}` })
+const mapStateToProps = ({ auth: { user }, priceFuel: { isFetching } }) => ({ gasStationID: `${user.id}`, isFetching })
 const mapDispatchToProps = dispatch => bindActionCreators(PriceFuelActions, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePriceFuelForm)

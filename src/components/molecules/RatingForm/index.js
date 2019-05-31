@@ -20,6 +20,7 @@ import {
 
 const RatingForm = ({
   initialValues,
+  isFetching,
   onDelete,
   onSubmit,
   queryType,
@@ -28,9 +29,8 @@ const RatingForm = ({
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={async (values, { setSubmitting }) => {
+      onSubmit={async (values) => {
         onSubmit(values)
-        setSubmitting(false)
         toggleModal()
       }}
       validationSchema={
@@ -40,12 +40,7 @@ const RatingForm = ({
             .integer('Avaliação precisa ser um número inteiro'),
         })
       }
-      render={({
-        values,
-        handleSubmit,
-        isSubmitting,
-        setFieldValue,
-      }) => (
+      render={({ values, handleSubmit, setFieldValue }) => (
         <Form
           onSubmit={handleSubmit}
           header={(
@@ -73,7 +68,7 @@ const RatingForm = ({
           footer={(
             <Block as="div" fontSize="small" backgroundColor={{ type: 'primary', position: 0 }}>
               <Flex halign="flex-end">
-                <Button type="submit" fontSize="small" disabled={isSubmitting}>
+                <Button type="submit" fontSize="small" disabled={isFetching}>
                   {`${queryType === QueryTypes.Create ? 'Adicionar' : 'Atualizar'}`}
                 </Button>
               </Flex>
@@ -96,6 +91,7 @@ const RatingForm = ({
 
 RatingForm.propTypes = {
   initialValues: PropTypes.object.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onDelete: PropTypes.func,
   queryType: PropTypes.oneOf(Object.values(QueryTypes)),
@@ -103,7 +99,7 @@ RatingForm.propTypes = {
 }
 
 
-const mapStateToProps = ({ auth: { user } }) => ({ gasStationID: `${user.id}` })
+const mapStateToProps = ({ auth: { user }, rating: { isFetching } }) => ({ gasStationID: `${user.id}`, isFetching })
 const mapDispatchToProps = dispatch => bindActionCreators(RatingActions, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(RatingForm)

@@ -53,13 +53,12 @@ const UpdateGasStationForm = ({
         city_id: gasStation.city_id,
         state_id: gasStation.state_id,
       }}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={(values) => {
         const filtredValues = {
           ...values,
           geo_location: values.geo_location.join(','),
         }
         updateGasStationRequest(filtredValues)
-        setSubmitting(false)
       }}
       validationSchema={
         Yup.object().shape({
@@ -119,7 +118,6 @@ const UpdateGasStationForm = ({
         handleChange,
         handleReset,
         handleSubmit,
-        isSubmitting,
         setFieldValue,
       }) => {
         const commomEvents = {
@@ -152,14 +150,14 @@ const UpdateGasStationForm = ({
                     type="reset"
                     fontSize="small"
                     onClick={handleReset}
-                    disabled={!dirty || isSubmitting}
+                    disabled={!dirty || isFetching}
                   >
                     Limpar
                   </Button>
                   <Button
                     type="submit"
                     fontSize="small"
-                    disabled={!dirty || isSubmitting}
+                    disabled={!dirty || isFetching}
                   >
                     Atualizar
                   </Button>

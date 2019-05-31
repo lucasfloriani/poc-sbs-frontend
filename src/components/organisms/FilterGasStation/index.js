@@ -30,7 +30,7 @@ const WrapperForm = styled(({ ...props }) => <Grid column="1fr 1fr 1fr" {...prop
   `}
 `
 
-const FilterGasStation = ({ gasStationsRequest, updateFuelType }) => (
+const FilterGasStation = ({ gasStationsRequest, isFetching, updateFuelType }) => (
   <Formik
     initialValues={{
       name: '',
@@ -43,10 +43,7 @@ const FilterGasStation = ({ gasStationsRequest, updateFuelType }) => (
       maxPrice: '',
       rating: 0,
     }}
-    onSubmit={(filterValues, { setSubmitting }) => {
-      gasStationsRequest(filterValues)
-      setSubmitting(false)
-    }}
+    onSubmit={filterValues => gasStationsRequest(filterValues)}
     validationSchema={
       Yup.object().shape({
         name: Yup.string().typeError('Nome precisa ser um texto'),
@@ -76,7 +73,6 @@ const FilterGasStation = ({ gasStationsRequest, updateFuelType }) => (
       handleChange,
       handleReset,
       handleSubmit,
-      isSubmitting,
       setFieldValue,
     }) => {
       const commomEvents = {
@@ -199,14 +195,14 @@ const FilterGasStation = ({ gasStationsRequest, updateFuelType }) => (
                 type="reset"
                 fontSize="small"
                 onClick={handleReset}
-                disabled={isSubmitting}
+                disabled={isFetching}
               >
                 Limpar
               </Button>
               <Button
                 type="submit"
                 fontSize="small"
-                disabled={isSubmitting}
+                disabled={isFetching}
               >
                 Filtrar
               </Button>
@@ -220,9 +216,11 @@ const FilterGasStation = ({ gasStationsRequest, updateFuelType }) => (
 
 FilterGasStation.propTypes = {
   gasStationsRequest: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   updateFuelType: PropTypes.func.isRequired,
 }
 
+const mapStateToProps = ({ gasStation: { isFetching } }) => ({ isFetching })
 const mapDispatchToProps = dispatch => bindActionCreators({ ...GasStationActions, ...AuthActions }, dispatch)
 
-export default connect(null, mapDispatchToProps)(FilterGasStation)
+export default connect(mapStateToProps, mapDispatchToProps)(FilterGasStation)

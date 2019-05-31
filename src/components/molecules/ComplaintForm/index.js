@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
+import { connect } from 'react-redux'
 import QueryTypes from '@enums/queryTypes'
 import {
   Badge,
@@ -17,6 +18,7 @@ import {
 
 const ComplaintForm = ({
   initialValues,
+  isFetching,
   onDelete,
   onSubmit,
   queryType,
@@ -25,9 +27,8 @@ const ComplaintForm = ({
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={(values) => {
         onSubmit(values)
-        setSubmitting(false)
         toggleModal()
       }}
       validationSchema={
@@ -45,7 +46,6 @@ const ComplaintForm = ({
         handleChange,
         handleReset,
         handleSubmit,
-        isSubmitting,
       }) => {
         const commomEvents = {
           onChange: handleChange,
@@ -90,12 +90,12 @@ const ComplaintForm = ({
                       type="reset"
                       fontSize="small"
                       onClick={handleReset}
-                      disabled={isSubmitting}
+                      disabled={isFetching}
                     >
                       Limpar
                     </Button>
                   )}
-                  <Button type="submit" fontSize="small" disabled={isSubmitting}>
+                  <Button type="submit" fontSize="small" disabled={isFetching}>
                     {`${queryType === QueryTypes.Create ? 'Criar' : 'Atualizar'}`}
                   </Button>
                 </Flex>
@@ -129,4 +129,6 @@ ComplaintForm.propTypes = {
   toggleModal: PropTypes.func.isRequired,
 }
 
-export default ComplaintForm
+const mapStateToProps = ({ complaint: { isFetching } }) => ({ isFetching })
+
+export default connect(mapStateToProps)(ComplaintForm)

@@ -16,14 +16,10 @@ import {
   Text,
 } from 'components'
 
-const LoginForm = ({ loginRequest }) => (
+const LoginForm = ({ isFetching, loginRequest }) => (
   <Formik
     initialValues={{ email: '', password: '' }}
-    onSubmit={(values, { setSubmitting }) => {
-      const { email, password } = values
-      loginRequest(email, password)
-      setSubmitting(false)
-    }}
+    onSubmit={({ email, password }) => loginRequest(email, password)}
     validationSchema={
       Yup.object().shape({
         email: Yup.string()
@@ -42,7 +38,6 @@ const LoginForm = ({ loginRequest }) => (
       handleBlur,
       handleChange,
       handleSubmit,
-      isSubmitting,
     }) => {
       const commomEvents = {
         onChange: handleChange,
@@ -82,7 +77,7 @@ const LoginForm = ({ loginRequest }) => (
             <Button
               type="submit"
               fontSize="small"
-              disabled={!dirty || isSubmitting}
+              disabled={!dirty || isFetching}
             >
               Entrar
             </Button>
@@ -97,6 +92,7 @@ LoginForm.propTypes = {
   loginRequest: PropTypes.func.isRequired,
 }
 
+const mapStateToProps = ({ auth: { isFetching } }) => ({ isFetching })
 const mapDispatchToProps = dispatch => bindActionCreators(AuthActions, dispatch)
 
-export default connect(null, mapDispatchToProps)(LoginForm)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
