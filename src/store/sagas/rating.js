@@ -1,4 +1,5 @@
 import { put, call } from 'redux-saga/effects'
+import { getRequestErrorsFromErrorObj } from '@helpers/error'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as RatingActions } from '../ducks/rating'
 import { Creators as GasStationAction } from '../ducks/gasStation'
@@ -25,7 +26,7 @@ export function* createRatingRequest({ ratingData }) {
   } catch (err) {
     console.log('SAGA RATING ERR:', err)
     yield put(RatingActions.createRatingFailure())
-    yield put(AlertActions.createErrorAlert('Erro ao criar a avaliação do posto, tente novamente mais tarde'))
+    yield put(AlertActions.createMultiErrorAlert(getRequestErrorsFromErrorObj(err)))
   }
 }
 
@@ -39,7 +40,7 @@ export function* updateRatingRequest({ ratingData }) {
   } catch (err) {
     console.log('SAGA RATING ERR:', err)
     yield put(RatingActions.updateRatingFailure())
-    yield put(AlertActions.createErrorAlert('Erro ao atualizar a avaliação do posto, tente novamente mais tarde'))
+    yield put(AlertActions.createMultiErrorAlert(getRequestErrorsFromErrorObj(err)))
   }
 }
 

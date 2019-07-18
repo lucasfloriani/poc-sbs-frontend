@@ -1,4 +1,5 @@
 import { put, call } from 'redux-saga/effects'
+import { getRequestErrorsFromErrorObj } from '@helpers/error'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as ComplaintActions } from '../ducks/complaint'
 import { Creators as GasStationAction } from '../ducks/gasStation'
@@ -37,7 +38,7 @@ export function* createComplaintRequest({ complaintData }) {
   } catch (err) {
     console.log('SAGA COMPLAINT ERR:', err)
     yield put(ComplaintActions.createComplaintFailure())
-    yield put(AlertActions.createErrorAlert('Erro ao realizar a denúncia do posto, tente novamente mais tarde'))
+    yield put(AlertActions.createMultiErrorAlert(getRequestErrorsFromErrorObj(err)))
   }
 }
 

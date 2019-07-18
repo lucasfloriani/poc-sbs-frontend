@@ -1,5 +1,6 @@
 import { call, put } from 'redux-saga/effects'
 import { accessType } from '@helpers/auth'
+import { getRequestErrorsFromErrorObj } from '@helpers/error'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as AuthActions } from '../ducks/auth'
 import api from '../../services'
@@ -33,7 +34,7 @@ export function* createUserRequest({
   } catch (err) {
     console.log('SAGA CREATE USER ACCOUNT ERR:', err)
     yield put(AuthActions.createUserFailure())
-    yield put(AlertActions.createErrorAlert('Erro ao criar a conta, tente novamente mais tarde'))
+    yield put(AlertActions.createMultiErrorAlert(getRequestErrorsFromErrorObj(err)))
   }
 }
 
@@ -48,6 +49,6 @@ export function* updateUserRequest({ userData }) {
   } catch (err) {
     console.log('SAGA UPDATE USER ACCOUNT ERR:', err)
     yield put(AuthActions.createUserFailure())
-    yield put(AlertActions.createErrorAlert('Erro ao atualizar a conta, tente novamente mais tarde'))
+    yield put(AlertActions.createMultiErrorAlert(getRequestErrorsFromErrorObj(err)))
   }
 }

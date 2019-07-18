@@ -1,4 +1,5 @@
 import { put, call } from 'redux-saga/effects'
+import { getRequestErrorsFromErrorObj } from '@helpers/error'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as PriceFuelActions } from '../ducks/priceFuel'
 import api from '../../services'
@@ -33,7 +34,7 @@ export function* createPriceFuelRequest({ priceFuelData }) {
   } catch (err) {
     console.log('SAGA PRICE FUEL ERR:', err)
     yield put(PriceFuelActions.createPriceFuelFailure())
-    yield put(AlertActions.createErrorAlert('Erro ao criar o preço de combustivel, verifique os campos e tente novamente'))
+    yield put(AlertActions.createMultiErrorAlert(getRequestErrorsFromErrorObj(err)))
   }
 }
 
@@ -45,7 +46,7 @@ export function* updatePriceFuelRequest({ priceFuelData }) {
   } catch (err) {
     console.log('SAGA PRICE FUEL ERR:', err)
     yield put(PriceFuelActions.updatePriceFuelFailure())
-    yield put(AlertActions.createErrorAlert('Erro ao atualizar o preço de combustivel, verifique os campos e tente novamente'))
+    yield put(AlertActions.createMultiErrorAlert(getRequestErrorsFromErrorObj(err)))
   }
 }
 

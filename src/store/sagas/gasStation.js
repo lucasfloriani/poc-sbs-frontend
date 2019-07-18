@@ -1,4 +1,5 @@
 import { put, call } from 'redux-saga/effects'
+import { getRequestErrorsFromErrorObj } from '@helpers/error'
 import { cleanFalsy, encodeQueryData } from '@helpers/object'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as GasStationActions } from '../ducks/gasStation'
@@ -67,7 +68,7 @@ export function* createGasStationRequest({ gasStationData }) {
   } catch (err) {
     console.log('SAGA GAS STATION ERR:', err)
     yield put(GasStationActions.createGasStationFailure())
-    yield put(AlertActions.createErrorAlert('Erro ao criar o posto de gasolina, verifique os campos e tente novamente'))
+    yield put(AlertActions.createMultiErrorAlert(getRequestErrorsFromErrorObj(err)))
   }
 }
 
@@ -79,6 +80,6 @@ export function* updateGasStationRequest({ gasStationData }) {
   } catch (err) {
     console.log('SAGA GAS STATION ERR:', err)
     yield put(GasStationActions.updateGasStationFailure())
-    yield put(AlertActions.createErrorAlert('Erro ao atualizar o posto de gasolina, verifique os campos e tente novamente'))
+    yield put(AlertActions.createMultiErrorAlert(getRequestErrorsFromErrorObj(err)))
   }
 }
