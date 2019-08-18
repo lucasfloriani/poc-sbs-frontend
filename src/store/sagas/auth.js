@@ -1,8 +1,11 @@
 import { call, put } from 'redux-saga/effects'
 import { accessType } from '@helpers/auth'
+import { getUserLocation } from '@helpers/geoLocation'
 import { getRequestErrorsFromErrorObj } from '@helpers/error'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as AuthActions } from '../ducks/auth'
+import { Creators as CityActions } from '../ducks/city'
+import { Creators as StateActions } from '../ducks/state'
 import api from '../../services'
 
 export function* loginRequest({ email, password }) {
@@ -50,5 +53,33 @@ export function* updateUserRequest({ userData }) {
     console.log('SAGA UPDATE USER ACCOUNT ERR:', err)
     yield put(AuthActions.createUserFailure())
     yield put(AlertActions.createMultiErrorAlert(getRequestErrorsFromErrorObj(err)))
+  }
+}
+
+export function* userLocationRequest() {
+  try {
+    const location = yield call(getUserLocation)
+    const { latitude = -26.244383377008926, longitude = -49.384092876981356 } = location.coords
+
+    const stateResponse = yield call(api.get, 'states')
+    const states = stateResponse.data.map(({ id, name }) => [name, id])
+
+    const reverseGeoLocation = yield call(api.get, `https://nominatim.openstreetmap.org/reverse.php?lat=${latitude}&lon=${longitude}&format=json`)
+    const { state = 'Santa Catarina', town: city = 'São Bento do Sul' } = reverseGeoLocation.data.address
+    const stateID = states.find(([name]) => name === state)[1]
+
+    const cityResponse = yield call(api.get, `states/${stateID}/cities`)
+    const cities = cityResponse.data.map(({ id, name }) => [name, id])
+    const cityID = cities.find(([name]) => name === city)[1]
+
+    yield put(StateActions.statesSuccess(states))
+    yield put(CityActions.citiesSuccess(cities))
+    yield put(AuthActions.userLocationSuccess(cityID, stateID, latitude, longitude))
+  } catch (err) {
+    console.log('SAGA USER LOCATION ERR:', err)
+    yield put(StateActions.statesFailure())
+    yield put(CityActions.citiesFailure())
+    yield put(AuthActions.userLocationFailure())
+    yield put(AlertActions.createErrorAlert('Erro ao buscar sua localização, tente novamente mais tarde'))
   }
 }

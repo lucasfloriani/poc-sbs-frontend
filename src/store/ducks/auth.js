@@ -12,14 +12,23 @@ export const { Types, Creators } = createActions({
   loginFailure: null,
   logout: null,
   updateFuelType: ['fuelTypeName'],
+  userLocationRequest: [],
+  userLocationSuccess: ['cityID', 'stateID', 'latitude', 'longitude'],
+  userLocationFailure: [],
 })
 
 const INITIAL_STATE = {
   isAuthenticated: !!sessionStorage.getItem('token'),
   isFetching: false,
   token: sessionStorage.getItem('token') || '',
-  user: (sessionStorage.getItem('user') && JSON.parse(sessionStorage.getItem('user'))) || {},
   fuelTypeName: '',
+  user: (sessionStorage.getItem('user') && JSON.parse(sessionStorage.getItem('user'))) || {},
+  userLocation: {
+    cityID: '',
+    stateID: '',
+    latitude: '',
+    longitude: '',
+  },
 }
 
 // Create User
@@ -80,10 +89,33 @@ const logout = () => {
     fuelTypeName: '',
   }
 }
+
 // FuelType selected
 const updateFuelType = (state = INITIAL_STATE, { fuelTypeName }) => ({
   ...state,
   fuelTypeName,
+})
+// UserLocation logic
+const userLocationRequest = (state = INITIAL_STATE) => ({
+  ...state,
+  isFetching: true,
+})
+const userLocationSuccess = (state = INITIAL_STATE, {
+  cityID, stateID, latitude, longitude,
+}) => ({
+  ...state,
+  isFetching: false,
+  userLocation: {
+    cityID,
+    stateID,
+    latitude,
+    longitude,
+  },
+})
+
+const userLocationFailure = (state = INITIAL_STATE) => ({
+  ...state,
+  isFetching: false,
 })
 
 export default createReducer(INITIAL_STATE, {
@@ -98,4 +130,7 @@ export default createReducer(INITIAL_STATE, {
   [Types.LOGIN_FAILURE]: loginFailure,
   [Types.LOGOUT]: logout,
   [Types.UPDATE_FUEL_TYPE]: updateFuelType,
+  [Types.USER_LOCATION_REQUEST]: userLocationRequest,
+  [Types.USER_LOCATION_SUCCESS]: userLocationSuccess,
+  [Types.USER_LOCATION_FAILURE]: userLocationFailure,
 })
