@@ -1,8 +1,6 @@
 import { createActions, createReducer } from 'reduxsauce'
 
 export const { Types, Creators } = createActions({
-  setGasStationLocation: ['gasStationLocation'],
-  clearGasStationLocation: null,
   gasStationsRequest: ['filter'],
   gasStationsSuccess: ['gasStations'],
   gasStationsFailure: null,
@@ -34,28 +32,12 @@ export const { Types, Creators } = createActions({
 const INITIAL_STATE = {
   bookmarkedGasStations: [],
   complaintGasStations: [],
-  gasStationLocation: {
-    location: '',
-    name: '',
-  },
   gasStation: {},
   gasStations: [],
   isFetching: false,
   ratingGasStations: [],
 }
 
-// GasStation location
-const setGasStationLocation = (state = INITIAL_STATE, { gasStationLocation }) => ({
-  ...state,
-  gasStationLocation,
-})
-const clearGasStationLocation = (state = INITIAL_STATE) => ({
-  ...state,
-  gasStationLocation: {
-    location: '',
-    name: '',
-  },
-})
 // Get All GasStations
 const gasStationsRequest = (state = INITIAL_STATE) => ({
   ...state,
@@ -278,8 +260,6 @@ const deleteGasStationsComplaint = (state = INITIAL_STATE, { complaint }) => {
 }
 
 export default createReducer(INITIAL_STATE, {
-  [Types.SET_GAS_STATION_LOCATION]: setGasStationLocation,
-  [Types.CLEAR_GAS_STATION_LOCATION]: clearGasStationLocation,
   [Types.GAS_STATIONS_REQUEST]: gasStationsRequest,
   [Types.GAS_STATIONS_SUCCESS]: gasStationsSuccess,
   [Types.GAS_STATIONS_FAILURE]: gasStationsFailure,
