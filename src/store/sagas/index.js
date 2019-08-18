@@ -1,19 +1,20 @@
 import { all, takeLatest } from 'redux-saga/effects'
-import { createUserRequest, loginRequest, updateUserRequest } from './auth'
+import {
+  createUserRequest,
+  loginRequest,
+  updateUserRequest,
+  userLocationRequest,
+} from './auth'
 import { bookmarksRequest, createBookmarkRequest, deleteBookmarkRequest } from './bookmark'
 import { citiesRequest } from './city'
 import {
   complaintsRequest,
-  getComplaintRequest,
   createComplaintRequest,
-  updateComplaintRequest,
-  deleteComplaintRequest,
 } from './complaint'
 import { fuelTypesRequest } from './fuelType'
 import {
   gasStationsRequest,
   bookmarkedGasStationsRequest,
-  complaintGasStationsRequest,
   ratingGasStationsRequest,
   getGasStationRequest,
   createGasStationRequest,
@@ -51,6 +52,7 @@ export default function* root() {
     takeLatest(AuthTypes.LOGIN_REQUEST, loginRequest),
     takeLatest(AuthTypes.CREATE_USER_REQUEST, createUserRequest),
     takeLatest(AuthTypes.UPDATE_USER_REQUEST, updateUserRequest),
+    takeLatest(AuthTypes.USER_LOCATION_REQUEST, userLocationRequest),
 
     takeLatest(BookmarkTypes.BOOKMARKS_REQUEST, bookmarksRequest),
     takeLatest(BookmarkTypes.CREATE_BOOKMARK_REQUEST, createBookmarkRequest),
@@ -59,16 +61,12 @@ export default function* root() {
     takeLatest(CityTypes.CITIES_REQUEST, citiesRequest),
 
     takeLatest(ComplaintTypes.COMPLAINTS_REQUEST, complaintsRequest),
-    takeLatest(ComplaintTypes.GET_COMPLAINT_REQUEST, getComplaintRequest),
     takeLatest(ComplaintTypes.CREATE_COMPLAINT_REQUEST, createComplaintRequest),
-    takeLatest(ComplaintTypes.UPDATE_COMPLAINT_REQUEST, updateComplaintRequest),
-    takeLatest(ComplaintTypes.DELETE_COMPLAINT_REQUEST, deleteComplaintRequest),
 
     takeLatest(FuelTypes.FUEL_TYPES_REQUEST, fuelTypesRequest),
 
     takeLatest(GasStationTypes.GAS_STATIONS_REQUEST, gasStationsRequest),
     takeLatest(GasStationTypes.BOOKMARKED_GAS_STATIONS_REQUEST, bookmarkedGasStationsRequest),
-    takeLatest(GasStationTypes.COMPLAINT_GAS_STATIONS_REQUEST, complaintGasStationsRequest),
     takeLatest(GasStationTypes.RATING_GAS_STATIONS_REQUEST, ratingGasStationsRequest),
     takeLatest(GasStationTypes.GET_GAS_STATION_REQUEST, getGasStationRequest),
     takeLatest(GasStationTypes.CREATE_GAS_STATION_REQUEST, createGasStationRequest),

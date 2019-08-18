@@ -9,9 +9,6 @@ export const { Types, Creators } = createActions({
   bookmarkedGasStationsRequest: null,
   bookmarkedGasStationsSuccess: ['gasStations'],
   bookmarkedGasStationsFailure: null,
-  complaintGasStationsRequest: null,
-  complaintGasStationsSuccess: ['gasStations'],
-  complaintGasStationsFailure: null,
   ratingGasStationsRequest: null,
   ratingGasStationsSuccess: ['gasStations'],
   ratingGasStationsFailure: null,
@@ -85,20 +82,6 @@ const bookmarkedGasStationsSuccess = (state = INITIAL_STATE, { gasStations }) =>
   bookmarkedGasStations: gasStations,
 })
 const bookmarkedGasStationsFailure = (state = INITIAL_STATE) => ({
-  ...state,
-  isFetching: false,
-})
-// Get All Complaint GasStations
-const complaintGasStationsRequest = (state = INITIAL_STATE) => ({
-  ...state,
-  isFetching: true,
-})
-const complaintGasStationsSuccess = (state = INITIAL_STATE, { gasStations }) => ({
-  ...state,
-  isFetching: false,
-  complaintGasStations: gasStations,
-})
-const complaintGasStationsFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
@@ -303,9 +286,6 @@ export default createReducer(INITIAL_STATE, {
   [Types.BOOKMARKED_GAS_STATIONS_REQUEST]: bookmarkedGasStationsRequest,
   [Types.BOOKMARKED_GAS_STATIONS_SUCCESS]: bookmarkedGasStationsSuccess,
   [Types.BOOKMARKED_GAS_STATIONS_FAILURE]: bookmarkedGasStationsFailure,
-  [Types.COMPLAINT_GAS_STATIONS_REQUEST]: complaintGasStationsRequest,
-  [Types.COMPLAINT_GAS_STATIONS_SUCCESS]: complaintGasStationsSuccess,
-  [Types.COMPLAINT_GAS_STATIONS_FAILURE]: complaintGasStationsFailure,
   [Types.RATING_GAS_STATIONS_REQUEST]: ratingGasStationsRequest,
   [Types.RATING_GAS_STATIONS_SUCCESS]: ratingGasStationsSuccess,
   [Types.RATING_GAS_STATIONS_FAILURE]: ratingGasStationsFailure,
