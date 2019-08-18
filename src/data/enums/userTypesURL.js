@@ -1,5 +1,5 @@
 const UserTypesURL = Object.freeze({
-  user: '/user',
+  user: '/',
   'gas-station': '/gas-station',
   admin: '/admin',
 })
