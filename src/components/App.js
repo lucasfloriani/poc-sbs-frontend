@@ -30,13 +30,11 @@ import { ScreenLoader } from './index'
  * - CRUD dos postos de gasolina
  */
 const HomePage = lazy(() => import('@pages/HomePage/index'))
+const LoginPage = lazy(() => import('@pages/LoginPage/index'))
 const RegisterPage = lazy(() => import('@pages/RegisterPage/index'))
 const NotFoundPage = lazy(() => import('@pages/NotFoundPage/index'))
 // User pages
-const UserHomePage = lazy(() => import('@pages/UserHomePage/index'))
-const UserListGasStations = lazy(() => import('@pages/UserListGasStations/index'))
 const UserBookmarks = lazy(() => import('@pages/UserBookmarks/index'))
-const UserComplaints = lazy(() => import('@pages/UserComplaints/index'))
 const UserRatings = lazy(() => import('@pages/UserRatings/index'))
 const UserEdit = lazy(() => import('@pages/UserEdit/index'))
 // Gas Station pages
@@ -57,13 +55,11 @@ const App = () => (
       <ToastContainer />
       <Suspense fallback={<ScreenLoader />}>
         <Switch>
-          <PublicRouter path="/" exact component={props => <HomePage {...props} />} />
+          <Route path="/" exact component={props => <HomePage {...props} />} />
+          <PublicRouter path="/login" exact component={props => <LoginPage {...props} />} />
           <PublicRouter path="/register" exact component={props => <RegisterPage {...props} />} />
 
-          <UserRouter path="/user" exact component={props => <UserHomePage {...props} />} />
-          <UserRouter path="/user/gas-stations" exact component={props => <UserListGasStations {...props} />} />
           <UserRouter path="/user/bookmarks" exact component={props => <UserBookmarks {...props} />} />
-          <UserRouter path="/user/complaints" exact component={props => <UserComplaints {...props} />} />
           <UserRouter path="/user/ratings" exact component={props => <UserRatings {...props} />} />
           <UserRouter path="/user/edit" exact component={props => <UserEdit {...props} />} />
 
