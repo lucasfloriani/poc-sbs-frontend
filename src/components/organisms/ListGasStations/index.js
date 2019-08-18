@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { media } from '@theme'
@@ -10,7 +10,6 @@ import {
   GasStationCard,
   Grid,
   Paragraph,
-  ScreenLoader,
 } from 'components'
 
 const ListWrapper = styled(({ length, ...props }) => <Grid column={length ? '1fr 1fr' : '1fr'} {...props} />)`
@@ -19,76 +18,52 @@ const ListWrapper = styled(({ length, ...props }) => <Grid column={length ? '1fr
   `}
 `
 
-const ListGasStations = ({
-  actions, gasStations, gasStationsRequest, isFetching,
-}) => {
-  useEffect(() => {
-    const filterValues = {
-      name: '',
-      state: '',
-      city: '',
-      orderType: '',
-      paymentType: '',
-      fuelType: '',
-      minPrice: '',
-      maxPrice: '',
-      rating: 0,
-    }
-    gasStationsRequest(filterValues)
-  }, [])
-  if (isFetching) return (<ScreenLoader />)
-
-  return (
-    <ListWrapper length={gasStations.length}>
-      {gasStations && gasStations.map(({
-        address,
-        bookmarks,
-        complaints,
-        cep,
-        city,
-        cnpj,
-        complement,
-        fantasy_name: fantasyName,
-        geo_location: geoLocation,
-        id,
-        neighborhood,
-        priceFuels,
-        ratings,
-        state,
-      }) => (
-        <GasStationCard
-          actions={actions}
-          address={address}
-          bookmarks={bookmarks}
-          cep={cep}
-          cityName={city.name}
-          cnpj={cnpj}
-          complaints={complaints}
-          complement={complement}
-          fantasyName={fantasyName}
-          geoLocation={geoLocation}
-          key={id}
-          id={id}
-          neighborhood={neighborhood}
-          priceFuels={priceFuels}
-          ratings={ratings}
-          stateName={state.name}
-        />
-      ))}
-      {!gasStations.length && (
-        <Block>
-          <Paragraph color={{ type: 'grayscale', position: 4 }}>Não foi encontrado nenhum posto de gasolina</Paragraph>
-        </Block>
-      )}
-    </ListWrapper>
-  )
-}
+const ListGasStations = ({ actions, gasStations }) => (
+  <ListWrapper length={gasStations.length}>
+    {gasStations && gasStations.map(({
+      address,
+      bookmarks,
+      cep,
+      city,
+      cnpj,
+      complement,
+      fantasy_name: fantasyName,
+      geo_location: geoLocation,
+      id,
+      neighborhood,
+      priceFuels,
+      ratings,
+      state,
+    }) => (
+      <GasStationCard
+        actions={actions}
+        address={address}
+        bookmarks={bookmarks}
+        cep={cep}
+        cityName={city.name}
+        cnpj={cnpj}
+        complement={complement}
+        fantasyName={fantasyName}
+        geoLocation={geoLocation}
+        key={id}
+        id={id}
+        neighborhood={neighborhood}
+        priceFuels={priceFuels}
+        ratings={ratings}
+        stateName={state.name}
+      />
+    ))}
+    {!gasStations.length && (
+      <Block>
+        <Paragraph color={{ type: 'grayscale', position: 4 }}>Não foi encontrado nenhum posto de gasolina</Paragraph>
+      </Block>
+    )}
+  </ListWrapper>
+)
 
 ListGasStations.propTypes = {
   actions: PropTypes.array.isRequired,
   gasStations: PropTypes.array.isRequired,
-  gasStationsRequest: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
 }
 
 ListGasStations.defaultProps = {

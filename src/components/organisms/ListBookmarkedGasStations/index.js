@@ -32,7 +32,6 @@ const ListBookmarkedGasStations = ({
       {bookmarkedGasStations && bookmarkedGasStations.map(({
         address,
         bookmarks,
-        complaints,
         cep,
         city,
         cnpj,
@@ -52,7 +51,6 @@ const ListBookmarkedGasStations = ({
           cep={cep}
           cityName={city.name}
           cnpj={cnpj}
-          complaints={complaints}
           complement={complement}
           fantasyName={fantasyName}
           geoLocation={geoLocation}
