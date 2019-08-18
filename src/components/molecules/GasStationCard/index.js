@@ -3,9 +3,8 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { media } from '@theme'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { Creators as GasStationActions } from '@store/ducks/gasStation'
 import paymentType from '@enums/paymentType'
+import UserType from '@enums/userType'
 import {
   Badge,
   BadgeIcon,
@@ -14,6 +13,7 @@ import {
   ComplaintRender,
   Flex,
   Grid,
+  HasPermission,
   Heading,
   Icon,
   Link,
@@ -34,7 +34,6 @@ const GasStationCard = ({
   cep,
   cityName,
   cnpj,
-  complaints,
   complement,
   fantasyName,
   fuelTypeName,
@@ -43,7 +42,6 @@ const GasStationCard = ({
   neighborhood,
   priceFuels,
   ratings,
-  setGasStationLocation,
   stateName,
 }) => {
   const initialValue = Object.values(paymentType).reduce((acc, type) => ({ ...acc, [type]: '-----' }), {})
@@ -65,41 +63,49 @@ const GasStationCard = ({
         </Flex>
         <Flex>
           {actions.includes('edit') && <Link to={`/admin/gas-stations/${id}`}><BadgeIcon icon="edit" /></Link>}
-          {actions.includes('rating') && (
-            <RatingRender ratings={ratings} gasStationID={`${id}`}>
-              {(userRating, toggleModal) => (
-                <Badge>
-                  <Icon
-                    cursor="pointer"
-                    icon="star"
-                    color={userRating ? { type: 'alert', position: 0 } : { type: 'primary', position: 0 }}
-                    hoverColor={userRating ? { type: 'alert', position: 0 } : { type: 'primary', position: 0 }}
-                    onClick={toggleModal}
-                  />
-                </Badge>
-              )}
-            </RatingRender>
-          )}
-          {actions.includes('alert') && (
-            <ComplaintRender complaints={complaints} gasStationID={`${id}`}>
-              {(userComplaint, toggleModal) => (
-                <Badge>
-                  <Icon
-                    cursor="pointer"
-                    icon="alert"
-                    color={userComplaint ? { type: 'primary', position: 4 } : { type: 'primary', position: 0 }}
-                    hoverColor={userComplaint ? { type: 'primary', position: 4 } : { type: 'primary', position: 0 }}
-                    onClick={toggleModal}
-                  />
-                </Badge>
-              )}
-            </ComplaintRender>
-          )}
-          {actions.includes('bookmark') && <BookmarkBadge bookmarks={bookmarks} gasStationID={`${id}`} />}
+          <HasPermission logged allowedUserType={[UserType.user]}>
+            {actions.includes('rating') && (
+              <RatingRender ratings={ratings} gasStationID={`${id}`}>
+                {(userRating, toggleModal) => (
+                  <Badge>
+                    <Icon
+                      cursor="pointer"
+                      icon="star"
+                      color={userRating ? { type: 'alert', position: 0 } : { type: 'primary', position: 0 }}
+                      hoverColor={userRating ? { type: 'alert', position: 0 } : { type: 'primary', position: 0 }}
+                      onClick={toggleModal}
+                    />
+                  </Badge>
+                )}
+              </RatingRender>
+            )}
+            {actions.includes('alert') && (
+              <ComplaintRender gasStationID={`${id}`}>
+                {toggleModal => (
+                  <Badge>
+                    <Icon
+                      cursor="pointer"
+                      icon="alert"
+                      color={{ type: 'primary', position: 0 }}
+                      hoverColor={{ type: 'primary', position: 0 }}
+                      onClick={toggleModal}
+                    />
+                  </Badge>
+                )}
+              </ComplaintRender>
+            )}
+            {actions.includes('bookmark') && <BookmarkBadge bookmarks={bookmarks} gasStationID={`${id}`} />}
+          </HasPermission>
           {actions.includes('navigation') && (
             <BadgeIcon
               icon="navigation"
-              onClick={() => setGasStationLocation({ location: geoLocation, name: fantasyName })}
+              onClick={() => {
+                navigator.geolocation.getCurrentPosition((position) => {
+                  const { latitude, longitude } = position.coords
+                  const url = `http://maps.google.com/?saddr=${latitude},${longitude}&daddr=${geoLocation}`
+                  window.open(url)
+                })
+              }}
             />
           )}
         </Flex>
@@ -130,7 +136,6 @@ GasStationCard.propTypes = {
   cep: PropTypes.string.isRequired,
   cityName: PropTypes.string.isRequired,
   cnpj: PropTypes.string.isRequired,
-  complaints: PropTypes.array.isRequired,
   complement: PropTypes.string.isRequired,
   fantasyName: PropTypes.string.isRequired,
   fuelTypeName: PropTypes.string.isRequired,
@@ -142,7 +147,6 @@ GasStationCard.propTypes = {
   neighborhood: PropTypes.string.isRequired,
   priceFuels: PropTypes.array.isRequired,
   ratings: PropTypes.array.isRequired,
-  setGasStationLocation: PropTypes.func.isRequired,
   stateName: PropTypes.string.isRequired,
 }
 
@@ -151,6 +155,5 @@ GasStationCard.defaultProps = {
 }
 
 const mapStateToProps = ({ auth: { fuelTypeName } }) => ({ fuelTypeName })
-const mapDispatchToProps = dispatch => bindActionCreators(GasStationActions, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(GasStationCard)
+export default connect(mapStateToProps)(GasStationCard)
