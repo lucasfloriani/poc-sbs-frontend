@@ -41,7 +41,7 @@ const GasStationMenu = ({ logout }) => {
         <Flex width="auto">
           <Menu toogleComponent={onClick => (<Icon icon="menu" onClick={onClick} {...iconStyle} />)}>
             <MenuItem to="/gas-station">Home</MenuItem>
-            <MenuItem to="/gas-station/price-fuel">Criar Preço de Combustível</MenuItem>
+            <MenuItem to="/gas-station/price-fuel">Criar Produto</MenuItem>
           </Menu>
           <Icon icon="logout" onClick={() => logout()} {...iconStyle} />
         </Flex>

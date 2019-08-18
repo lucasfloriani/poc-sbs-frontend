@@ -51,7 +51,7 @@ const ListPriceFuels = ({
             backgroundColor={{ type: 'primary', position: 2 }}
             hoverBackgroundColor={{ type: 'primary', position: 0 }}
           >
-            Criar Preço
+            Criar Produto
           </Button>
         </Flex>
       </Block>

@@ -75,7 +75,7 @@ const CreatePriceFuelForm = ({ createPriceFuelRequest, gasStationID, isFetching 
                 color={{ type: 'grayscale', position: 4 }}
                 hoverColor={{ type: 'grayscale', position: 4 }}
               >
-                Criar Preço
+                Criar Produto
               </Heading>
             </Block>
           )}
