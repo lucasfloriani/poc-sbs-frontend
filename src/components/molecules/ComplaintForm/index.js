@@ -3,25 +3,20 @@ import PropTypes from 'prop-types'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { connect } from 'react-redux'
-import QueryTypes from '@enums/queryTypes'
 import {
-  Badge,
   Button,
   Block,
   Flex,
   Form,
   Grid,
   Heading,
-  Icon,
   Text,
 } from 'components'
 
 const ComplaintForm = ({
   initialValues,
   isFetching,
-  onDelete,
   onSubmit,
-  queryType,
   toggleModal,
 }) => {
   return (
@@ -63,18 +58,8 @@ const ComplaintForm = ({
                     color={{ type: 'grayscale', position: 4 }}
                     hoverColor={{ type: 'grayscale', position: 4 }}
                   >
-                    {`${queryType === QueryTypes.Create ? 'Criar' : 'Atualizar'} Denúncia`}
+                    Criar Denúncia
                   </Heading>
-                  {onDelete && (
-                    <Badge
-                      onClick={() => {
-                        onDelete(initialValues.id)
-                        toggleModal()
-                      }}
-                    >
-                      <Icon icon="delete" />
-                    </Badge>
-                  )}
                 </Grid>
               </Block>
             )}
@@ -85,18 +70,16 @@ const ComplaintForm = ({
                 backgroundColor={{ type: 'primary', position: 0 }}
               >
                 <Flex halign="flex-end">
-                  {queryType === QueryTypes.Create && (
-                    <Button
-                      type="reset"
-                      fontSize="small"
-                      onClick={handleReset}
-                      disabled={isFetching}
-                    >
-                      Limpar
-                    </Button>
-                  )}
+                  <Button
+                    type="reset"
+                    fontSize="small"
+                    onClick={handleReset}
+                    disabled={isFetching}
+                  >
+                    Limpar
+                  </Button>
                   <Button type="submit" fontSize="small" disabled={isFetching}>
-                    {`${queryType === QueryTypes.Create ? 'Criar' : 'Atualizar'}`}
+                    Criar
                   </Button>
                 </Flex>
               </Block>
@@ -124,8 +107,6 @@ const ComplaintForm = ({
 ComplaintForm.propTypes = {
   initialValues: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  onDelete: PropTypes.func,
-  queryType: PropTypes.oneOf(Object.values(QueryTypes)),
   toggleModal: PropTypes.func.isRequired,
 }
 
