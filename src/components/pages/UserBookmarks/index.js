@@ -1,6 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import {
   Block,
   Container,
@@ -8,12 +6,11 @@ import {
   Grid,
   Heading,
   ListBookmarkedGasStations,
-  MapDirections,
   UserFooter,
   UserMenu,
 } from 'components'
 
-const UserBookmarks = ({ gasStationLocation }) => (
+const UserBookmarks = () => (
   <FullPageTemplate
     header={<UserMenu />}
     footer={<UserFooter />}
@@ -21,7 +18,6 @@ const UserBookmarks = ({ gasStationLocation }) => (
   >
     <Container align="center">
       <Grid>
-        {gasStationLocation.location && <MapDirections gasStationLocation={gasStationLocation} />}
         <Block>
           <Heading
             color={{ type: 'grayscale', position: 4 }}
@@ -36,13 +32,4 @@ const UserBookmarks = ({ gasStationLocation }) => (
   </FullPageTemplate>
 )
 
-UserBookmarks.propTypes = {
-  gasStationLocation: PropTypes.shape({
-    location: PropTypes.string,
-    name: PropTypes.string,
-  }),
-}
-
-const mapStateToProps = ({ gasStation: { gasStationLocation } }) => ({ gasStationLocation })
-
-export default connect(mapStateToProps)(UserBookmarks)
+export default UserBookmarks
