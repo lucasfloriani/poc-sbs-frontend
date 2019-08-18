@@ -19,7 +19,7 @@ const ListWrapper = styled(({ length, ...props }) => <Grid column={length ? '1fr
   `}
 `
 
-const ListComplaintGasStations = ({
+const ListComplaint = ({
   complaints, complaintsRequest, isFetching,
 }) => {
   useEffect(() => { complaintsRequest() }, [])
@@ -47,7 +47,7 @@ const ListComplaintGasStations = ({
   )
 }
 
-ListComplaintGasStations.propTypes = {
+ListComplaint.propTypes = {
   complaintsRequest: PropTypes.func.isRequired,
   complaints: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
@@ -56,4 +56,4 @@ ListComplaintGasStations.propTypes = {
 const mapStateToProps = ({ complaint: { complaints, isFetching } }) => ({ complaints, isFetching })
 const mapDispatchToProps = dispatch => bindActionCreators(ComplaintActions, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListComplaintGasStations)
+export default connect(mapStateToProps, mapDispatchToProps)(ListComplaint)
