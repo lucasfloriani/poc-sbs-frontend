@@ -5,8 +5,9 @@ import { getShadow, media } from '@theme'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as AuthActions } from '@store/ducks/auth'
+import UserType from '@enums/userType'
 import {
-  Block, Flex, Icon, IconLink, ImageLink, Menu, MenuItem,
+  Block, Flex, HasPermission, Icon, IconLink, ImageLink, Menu, MenuItem,
 } from 'components'
 
 const Wrapper = styled(Block)`
@@ -37,17 +38,24 @@ const UserMenu = ({ logout }) => {
   return (
     <Wrapper>
       <InnerWrapper>
-        <ImageLink height="50px" alt="Logo" to="/user" src={logo} />
+        <ImageLink height="50px" alt="Logo" to="/" src={logo} />
         <Flex width="auto">
           <Menu toogleComponent={onClick => (<Icon icon="menu" onClick={onClick} {...iconStyle} />)}>
-            <MenuItem to="/user">Home</MenuItem>
-            <MenuItem to="/user/bookmarks">Favoritos</MenuItem>
-            <MenuItem to="/user/complaints">Denuncias</MenuItem>
-            <MenuItem to="/user/ratings">Avaliações</MenuItem>
-            <MenuItem to="/user/edit">Editar Usuário</MenuItem>
+            <MenuItem to="/">Home</MenuItem>
+            <HasPermission logged allowedUserType={[UserType.user]}>
+              <MenuItem to="/user/bookmarks">Favoritos</MenuItem>
+              <MenuItem to="/user/ratings">Avaliações</MenuItem>
+              <MenuItem to="/user/edit">Editar Usuário</MenuItem>
+            </HasPermission>
+            <HasPermission>
+              <MenuItem to="/login">Login</MenuItem>
+              <MenuItem to="/register">Cadastrar-se</MenuItem>
+            </HasPermission>
           </Menu>
-          <IconLink to="/user/edit" icon="user" {...iconStyle} />
-          <Icon icon="logout" onClick={() => logout()} {...iconStyle} />
+          <HasPermission logged allowedUserType={[UserType.user]}>
+            <IconLink to="/user/edit" icon="user" {...iconStyle} />
+            <Icon icon="logout" onClick={() => logout()} {...iconStyle} />
+          </HasPermission>
         </Flex>
       </InnerWrapper>
     </Wrapper>
