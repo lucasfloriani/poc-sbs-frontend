@@ -113,10 +113,9 @@ const userLocationSuccess = (state = INITIAL_STATE, {
     longitude,
   },
 })
-
 const userLocationFailure = (state = INITIAL_STATE) => ({
   ...state,
-  isFetching: false,
+  isFetchingLocation: false,
 })
 
 export default createReducer(INITIAL_STATE, {
