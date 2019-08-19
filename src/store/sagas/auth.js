@@ -80,6 +80,6 @@ export function* userLocationRequest() {
     yield put(StateActions.statesFailure())
     yield put(CityActions.citiesFailure())
     yield put(AuthActions.userLocationFailure())
-    yield put(AlertActions.createErrorAlert('Erro ao buscar sua localização, tente novamente mais tarde'))
+    yield put(AlertActions.createErrorAlert('Não foi possível buscar sua localização, libere o acesso para filtrar os postos e outras funcionalidades corretamente'))
   }
 }

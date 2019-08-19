@@ -20,8 +20,9 @@ export const { Types, Creators } = createActions({
 const INITIAL_STATE = {
   isAuthenticated: !!sessionStorage.getItem('token'),
   isFetching: false,
+  isFetchingLocation: false,
   token: sessionStorage.getItem('token') || '',
-  fuelTypeName: '',
+  fuelTypeName: 'Gasolina',
   user: (sessionStorage.getItem('user') && JSON.parse(sessionStorage.getItem('user'))) || {},
   userLocation: {
     cityID: '',
@@ -86,7 +87,7 @@ const logout = () => {
     isFetching: false,
     token: '',
     user: {},
-    fuelTypeName: '',
+    fuelTypeName: 'Gasolina',
   }
 }
 
@@ -98,13 +99,13 @@ const updateFuelType = (state = INITIAL_STATE, { fuelTypeName }) => ({
 // UserLocation logic
 const userLocationRequest = (state = INITIAL_STATE) => ({
   ...state,
-  isFetching: true,
+  isFetchingLocation: true,
 })
 const userLocationSuccess = (state = INITIAL_STATE, {
   cityID, stateID, latitude, longitude,
 }) => ({
   ...state,
-  isFetching: false,
+  isFetchingLocation: false,
   userLocation: {
     cityID,
     stateID,

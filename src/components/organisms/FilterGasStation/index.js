@@ -10,7 +10,6 @@ import { Creators as GasStationActions } from '@store/ducks/gasStation'
 import { Creators as AuthActions } from '@store/ducks/auth'
 import orderType from '@enums/orderType'
 import paymentType from '@enums/paymentType'
-import fuelType from '@enums/fuelType'
 import {
   Block,
   Button,
@@ -33,17 +32,17 @@ const WrapperForm = styled(({ ...props }) => <Grid column="1fr 1fr 1fr" {...prop
 `
 
 const FilterGasStation = ({
+  fuelTypeName,
   gasStationsRequest,
   gasStationIsFetching,
-  locationIsFetching,
+  isFetchingLocation,
   states,
-  updateFuelType,
   userLocation,
   userLocationRequest,
 }) => {
   const [showFields, setShowFields] = useState(false)
   useEffect(() => { userLocationRequest() }, [])
-  if (gasStationIsFetching || locationIsFetching) return <ContentLoader />
+  if (gasStationIsFetching || isFetchingLocation) return <ContentLoader />
 
   return (
     <Formik
@@ -53,12 +52,13 @@ const FilterGasStation = ({
         city: userLocation.cityID || '',
         orderType: '',
         paymentType: '',
-        fuelType: '',
         minPrice: '',
         maxPrice: '',
         rating: 0,
       }}
-      onSubmit={filterValues => gasStationsRequest(filterValues)}
+      onSubmit={(filterValues) => {
+        gasStationsRequest({ ...filterValues, fuelType: fuelTypeName })
+      }}
       validationSchema={
         Yup.object().shape({
           name: Yup.string().typeError('Nome precisa ser um texto'),
@@ -70,9 +70,6 @@ const FilterGasStation = ({
           paymentType: Yup.string()
             .typeError('Tipo de pagamento precisa ser um texto')
             .oneOf(Object.values(paymentType), 'Selecione um dos tipos de pagamento corretamente'),
-          fuelType: Yup.string()
-            .typeError('Tipo de combustível precisa ser um texto')
-            .oneOf(Object.values(fuelType), 'Selecione um dos tipos de combustível corretamente'),
           minPrice: Yup.number().typeError('Preço mínimo precisa ser um número'),
           maxPrice: Yup.number().typeError('Preço máximo precisa ser um número'),
           rating: Yup.number()
@@ -180,20 +177,6 @@ const FilterGasStation = ({
                   value={values.paymentType}
                   {...commomEvents}
                 />
-                <Select
-                  options={Object.entries(fuelType).map(type => [type[1], type[1]])}
-                  id="fuelType"
-                  name="fuelType"
-                  labelTitle="Tipo de combustível"
-                  error={touched.fuelType && errors.fuelType}
-                  active={touched.fuelType}
-                  value={values.fuelType}
-                  {...commomEvents}
-                  onChange={(e) => {
-                    handleChange(e)
-                    updateFuelType(e.currentTarget.value)
-                  }}
-                />
                 <Text
                   type="number"
                   id="minPrice"
@@ -228,14 +211,14 @@ const FilterGasStation = ({
                   type="reset"
                   fontSize="small"
                   onClick={handleReset}
-                  disabled={gasStationIsFetching || locationIsFetching}
+                  disabled={gasStationIsFetching || isFetchingLocation}
                 >
                   Limpar
                 </Button>
                 <Button
                   type="submit"
                   fontSize="small"
-                  disabled={gasStationIsFetching || locationIsFetching}
+                  disabled={gasStationIsFetching || isFetchingLocation}
                 >
                   Filtrar
                 </Button>
@@ -250,23 +233,24 @@ const FilterGasStation = ({
 
 FilterGasStation.propTypes = {
   cities: PropTypes.array.isRequired,
+  fuelTypeName: PropTypes.string,
   gasStationIsFetching: PropTypes.bool.isRequired,
-  locationIsFetching: PropTypes.bool.isRequired,
+  isFetchingLocation: PropTypes.bool.isRequired,
   gasStationsRequest: PropTypes.func.isRequired,
   states: PropTypes.array.isRequired,
-  updateFuelType: PropTypes.func.isRequired,
   userLocation: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = ({
-  auth: { userLocation, isFetching: locationIsFetching },
+  auth: { fuelTypeName, userLocation, isFetchingLocation },
   city: { cities },
   gasStation: { isFetching: gasStationIsFetching },
   state: { states },
 }) => ({
   cities,
+  fuelTypeName,
   gasStationIsFetching,
-  locationIsFetching,
+  isFetchingLocation,
   states,
   userLocation,
 })
