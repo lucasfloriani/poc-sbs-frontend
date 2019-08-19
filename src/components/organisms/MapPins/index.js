@@ -1,8 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Marker from 'pigeon-marker'
 import Map from 'pigeon-maps'
 import { usePosition } from 'use-position'
+import { CustomMarker } from 'components'
+
+const DivMarker = ({
+  left, top, style, children, ...props
+}) => (
+  <div
+    style={{
+      position: 'absolute',
+      left,
+      top,
+      width: 210,
+      height: 94,
+      ...(style || {}),
+    }}
+    {...props}
+  >
+    {children}
+  </div>
+)
 
 const MapPins = ({ pins = [] }) => {
   const { latitude = -26.244383377008926, longitude = -49.384092876981356 } = usePosition()
@@ -20,12 +38,18 @@ const MapPins = ({ pins = [] }) => {
       {pins.length !== 0 && pins.map((pin, index) => {
         const formatedLocation = pin.location.split(',').map(value => parseFloat(value))
         return (
-          <Marker
-            key={pin.location}
+          <DivMarker
             anchor={formatedLocation}
+            offset={[105, 102]}
+            key={pin.location}
             payload={index + 1}
-            onClick={() => showDirections(pin.location)}
-          />
+          >
+            <CustomMarker
+              name={pin.name}
+              prices={pin.prices}
+              onClick={() => showDirections(pin.location)}
+            />
+          </DivMarker>
         )
       })}
     </Map>

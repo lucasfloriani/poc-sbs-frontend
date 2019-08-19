@@ -35,6 +35,7 @@ const HomePage = ({ gasStations, gasStationsRequest, isFetching }) => {
   const gasStationsPins = gasStations.map(gasStation => ({
     location: gasStation.geo_location,
     name: gasStation.fantasy_name,
+    prices: gasStation.priceFuels,
   }))
 
   return (
