@@ -9,6 +9,7 @@ import { bookmarksRequest, createBookmarkRequest, deleteBookmarkRequest } from '
 import { citiesRequest } from './city'
 import {
   complaintsRequest,
+  complaintRelatoryRequest,
   createComplaintRequest,
 } from './complaint'
 import { fuelTypesRequest } from './fuelType'
@@ -61,6 +62,7 @@ export default function* root() {
     takeLatest(CityTypes.CITIES_REQUEST, citiesRequest),
 
     takeLatest(ComplaintTypes.COMPLAINTS_REQUEST, complaintsRequest),
+    takeLatest(ComplaintTypes.COMPLAINT_RELATORY_REQUEST, complaintRelatoryRequest),
     takeLatest(ComplaintTypes.CREATE_COMPLAINT_REQUEST, createComplaintRequest),
 
     takeLatest(FuelTypes.FUEL_TYPES_REQUEST, fuelTypesRequest),

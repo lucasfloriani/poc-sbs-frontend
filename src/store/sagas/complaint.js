@@ -1,5 +1,6 @@
 import { put, call } from 'redux-saga/effects'
 import { getRequestErrorsFromErrorObj } from '@helpers/error'
+import FileSaver from 'file-saver'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as ComplaintActions } from '../ducks/complaint'
 import { Creators as GasStationAction } from '../ducks/gasStation'
@@ -28,5 +29,19 @@ export function* createComplaintRequest({ complaintData }) {
     console.log('SAGA COMPLAINT ERR:', err)
     yield put(ComplaintActions.createComplaintFailure())
     yield put(AlertActions.createMultiErrorAlert(getRequestErrorsFromErrorObj(err)))
+  }
+}
+
+export function* complaintRelatoryRequest() {
+  try {
+    const requestOptions = { headers: { Accept: 'application/xls', 'Content-Type': 'application/xls' } }
+    const response = yield call(api.get, 'admin/complaints/relatory', requestOptions)
+    const blob = new Blob([response.data], { type: 'application/xls' })
+    FileSaver.saveAs(blob, 'relatorio-de-denuncias.xls')
+    yield put(ComplaintActions.complaintRelatorySuccess())
+  } catch (err) {
+    console.log('SAGA COMPLAINT ERR: ', err)
+    yield put(ComplaintActions.complaintRelatoryFailure())
+    yield put(AlertActions.createErrorAlert('Erro ao baixar o relatório de denúncias, tente novamente mais tarde'))
   }
 }
