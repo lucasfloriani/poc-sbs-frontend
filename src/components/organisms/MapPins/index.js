@@ -5,7 +5,7 @@ import { usePosition } from 'use-position'
 import { CustomMarker } from 'components'
 
 const DivMarker = ({
-  left, top, style, children, ...props
+  left, top, style, children,
 }) => (
   <div
     style={{
@@ -16,11 +16,17 @@ const DivMarker = ({
       height: 94,
       ...(style || {}),
     }}
-    {...props}
   >
     {children}
   </div>
 )
+
+DivMarker.propTypes = {
+  left: PropTypes.any,
+  top: PropTypes.any,
+  style: PropTypes.any,
+  children: PropTypes.node.isRequired,
+}
 
 const MapPins = ({ pins = [] }) => {
   const { latitude = -26.244383377008926, longitude = -49.384092876981356 } = usePosition()
