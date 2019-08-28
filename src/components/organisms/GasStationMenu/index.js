@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import logo from '@public/img/logo.png'
+import logo from '@public/img/logo-branca.png'
 import { getShadow, media } from '@theme'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -42,6 +42,7 @@ const GasStationMenu = ({ logout }) => {
           <Menu toogleComponent={onClick => (<Icon icon="menu" onClick={onClick} {...iconStyle} />)}>
             <MenuItem to="/gas-station">Home</MenuItem>
             <MenuItem to="/gas-station/price-fuel">Criar Produto</MenuItem>
+            <MenuItem to="/gas-station/about-us">Sobre nós</MenuItem>
           </Menu>
           <Icon icon="logout" onClick={() => logout()} {...iconStyle} />
         </Flex>

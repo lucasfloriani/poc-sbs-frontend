@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import logo from '@public/img/logo.png'
+import logo from '@public/img/logo-branca.png'
 import { getShadow, media } from '@theme'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -82,6 +82,7 @@ const UserMenu = ({ fuelTypeName, logout, updateFuelType }) => {
               <MenuItem to="/login">Login</MenuItem>
               <MenuItem to="/register">Cadastrar-se</MenuItem>
             </HasPermission>
+            <MenuItem to="/about-us">Sobre nós</MenuItem>
           </Menu>
           <HasPermission logged allowedUserType={[UserType.user]}>
             <IconLink to="/user/edit" icon="user" {...iconStyle} />

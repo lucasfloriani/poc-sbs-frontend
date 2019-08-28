@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import logo from '@public/img/logo.png'
+import logo from '@public/img/logo-branca.png'
 import { getShadow, media } from '@theme'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -71,6 +71,8 @@ const AdminMenu = ({ fuelTypeName, logout, updateFuelType }) => {
             <MenuItem to="/admin">Home</MenuItem>
             <MenuItem to="/admin/complaints">Denúncias</MenuItem>
             <MenuItem to="/admin/gas-stations">Criar Posto</MenuItem>
+            <MenuItem to="/admin/relatories">Relatórios</MenuItem>
+            <MenuItem to="/admin/about-us">Sobre nós</MenuItem>
           </Menu>
           <Icon icon="logout" onClick={() => logout()} {...iconStyle} />
         </Flex>

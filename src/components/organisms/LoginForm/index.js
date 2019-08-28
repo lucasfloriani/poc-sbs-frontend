@@ -5,7 +5,7 @@ import * as Yup from 'yup'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as AuthActions } from '@store/ducks/auth'
-import logo from '@public/img/logo.png'
+import logo from '@public/img/logo-verde.png'
 import {
   Button,
   Form,
@@ -48,7 +48,7 @@ const LoginForm = ({ isFetching, loginRequest }) => (
       return (
         <Form onSubmit={handleSubmit} style={{ margin: 'auto', maxWidth: '400px', width: '100%' }}>
           <Grid valign="flex-start" column="1fr">
-            <Image alt="POC SBS" src={logo} style={{ justifySelf: 'center' }} />
+            <Image alt="Octano" height="80px" src={logo} style={{ justifySelf: 'center' }} />
             <Text
               type="email"
               id="email"

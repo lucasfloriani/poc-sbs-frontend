@@ -1,6 +1,6 @@
-# POC SBS Frontend
+# Octano Frontend
 
-Frontend do projeto POC SBS
+Frontend do projeto Octano
 
 ## Instalação do projeto
 
