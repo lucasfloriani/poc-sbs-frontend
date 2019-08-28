@@ -57,6 +57,7 @@ const config = {
         '@organisms': path.resolve(__dirname, 'src', 'components', 'organisms'),
         '@pages': path.resolve(__dirname, 'src', 'components', 'pages'),
         '@public': path.resolve(__dirname, 'public'),
+        '@service': path.resolve(__dirname, 'src', 'services'),
         '@store': path.resolve(__dirname, 'src', 'store'),
         '@templates': path.resolve(__dirname, 'src', 'components', 'templates'),
         '@theme': path.resolve(
