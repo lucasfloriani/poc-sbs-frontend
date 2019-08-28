@@ -1,5 +1,6 @@
 import { put, call } from 'redux-saga/effects'
 import { getRequestErrorsFromErrorObj } from '@helpers/error'
+import FileSaver from 'file-saver'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as PriceFuelActions } from '../ducks/priceFuel'
 import api from '../../services'
@@ -59,5 +60,19 @@ export function* deletePriceFuelRequest({ priceFuelID }) {
     console.log('SAGA PRICE FUEL ERR:', err)
     yield put(PriceFuelActions.deletePriceFuelFailure())
     yield put(AlertActions.createErrorAlert('Erro ao excluir o preço de combustivel, tente novamente mais tarde'))
+  }
+}
+
+export function* priceFuelHistoryRelatoryRequest() {
+  try {
+    const requestOptions = { headers: { Accept: 'application/xls', 'Content-Type': 'application/xls' } }
+    const response = yield call(api.get, 'admin/price-fuel-history/relatory', requestOptions)
+    const blob = new Blob([response.data], { type: 'application/xls' })
+    FileSaver.saveAs(blob, 'relatorio-de-historico-de-precos.xls')
+    yield put(PriceFuelActions.priceFuelHistoryRelatorySuccess())
+  } catch (err) {
+    console.log('SAGA COMPLAINT ERR: ', err)
+    yield put(PriceFuelActions.priceFuelHistoryRelatoryFailure())
+    yield put(AlertActions.createErrorAlert('Erro ao baixar o relatório de histórico de preços, tente novamente mais tarde'))
   }
 }

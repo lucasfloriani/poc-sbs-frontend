@@ -17,6 +17,9 @@ export const { Types, Creators } = createActions({
   deletePriceFuelRequest: ['priceFuelID'],
   deletePriceFuelSuccess: ['priceFuelID'],
   deletePriceFuelFailure: null,
+  priceFuelHistoryRelatoryRequest: null,
+  priceFuelHistoryRelatorySuccess: null,
+  priceFuelHistoryRelatoryFailure: null,
 })
 
 const INITIAL_STATE = {
@@ -96,6 +99,10 @@ const deletePriceFuelFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+// Price Fuel History Relatory
+const priceFuelHistoryRelatoryRequest = (state = INITIAL_STATE) => ({ ...state })
+const priceFuelHistoryRelatorySuccess = (state = INITIAL_STATE) => ({ ...state })
+const priceFuelHistoryRelatoryFailure = (state = INITIAL_STATE) => ({ ...state })
 
 export default createReducer(INITIAL_STATE, {
   [Types.PRICE_FUELS_REQUEST]: priceFuelsRequest,
@@ -113,4 +120,7 @@ export default createReducer(INITIAL_STATE, {
   [Types.DELETE_PRICE_FUEL_REQUEST]: deletePriceFuelRequest,
   [Types.DELETE_PRICE_FUEL_SUCCESS]: deletePriceFuelSuccess,
   [Types.DELETE_PRICE_FUEL_FAILURE]: deletePriceFuelFailure,
+  [Types.PRICE_FUEL_HISTORY_RELATORY_REQUEST]: priceFuelHistoryRelatoryRequest,
+  [Types.PRICE_FUEL_HISTORY_RELATORY_SUCCESS]: priceFuelHistoryRelatorySuccess,
+  [Types.PRICE_FUEL_HISTORY_RELATORY_FAILURE]: priceFuelHistoryRelatoryFailure,
 })

@@ -27,6 +27,9 @@ export const { Types, Creators } = createActions({
   createGasStationsComplaint: ['complaint'],
   updateGasStationsComplaint: ['complaint'],
   deleteGasStationsComplaint: ['complaint'],
+  gasStationRelatoryRequest: null,
+  gasStationRelatorySuccess: null,
+  gasStationRelatoryFailure: null,
 })
 
 const INITIAL_STATE = {
@@ -258,6 +261,10 @@ const deleteGasStationsComplaint = (state = INITIAL_STATE, { complaint }) => {
     complaintGasStations: updatedComplaintGasStations,
   }
 }
+// Gas Station Relatory
+const gasStationRelatoryRequest = (state = INITIAL_STATE) => ({ ...state })
+const gasStationRelatorySuccess = (state = INITIAL_STATE) => ({ ...state })
+const gasStationRelatoryFailure = (state = INITIAL_STATE) => ({ ...state })
 
 export default createReducer(INITIAL_STATE, {
   [Types.GAS_STATIONS_REQUEST]: gasStationsRequest,
@@ -286,4 +293,7 @@ export default createReducer(INITIAL_STATE, {
   [Types.CREATE_GAS_STATIONS_COMPLAINT]: createGasStationsComplaint,
   [Types.UPDATE_GAS_STATIONS_COMPLAINT]: updateGasStationsComplaint,
   [Types.DELETE_GAS_STATIONS_COMPLAINT]: deleteGasStationsComplaint,
+  [Types.GAS_STATION_RELATORY_REQUEST]: gasStationRelatoryRequest,
+  [Types.GAS_STATION_RELATORY_SUCCESS]: gasStationRelatorySuccess,
+  [Types.GAS_STATION_RELATORY_FAILURE]: gasStationRelatoryFailure,
 })

@@ -1,5 +1,6 @@
 import { put, call } from 'redux-saga/effects'
 import { getRequestErrorsFromErrorObj } from '@helpers/error'
+import FileSaver from 'file-saver'
 import { cleanFalsy, encodeQueryData } from '@helpers/object'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as GasStationActions } from '../ducks/gasStation'
@@ -70,5 +71,19 @@ export function* updateGasStationRequest({ gasStationData }) {
     console.log('SAGA GAS STATION ERR:', err)
     yield put(GasStationActions.updateGasStationFailure())
     yield put(AlertActions.createMultiErrorAlert(getRequestErrorsFromErrorObj(err)))
+  }
+}
+
+export function* gasStationRelatoryRequest() {
+  try {
+    const requestOptions = { headers: { Accept: 'application/xls', 'Content-Type': 'application/xls' } }
+    const response = yield call(api.get, 'admin/gas-stations/relatory', requestOptions)
+    const blob = new Blob([response.data], { type: 'application/xls' })
+    FileSaver.saveAs(blob, 'relatorio-de-postos.xls')
+    yield put(GasStationActions.gasStationRelatorySuccess())
+  } catch (err) {
+    console.log('SAGA COMPLAINT ERR: ', err)
+    yield put(GasStationActions.gasStationRelatoryFailure())
+    yield put(AlertActions.createErrorAlert('Erro ao baixar o relatório dos postos de combustível, tente novamente mais tarde'))
   }
 }

@@ -20,6 +20,7 @@ import {
   getGasStationRequest,
   createGasStationRequest,
   updateGasStationRequest,
+  gasStationRelatoryRequest,
 } from './gasStation'
 import { paymentTypesRequest } from './paymentType'
 import {
@@ -28,6 +29,7 @@ import {
   createPriceFuelRequest,
   updatePriceFuelRequest,
   deletePriceFuelRequest,
+  priceFuelHistoryRelatoryRequest,
 } from './priceFuel'
 import {
   getRatingRequest,
@@ -73,6 +75,7 @@ export default function* root() {
     takeLatest(GasStationTypes.GET_GAS_STATION_REQUEST, getGasStationRequest),
     takeLatest(GasStationTypes.CREATE_GAS_STATION_REQUEST, createGasStationRequest),
     takeLatest(GasStationTypes.UPDATE_GAS_STATION_REQUEST, updateGasStationRequest),
+    takeLatest(GasStationTypes.GAS_STATION_RELATORY_REQUEST, gasStationRelatoryRequest),
 
     takeLatest(PaymentTypes.PAYMENT_TYPES_REQUEST, paymentTypesRequest),
 
@@ -81,6 +84,7 @@ export default function* root() {
     takeLatest(PriceFuelTypes.CREATE_PRICE_FUEL_REQUEST, createPriceFuelRequest),
     takeLatest(PriceFuelTypes.UPDATE_PRICE_FUEL_REQUEST, updatePriceFuelRequest),
     takeLatest(PriceFuelTypes.DELETE_PRICE_FUEL_REQUEST, deletePriceFuelRequest),
+    takeLatest(PriceFuelTypes.PRICE_FUEL_HISTORY_RELATORY_REQUEST, priceFuelHistoryRelatoryRequest),
 
     takeLatest(RatingTypes.GET_RATING_REQUEST, getRatingRequest),
     takeLatest(RatingTypes.CREATE_RATING_REQUEST, createRatingRequest),
