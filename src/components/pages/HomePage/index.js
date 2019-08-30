@@ -30,7 +30,7 @@ const HomePage = ({ gasStations, gasStationsRequest, isFetching }) => {
     }
     gasStationsRequest(filterValues)
   }, [])
-  if (gasStations.length === 0 || isFetching) return (<ScreenLoader />)
+  if (isFetching) return (<ScreenLoader />)
 
   const gasStationsPins = gasStations.map(gasStation => ({
     location: gasStation.geo_location,
