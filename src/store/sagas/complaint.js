@@ -20,7 +20,9 @@ export function* complaintsRequest() {
 
 export function* createComplaintRequest({ complaintData }) {
   try {
-    const response = yield call(api.post, 'users/complaints', complaintData)
+    const response = yield call(api.post, 'users/complaints', complaintData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
     const complaint = response.data
     yield put(ComplaintActions.createComplaintSuccess(complaint))
     yield put(GasStationAction.createGasStationsComplaint(complaint))
