@@ -39,15 +39,11 @@ const HomePage = ({ gasStations, gasStationsRequest, isFetching }) => {
   }))
 
   return (
-    <FullPageTemplate
-      header={<UserMenu />}
-      footer={<UserFooter />}
-      style={{ backgroundImage: 'linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%)' }}
-    >
+    <FullPageTemplate header={<UserMenu />} footer={<UserFooter />}>
       <Container align="center">
         <Grid>
           <MapPins pins={gasStationsPins} />
-          <FilterGasStation />
+          <FilterGasStation onSubmit={filterPayload => gasStationsRequest(filterPayload)} />
           <ListGasStations />
         </Grid>
       </Container>
@@ -60,7 +56,6 @@ HomePage.propTypes = {
   gasStationsRequest: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
 }
-
 
 const mapStateToProps = ({ gasStation: { gasStations, isFetching } }) => ({ gasStations, isFetching })
 const mapDispatchToProps = dispatch => bindActionCreators(GasStationActions, dispatch)
