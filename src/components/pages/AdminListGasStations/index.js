@@ -1,4 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { Creators as GasStationActions } from '@store/ducks/gasStation'
 import {
   AdminFooter,
   AdminMenu,
@@ -7,21 +11,44 @@ import {
   FilterGasStation,
   Grid,
   ListGasStations,
+  ScreenLoader,
 } from 'components'
 
-const AdminListGasStations = () => (
-  <FullPageTemplate
-    header={<AdminMenu />}
-    footer={<AdminFooter />}
-    style={{ backgroundImage: 'linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%)' }}
-  >
-    <Container align="center">
-      <Grid>
-        <FilterGasStation />
-        <ListGasStations actions={['edit']} />
-      </Grid>
-    </Container>
-  </FullPageTemplate>
-)
+const AdminListGasStations = ({ adminGasStationsRequest, isFetching }) => {
+  useEffect(() => {
+    const filterValues = {
+      name: '',
+      state: '',
+      city: '',
+      orderType: '',
+      paymentType: '',
+      fuelType: '',
+      minPrice: '',
+      maxPrice: '',
+      rating: 0,
+    }
+    adminGasStationsRequest(filterValues)
+  }, [])
+  if (isFetching) return (<ScreenLoader />)
 
-export default AdminListGasStations
+  return (
+    <FullPageTemplate header={<AdminMenu />} footer={<AdminFooter />}>
+      <Container align="center">
+        <Grid>
+          <FilterGasStation onSubmit={filterPayload => adminGasStationsRequest(filterPayload)} />
+          <ListGasStations actions={['edit']} />
+        </Grid>
+      </Container>
+    </FullPageTemplate>
+  )
+}
+
+AdminListGasStations.propTypes = {
+  adminGasStationsRequest: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+}
+
+const mapStateToProps = ({ gasStation: { isFetching } }) => ({ isFetching })
+const mapDispatchToProps = dispatch => bindActionCreators(GasStationActions, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminListGasStations)
