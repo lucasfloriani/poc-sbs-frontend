@@ -86,6 +86,7 @@
     "pigeon-draggable": "^0.1.1",
     "pigeon-maps": "^0.12.1",
     "pigeon-marker": "^0.3.4",
+    "promise-file-reader": "^1.0.2",
     "prop-types": "^15.6.2",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
