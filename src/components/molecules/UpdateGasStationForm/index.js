@@ -16,6 +16,7 @@ import {
   Form,
   Grid,
   MapInput,
+  Select,
   StateSelect,
   Text,
 } from 'components'
@@ -45,6 +46,7 @@ const UpdateGasStationForm = ({
         fantasy_name: gasStation.fantasy_name,
         state_registration: gasStation.state_registration,
         anp: gasStation.anp,
+        status: gasStation.status,
         cep: gasStation.cep,
         address: gasStation.address,
         complement: gasStation.complement,
@@ -82,6 +84,10 @@ const UpdateGasStationForm = ({
           anp: Yup.string()
             .typeError('ANP precisa ser um texto')
             .required('Campo anp é obrigatório'),
+          status: Yup.string()
+            .typeError('Status precisa ser um texto')
+            .oneOf(['active', 'inactive'], 'Selecione um dos valores da lista')
+            .required('Campo status é obrigatório'),
           cep: Yup.string()
             .typeError('CEP precisa ser um texto')
             .matches(/[0-9]{5}-[0-9]{3}/, 'CEP é inválido')
@@ -213,6 +219,17 @@ const UpdateGasStationForm = ({
                 error={touched.anp && errors.anp}
                 active={touched.anp || values.anp !== ''}
                 value={values.anp}
+                required
+                {...commomEvents}
+              />
+              <Select
+                options={[['Ativo', 'active'], ['Inativo', 'inactive']]}
+                id="status"
+                name="status"
+                labelTitle="Status"
+                error={touched.status && errors.status}
+                active={touched.status || values.status !== ''}
+                value={values.status}
                 required
                 {...commomEvents}
               />
