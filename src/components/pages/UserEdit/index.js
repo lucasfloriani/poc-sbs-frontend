@@ -8,11 +8,7 @@ import {
 } from 'components'
 
 const UserEdit = () => (
-  <FullPageTemplate
-    header={<UserMenu />}
-    footer={<UserFooter />}
-    style={{ backgroundImage: 'linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%)' }}
-  >
+  <FullPageTemplate header={<UserMenu />} footer={<UserFooter />}>
     <Container align="center">
       <UpdateUserForm />
     </Container>

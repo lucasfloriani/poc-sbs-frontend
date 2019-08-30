@@ -5,7 +5,7 @@ import {
 } from 'components'
 
 const NotFoundPage = () => (
-  <FullPageTemplate mainPadding="0" style={{ backgroundImage: 'linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%)' }}>
+  <FullPageTemplate mainPadding="0">
     <NotFound />
   </FullPageTemplate>
 )

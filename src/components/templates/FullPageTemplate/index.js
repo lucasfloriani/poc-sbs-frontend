@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
+  background-image: 'linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%)';
   box-sizing: border-box;
   display: flex;
   flex-direction: column;

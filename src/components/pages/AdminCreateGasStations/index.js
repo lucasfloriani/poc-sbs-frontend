@@ -8,11 +8,7 @@ import {
 } from 'components'
 
 const AdminCreateGasStations = () => (
-  <FullPageTemplate
-    header={<AdminMenu />}
-    footer={<AdminFooter />}
-    style={{ backgroundImage: 'linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%)' }}
-  >
+  <FullPageTemplate header={<AdminMenu />} footer={<AdminFooter />}>
     <Container align="center">
       <CreateGasStationForm />
     </Container>

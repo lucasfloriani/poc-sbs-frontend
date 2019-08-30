@@ -8,11 +8,7 @@ import {
 } from 'components'
 
 const GasStationHomePage = () => (
-  <FullPageTemplate
-    header={<GasStationMenu />}
-    footer={<GasStationFooter />}
-    style={{ backgroundImage: 'linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%)' }}
-  >
+  <FullPageTemplate header={<GasStationMenu />} footer={<GasStationFooter />}>
     <Container align="center">
       <ListPriceFuels />
     </Container>
