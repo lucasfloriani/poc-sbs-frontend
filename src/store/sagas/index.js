@@ -2,8 +2,10 @@ import { all, takeLatest } from 'redux-saga/effects'
 import {
   createUserRequest,
   loginRequest,
+  forgotPasswordRequest,
   updateUserRequest,
   userLocationRequest,
+  recoveryPasswordRequest,
 } from './auth'
 import { bookmarksRequest, createBookmarkRequest, deleteBookmarkRequest } from './bookmark'
 import { citiesRequest } from './city'
@@ -55,9 +57,11 @@ import { Types as StatesTypes } from '../ducks/state'
 export default function* root() {
   return yield all([
     takeLatest(AuthTypes.LOGIN_REQUEST, loginRequest),
+    takeLatest(AuthTypes.FORGOT_PASSWORD_REQUEST, forgotPasswordRequest),
     takeLatest(AuthTypes.CREATE_USER_REQUEST, createUserRequest),
     takeLatest(AuthTypes.UPDATE_USER_REQUEST, updateUserRequest),
     takeLatest(AuthTypes.USER_LOCATION_REQUEST, userLocationRequest),
+    takeLatest(AuthTypes.RECOVERY_PASSWORD_REQUEST, recoveryPasswordRequest),
 
     takeLatest(BookmarkTypes.BOOKMARKS_REQUEST, bookmarksRequest),
     takeLatest(BookmarkTypes.CREATE_BOOKMARK_REQUEST, createBookmarkRequest),

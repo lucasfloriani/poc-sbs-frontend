@@ -11,6 +11,12 @@ export const { Types, Creators } = createActions({
   loginSuccess: ['token', 'user'],
   loginFailure: null,
   logout: null,
+  forgotPasswordRequest: ['email'],
+  forgotPasswordSuccess: null,
+  forgotPasswordFailure: null,
+  recoveryPasswordRequest: ['password', 'token'],
+  recoveryPasswordSuccess: null,
+  recoveryPasswordFailure: null,
   updateFuelType: ['fuelTypeName'],
   userLocationRequest: [],
   userLocationSuccess: ['cityID', 'stateID', 'latitude', 'longitude'],
@@ -90,6 +96,32 @@ const logout = () => {
     fuelTypeName: 'Gasolina',
   }
 }
+// Forgot password logic
+const forgotPasswordRequest = (state = INITIAL_STATE) => ({
+  ...state,
+  isFetching: true,
+})
+const forgotPasswordSuccess = (state = INITIAL_STATE) => ({
+  ...state,
+  isFetching: false,
+})
+const forgotPasswordFailure = (state = INITIAL_STATE) => ({
+  ...state,
+  isFetching: false,
+})
+// Recovery password logic
+const recoveryPasswordRequest = (state = INITIAL_STATE) => ({
+  ...state,
+  isFetching: true,
+})
+const recoveryPasswordSuccess = (state = INITIAL_STATE) => ({
+  ...state,
+  isFetching: false,
+})
+const recoveryPasswordFailure = (state = INITIAL_STATE) => ({
+  ...state,
+  isFetching: false,
+})
 
 // FuelType selected
 const updateFuelType = (state = INITIAL_STATE, { fuelTypeName }) => ({
@@ -129,6 +161,12 @@ export default createReducer(INITIAL_STATE, {
   [Types.LOGIN_SUCCESS]: loginSuccess,
   [Types.LOGIN_FAILURE]: loginFailure,
   [Types.LOGOUT]: logout,
+  [Types.FORGOT_PASSWORD_REQUEST]: forgotPasswordRequest,
+  [Types.FORGOT_PASSWORD_SUCCESS]: forgotPasswordSuccess,
+  [Types.FORGOT_PASSWORD_FAILURE]: forgotPasswordFailure,
+  [Types.RECOVERY_PASSWORD_REQUEST]: recoveryPasswordRequest,
+  [Types.RECOVERY_PASSWORD_SUCCESS]: recoveryPasswordSuccess,
+  [Types.RECOVERY_PASSWORD_FAILURE]: recoveryPasswordFailure,
   [Types.UPDATE_FUEL_TYPE]: updateFuelType,
   [Types.USER_LOCATION_REQUEST]: userLocationRequest,
   [Types.USER_LOCATION_SUCCESS]: userLocationSuccess,

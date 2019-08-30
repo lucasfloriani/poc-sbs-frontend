@@ -25,6 +25,30 @@ export function* loginRequest({ email, password }) {
   }
 }
 
+export function* forgotPasswordRequest({ email }) {
+  try {
+    yield call(api.post, 'forgot-password', { email })
+    yield put(AuthActions.forgotPasswordSuccess())
+    yield put(AlertActions.createSuccessAlert('Solicitado a troca da senha com successo, e-mail com o link da troca de senha chegará em breve'))
+  } catch (err) {
+    console.log('SAGA LOGIN ERR: ', err)
+    yield put(AuthActions.forgotPasswordFailure())
+    yield put(AlertActions.createErrorAlert('Erro ao solicitar a troca da senha'))
+  }
+}
+
+export function* recoveryPasswordRequest({ password, token }) {
+  try {
+    yield call(api.put, 'password-recovery', { password, token })
+    yield put(AuthActions.recoveryPasswordSuccess())
+    yield put(AlertActions.createSuccessAlert('Sucesso ao trocar a senha da conta'))
+  } catch (err) {
+    console.log('SAGA LOGIN ERR: ', err)
+    yield put(AuthActions.recoveryPasswordFailure())
+    yield put(AlertActions.createErrorAlert('Erro ao realizar a troca da senha'))
+  }
+}
+
 export function* createUserRequest({
   name, cpf, email, password,
 }) {
