@@ -34,6 +34,8 @@ const LoginPage = lazy(() => import('@pages/LoginPage/index'))
 const RegisterUserPage = lazy(() => import('@pages/RegisterUserPage/index'))
 const RegisterGasStationPage = lazy(() => import('@pages/RegisterGasStationPage/index'))
 const NotFoundPage = lazy(() => import('@pages/NotFoundPage/index'))
+const ForgotPassword = lazy(() => import('@pages/ForgotPassword/index'))
+const RecoveryPassword = lazy(() => import('@pages/RecoveryPassword/index'))
 // User pages
 const UserAboutUs = lazy(() => import('@pages/UserAboutUs/index'))
 const UserBookmarks = lazy(() => import('@pages/UserBookmarks/index'))
@@ -65,6 +67,8 @@ const App = () => (
           <PublicRouter path="/login" exact component={props => <LoginPage {...props} />} />
           <PublicRouter path="/register/user" exact component={props => <RegisterUserPage {...props} />} />
           <PublicRouter path="/register/gas-station" exact component={props => <RegisterGasStationPage {...props} />} />
+          <PublicRouter path="/forgot-password" exact component={props => <ForgotPassword {...props} />} />
+          <PublicRouter path="/recovery-password/:token" exact component={props => <RecoveryPassword {...props} />} />
 
           <UserRouter path="/user/bookmarks" exact component={props => <UserBookmarks {...props} />} />
           <UserRouter path="/user/ratings" exact component={props => <UserRatings {...props} />} />
