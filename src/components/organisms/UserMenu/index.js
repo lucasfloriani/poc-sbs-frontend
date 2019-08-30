@@ -80,7 +80,8 @@ const UserMenu = ({ fuelTypeName, logout, updateFuelType }) => {
             </HasPermission>
             <HasPermission>
               <MenuItem to="/login">Login</MenuItem>
-              <MenuItem to="/register">Cadastrar-se</MenuItem>
+              <MenuItem to="/register/user">Cadastrar-se como usuário</MenuItem>
+              <MenuItem to="/register/gas-station">Cadastrar-se como posto</MenuItem>
             </HasPermission>
             <MenuItem to="/about-us">Sobre nós</MenuItem>
           </Menu>
