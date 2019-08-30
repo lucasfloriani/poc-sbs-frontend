@@ -108,7 +108,7 @@ export function* gasStationRelatoryRequest() {
     FileSaver.saveAs(blob, 'relatorio-de-postos.xls')
     yield put(GasStationActions.gasStationRelatorySuccess())
   } catch (err) {
-    console.log('SAGA COMPLAINT ERR: ', err)
+    console.log('SAGA GAS STATION ERR: ', err)
     yield put(GasStationActions.gasStationRelatoryFailure())
     yield put(AlertActions.createErrorAlert('Erro ao baixar o relatório dos postos de combustível, tente novamente mais tarde'))
   }

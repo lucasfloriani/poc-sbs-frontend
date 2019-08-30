@@ -71,7 +71,7 @@ export function* priceFuelHistoryRelatoryRequest() {
     FileSaver.saveAs(blob, 'relatorio-de-historico-de-precos.xls')
     yield put(PriceFuelActions.priceFuelHistoryRelatorySuccess())
   } catch (err) {
-    console.log('SAGA COMPLAINT ERR: ', err)
+    console.log('SAGA PRICE FUEL ERR: ', err)
     yield put(PriceFuelActions.priceFuelHistoryRelatoryFailure())
     yield put(AlertActions.createErrorAlert('Erro ao baixar o relatório de histórico de preços, tente novamente mais tarde'))
   }
