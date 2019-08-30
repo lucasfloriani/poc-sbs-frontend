@@ -33,9 +33,9 @@ const WrapperForm = styled(({ ...props }) => <Grid column="1fr 1fr 1fr" {...prop
 
 const FilterGasStation = ({
   fuelTypeName,
-  gasStationsRequest,
   gasStationIsFetching,
   isFetchingLocation,
+  onSubmit,
   states,
   userLocation,
   userLocationRequest,
@@ -57,7 +57,7 @@ const FilterGasStation = ({
         rating: 0,
       }}
       onSubmit={(filterValues) => {
-        gasStationsRequest({ ...filterValues, fuelType: fuelTypeName })
+        onSubmit({ ...filterValues, fuelType: fuelTypeName })
       }}
       validationSchema={
         Yup.object().shape({
@@ -236,7 +236,7 @@ FilterGasStation.propTypes = {
   fuelTypeName: PropTypes.string,
   gasStationIsFetching: PropTypes.bool.isRequired,
   isFetchingLocation: PropTypes.bool.isRequired,
-  gasStationsRequest: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
   states: PropTypes.array.isRequired,
   userLocation: PropTypes.object.isRequired,
 }
