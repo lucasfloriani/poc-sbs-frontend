@@ -35,6 +35,7 @@ const CreateGasStationForm = ({ createGasStationRequest, isFetching }) => (
       fantasy_name: '',
       state_registration: '',
       anp: '',
+      status: 'active',
       cep: '',
       address: '',
       complement: '',
