@@ -28,12 +28,13 @@ const ListComplaint = ({
   return (
     <ListWrapper length={complaints.length}>
       {complaints && complaints.map(({
-        gasStation, user, message, created_at: createdAt,
+        gasStation, user, image, message, created_at: createdAt,
       }) => (
         <ComplaintCard
           key={`${gasStation.id}1${user.id}`}
           gasStationID={`${gasStation.id}`}
           gasStationName={gasStation.fantasy_name}
+          image={image}
           message={message}
           createdAt={createdAt}
         />

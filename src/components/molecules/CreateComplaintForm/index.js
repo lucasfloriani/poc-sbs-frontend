@@ -21,6 +21,7 @@ CreateComplaintForm.propTypes = {
   createComplaintRequest: PropTypes.func.isRequired,
   initialValues: PropTypes.shape({
     gas_station_id: PropTypes.string,
+    image: PropTypes.string,
     message: PropTypes.string,
   }).isRequired,
   toggleModal: PropTypes.func.isRequired,
