@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+import { prop } from 'styled-tools'
 
 const Grid = styled.div`
   display: grid;
@@ -9,7 +10,7 @@ const Grid = styled.div`
   ${({ valign }) => valign && css`align-items: ${valign};`}
   ${({ columnLength }) => columnLength && css`grid-column: ${columnLength};`}
   ${({ rows }) => rows && css`grid-template-rows: ${rows}`};
-  width: 100%;
+  width: ${prop('width')};
 `
 
 Grid.propTypes = {
@@ -24,6 +25,7 @@ Grid.propTypes = {
 Grid.defaultProps = {
   column: '1fr',
   gap: '15px',
+  width: '100%',
 }
 
 export default Grid
