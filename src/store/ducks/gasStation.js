@@ -4,6 +4,9 @@ export const { Types, Creators } = createActions({
   gasStationsRequest: ['filter'],
   gasStationsSuccess: ['gasStations'],
   gasStationsFailure: null,
+  adminGasStationsRequest: ['filter'],
+  adminGasStationsSuccess: ['gasStations'],
+  adminGasStationsFailure: null,
   bookmarkedGasStationsRequest: null,
   bookmarkedGasStationsSuccess: ['gasStations'],
   bookmarkedGasStationsFailure: null,
@@ -16,6 +19,9 @@ export const { Types, Creators } = createActions({
   createGasStationRequest: ['gasStationData'],
   createGasStationSuccess: null,
   createGasStationFailure: null,
+  publicCreateGasStationRequest: ['gasStationData', 'successCallback'],
+  publicCreateGasStationSuccess: null,
+  publicCreateGasStationFailure: null,
   updateGasStationRequest: ['gasStationData'],
   updateGasStationSuccess: ['gasStation'],
   updateGasStationFailure: null,
@@ -53,6 +59,21 @@ const gasStationsSuccess = (state = INITIAL_STATE, { gasStations }) => ({
   gasStations,
 })
 const gasStationsFailure = (state = INITIAL_STATE) => ({
+  ...state,
+  isFetching: false,
+})
+// Get All GasStations that only admins can see
+const adminGasStationsRequest = (state = INITIAL_STATE) => ({
+  ...state,
+  isFetching: true,
+  gasStations: [],
+})
+const adminGasStationsSuccess = (state = INITIAL_STATE, { gasStations }) => ({
+  ...state,
+  isFetching: false,
+  gasStations,
+})
+const adminGasStationsFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
@@ -109,6 +130,19 @@ const createGasStationSuccess = (state = INITIAL_STATE) => ({
   isFetching: false,
 })
 const createGasStationFailure = (state = INITIAL_STATE) => ({
+  ...state,
+  isFetching: false,
+})
+// Public Create GasStation
+const publicCreateGasStationRequest = (state = INITIAL_STATE) => ({
+  ...state,
+  isFetching: true,
+})
+const publicCreateGasStationSuccess = (state = INITIAL_STATE) => ({
+  ...state,
+  isFetching: false,
+})
+const publicCreateGasStationFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
@@ -270,6 +304,9 @@ export default createReducer(INITIAL_STATE, {
   [Types.GAS_STATIONS_REQUEST]: gasStationsRequest,
   [Types.GAS_STATIONS_SUCCESS]: gasStationsSuccess,
   [Types.GAS_STATIONS_FAILURE]: gasStationsFailure,
+  [Types.ADMIN_GAS_STATIONS_REQUEST]: adminGasStationsRequest,
+  [Types.ADMIN_GAS_STATIONS_SUCCESS]: adminGasStationsSuccess,
+  [Types.ADMIN_GAS_STATIONS_FAILURE]: adminGasStationsFailure,
   [Types.BOOKMARKED_GAS_STATIONS_REQUEST]: bookmarkedGasStationsRequest,
   [Types.BOOKMARKED_GAS_STATIONS_SUCCESS]: bookmarkedGasStationsSuccess,
   [Types.BOOKMARKED_GAS_STATIONS_FAILURE]: bookmarkedGasStationsFailure,
@@ -282,6 +319,9 @@ export default createReducer(INITIAL_STATE, {
   [Types.CREATE_GAS_STATION_REQUEST]: createGasStationRequest,
   [Types.CREATE_GAS_STATION_SUCCESS]: createGasStationSuccess,
   [Types.CREATE_GAS_STATION_FAILURE]: createGasStationFailure,
+  [Types.PUBLIC_CREATE_GAS_STATION_REQUEST]: publicCreateGasStationRequest,
+  [Types.PUBLIC_CREATE_GAS_STATION_SUCCESS]: publicCreateGasStationSuccess,
+  [Types.PUBLIC_CREATE_GAS_STATION_FAILURE]: publicCreateGasStationFailure,
   [Types.UPDATE_GAS_STATION_REQUEST]: updateGasStationRequest,
   [Types.UPDATE_GAS_STATION_SUCCESS]: updateGasStationSuccess,
   [Types.UPDATE_GAS_STATION_FAILURE]: updateGasStationFailure,

@@ -13,7 +13,18 @@ export function* gasStationsRequest({ filter }) {
   } catch (err) {
     console.log('SAGA GAS STATION ERR: ', err)
     yield put(GasStationActions.gasStationFailure())
-    yield put(AlertActions.createErrorAlert('Erro ao carregar os postos de gasolina, tente novamente mais tarde'))
+    yield put(AlertActions.createErrorAlert('Erro ao carregar os postos de combustível, tente novamente mais tarde'))
+  }
+}
+
+export function* adminGasStationsRequest({ filter }) {
+  try {
+    const response = yield call(api.get, `admin/gas-stations${encodeQueryData(cleanFalsy(filter))}`)
+    yield put(GasStationActions.adminGasStationsSuccess(response.data))
+  } catch (err) {
+    console.log('SAGA GAS STATION ERR: ', err)
+    yield put(GasStationActions.adminGasStationFailure())
+    yield put(AlertActions.createErrorAlert('Erro ao carregar os postos de combustível, tente novamente mais tarde'))
   }
 }
 
@@ -46,7 +57,7 @@ export function* getGasStationRequest({ gasStationID }) {
   } catch (err) {
     console.log('SAGA GAS STATION ERR:', err)
     yield put(GasStationActions.getGasStationFailure())
-    yield put(AlertActions.createErrorAlert('Erro ao carregar o posto de gasolina, verifique se a url esta correta'))
+    yield put(AlertActions.createErrorAlert('Erro ao carregar o posto de combustível, verifique se a url esta correta'))
   }
 }
 
@@ -58,6 +69,21 @@ export function* createGasStationRequest({ gasStationData }) {
   } catch (err) {
     console.log('SAGA GAS STATION ERR:', err)
     yield put(GasStationActions.createGasStationFailure())
+    yield put(AlertActions.createMultiErrorAlert(getRequestErrorsFromErrorObj(err)))
+  }
+}
+
+export function* publicCreateGasStationRequest({ gasStationData, successCallback }) {
+  try {
+    yield call(api.post, 'gas-stations', gasStationData)
+    yield put(GasStationActions.publicCreateGasStationSuccess())
+    yield put(AlertActions.createSuccessAlert(
+      'Pedido para criação da conta do posto de combustível foi enviado com sucesso'
+    ))
+    successCallback()
+  } catch (err) {
+    console.log('SAGA GAS STATION ERR:', err)
+    yield put(GasStationActions.publicCreateGasStationFailure())
     yield put(AlertActions.createMultiErrorAlert(getRequestErrorsFromErrorObj(err)))
   }
 }

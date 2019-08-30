@@ -15,10 +15,12 @@ import {
 import { fuelTypesRequest } from './fuelType'
 import {
   gasStationsRequest,
+  adminGasStationsRequest,
   bookmarkedGasStationsRequest,
   ratingGasStationsRequest,
   getGasStationRequest,
   createGasStationRequest,
+  publicCreateGasStationRequest,
   updateGasStationRequest,
   gasStationRelatoryRequest,
 } from './gasStation'
@@ -70,10 +72,12 @@ export default function* root() {
     takeLatest(FuelTypes.FUEL_TYPES_REQUEST, fuelTypesRequest),
 
     takeLatest(GasStationTypes.GAS_STATIONS_REQUEST, gasStationsRequest),
+    takeLatest(GasStationTypes.ADMIN_GAS_STATIONS_REQUEST, adminGasStationsRequest),
     takeLatest(GasStationTypes.BOOKMARKED_GAS_STATIONS_REQUEST, bookmarkedGasStationsRequest),
     takeLatest(GasStationTypes.RATING_GAS_STATIONS_REQUEST, ratingGasStationsRequest),
     takeLatest(GasStationTypes.GET_GAS_STATION_REQUEST, getGasStationRequest),
     takeLatest(GasStationTypes.CREATE_GAS_STATION_REQUEST, createGasStationRequest),
+    takeLatest(GasStationTypes.PUBLIC_CREATE_GAS_STATION_REQUEST, publicCreateGasStationRequest),
     takeLatest(GasStationTypes.UPDATE_GAS_STATION_REQUEST, updateGasStationRequest),
     takeLatest(GasStationTypes.GAS_STATION_RELATORY_REQUEST, gasStationRelatoryRequest),
 
