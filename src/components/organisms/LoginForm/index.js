@@ -71,8 +71,14 @@ const LoginForm = ({ isFetching, loginRequest }) => (
               required
               {...commomEvents}
             />
-            <Link to="/register">
-              <Paragraph align="center">Cadastre-se</Paragraph>
+            <Link to="/register/user">
+              <Paragraph align="center">Cadastre-se como usuário</Paragraph>
+            </Link>
+            <Link to="/register/gas-station">
+              <Paragraph align="center">Cadastre-se como posto</Paragraph>
+            </Link>
+            <Link to="/">
+              <Paragraph align="center">Voltar</Paragraph>
             </Link>
             <Button
               type="submit"
