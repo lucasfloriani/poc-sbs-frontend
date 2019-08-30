@@ -31,7 +31,8 @@ import { ScreenLoader } from './index'
  */
 const HomePage = lazy(() => import('@pages/HomePage/index'))
 const LoginPage = lazy(() => import('@pages/LoginPage/index'))
-const RegisterPage = lazy(() => import('@pages/RegisterPage/index'))
+const RegisterUserPage = lazy(() => import('@pages/RegisterUserPage/index'))
+const RegisterGasStationPage = lazy(() => import('@pages/RegisterGasStationPage/index'))
 const NotFoundPage = lazy(() => import('@pages/NotFoundPage/index'))
 // User pages
 const UserAboutUs = lazy(() => import('@pages/UserAboutUs/index'))
@@ -62,7 +63,8 @@ const App = () => (
           <Route path="/" exact component={props => <HomePage {...props} />} />
           <Route path="/about-us" exact component={props => <UserAboutUs {...props} />} />
           <PublicRouter path="/login" exact component={props => <LoginPage {...props} />} />
-          <PublicRouter path="/register" exact component={props => <RegisterPage {...props} />} />
+          <PublicRouter path="/register/user" exact component={props => <RegisterUserPage {...props} />} />
+          <PublicRouter path="/register/gas-station" exact component={props => <RegisterGasStationPage {...props} />} />
 
           <UserRouter path="/user/bookmarks" exact component={props => <UserBookmarks {...props} />} />
           <UserRouter path="/user/ratings" exact component={props => <UserRatings {...props} />} />
