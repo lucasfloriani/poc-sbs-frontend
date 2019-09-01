@@ -6,8 +6,9 @@ import styled from 'styled-components'
 import { media } from '@theme'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Creators as GasStationActions } from '@store/ducks/gasStation'
 import { Creators as AuthActions } from '@store/ducks/auth'
+import { Creators as GasStationActions } from '@store/ducks/gasStation'
+import { Creators as StateActions } from '@store/ducks/state'
 import orderType from '@enums/orderType'
 import paymentType from '@enums/paymentType'
 import {
@@ -33,16 +34,21 @@ const WrapperForm = styled(({ ...props }) => <Grid column="1fr 1fr 1fr" {...prop
 
 const FilterGasStation = ({
   fuelTypeName,
-  gasStationIsFetching,
+  isFetchingGasStation,
   isFetchingLocation,
+  isFetchingStates,
   onSubmit,
   states,
+  statesRequest,
   userLocation,
   userLocationRequest,
 }) => {
   const [showFields, setShowFields] = useState(false)
-  useEffect(() => { userLocationRequest() }, [])
-  if (gasStationIsFetching || isFetchingLocation) return <ContentLoader />
+  useEffect(() => {
+    statesRequest()
+    userLocationRequest()
+  }, [])
+  if (isFetchingGasStation || isFetchingLocation || isFetchingStates) return <ContentLoader />
 
   return (
     <Formik
@@ -99,10 +105,7 @@ const FilterGasStation = ({
             header={(
               <Block backgroundColor={{ type: 'primary', position: 0 }}>
                 <Flex valign="center" halign="space-between">
-                  <Heading
-                    color={{ type: 'grayscale', position: 4 }}
-                    hoverColor={{ type: 'grayscale', position: 4 }}
-                  >
+                  <Heading color={{ type: 'grayscale', position: 4 }} hoverColor={{ type: 'grayscale', position: 4 }}>
                     Filtro
                   </Heading>
                   <BadgeIcon
@@ -211,14 +214,14 @@ const FilterGasStation = ({
                   type="reset"
                   fontSize="small"
                   onClick={handleReset}
-                  disabled={gasStationIsFetching || isFetchingLocation}
+                  disabled={isFetchingGasStation || isFetchingLocation || isFetchingStates}
                 >
                   Limpar
                 </Button>
                 <Button
                   type="submit"
                   fontSize="small"
-                  disabled={gasStationIsFetching || isFetchingLocation}
+                  disabled={isFetchingGasStation || isFetchingLocation || isFetchingStates}
                 >
                   Filtrar
                 </Button>
@@ -234,8 +237,9 @@ const FilterGasStation = ({
 FilterGasStation.propTypes = {
   cities: PropTypes.array.isRequired,
   fuelTypeName: PropTypes.string,
-  gasStationIsFetching: PropTypes.bool.isRequired,
+  isFetchingGasStation: PropTypes.bool.isRequired,
   isFetchingLocation: PropTypes.bool.isRequired,
+  isFetchingStates: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
   states: PropTypes.array.isRequired,
   userLocation: PropTypes.object.isRequired,
@@ -244,16 +248,21 @@ FilterGasStation.propTypes = {
 const mapStateToProps = ({
   auth: { fuelTypeName, userLocation, isFetchingLocation },
   city: { cities },
-  gasStation: { isFetching: gasStationIsFetching },
-  state: { states },
+  gasStation: { isFetching: isFetchingGasStation },
+  state: { isFetching: isFetchingStates, states },
 }) => ({
   cities,
   fuelTypeName,
-  gasStationIsFetching,
+  isFetchingGasStation,
   isFetchingLocation,
+  isFetchingStates,
   states,
   userLocation,
 })
-const mapDispatchToProps = dispatch => bindActionCreators({ ...GasStationActions, ...AuthActions }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({
+  ...AuthActions,
+  ...GasStationActions,
+  ...StateActions,
+}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterGasStation)
