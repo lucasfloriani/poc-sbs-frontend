@@ -12,7 +12,7 @@ export function* gasStationsRequest({ filter }) {
     yield put(GasStationActions.gasStationsSuccess(response.data))
   } catch (err) {
     console.log('SAGA GAS STATION ERR: ', err)
-    yield put(GasStationActions.gasStationFailure())
+    yield put(GasStationActions.gasStationsFailure())
     yield put(AlertActions.createErrorAlert('Erro ao carregar os postos de combustível, tente novamente mais tarde'))
   }
 }
