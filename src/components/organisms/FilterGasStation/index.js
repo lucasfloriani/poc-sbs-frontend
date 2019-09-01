@@ -108,13 +108,7 @@ const FilterGasStation = ({
                   <Heading color={{ type: 'grayscale', position: 4 }} hoverColor={{ type: 'grayscale', position: 4 }}>
                     Filtro
                   </Heading>
-                  <BadgeIcon
-                    icon="downArrow"
-                    onClick={() => {
-                      setShowFields(!showFields)
-                      console.log(showFields)
-                    }}
-                  />
+                  <BadgeIcon icon="downArrow" onClick={() => setShowFields(!showFields)} />
                 </Flex>
               </Block>
             )}
