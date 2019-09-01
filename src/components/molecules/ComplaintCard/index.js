@@ -32,7 +32,7 @@ const ComplaintCard = ({
         <Paragraph fontSize="small">{createdAt}</Paragraph>
       </HeaderWrapper>
       <Flex valign="center" halign="center" style={{ height: '120px' }}>
-        <Image alt={message} src={image} margin="auto" maxWidth="100%" maxHeight="170px" />
+        <Image alt={message} src={`${process.env.REACT_APP_API_URL}${image}`} margin="auto" maxWidth="100%" maxHeight="120px" />
       </Flex>
       <Paragraph>{message}</Paragraph>
       <Button to={`/admin/gas-stations/${gasStationID}/price-historic`}>Ver histórico de preço</Button>

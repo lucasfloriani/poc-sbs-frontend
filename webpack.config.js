@@ -1,7 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const {
   addPlugins,
   babel,
@@ -35,6 +34,7 @@ const config = {
     }),
     defineConstants({
       'process.env.NODE_ENV': process.env.NODE_ENV,
+      'process.env.REACT_APP_API_URL': process.env.REACT_APP_API_URL,
       'process.env.PUBLIC_PATH': publicPath.replace(/\/$/, ''),
     }),
     addPlugins([
@@ -83,6 +83,9 @@ const config = {
       }),
       sourceMaps(),
       addPlugins([new webpack.NamedModulesPlugin()]),
+      defineConstants({
+        'process.env.REACT_APP_API_URL': 'http://localhost:3333/',
+      }),
     ]),
 
     env('production', [
@@ -91,9 +94,11 @@ const config = {
           splitChunks: {
             chunks: 'all',
           },
-          // minimize: [new UglifyJsPlugin()],
           minimize: true,
         },
+      }),
+      defineConstants({
+        'process.env.REACT_APP_API_URL': 'https://poc-sbs-backend.herokuapp.com/',
       }),
     ]),
   ]),
