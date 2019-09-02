@@ -4,10 +4,10 @@ import { prop } from 'styled-tools'
 
 const Flex = styled.div`
   display: flex;
-  ${({ margin }) => css`margin: ${margin};`}
-  ${({ halign }) => css`justify-content: ${halign};`}
-  ${({ valign }) => css`align-items: ${valign};`}
   flex-direction: ${({ flow }) => flow};
+  ${({ halign }) => css`justify-content: ${halign};`}
+  ${({ margin }) => css`margin: ${margin};`}
+  ${({ valign }) => css`align-items: ${valign};`}
   width: ${prop('width')};
 `
 

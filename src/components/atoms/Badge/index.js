@@ -5,7 +5,7 @@ import { getCubicBezier, getOptionsFrom, getShadow } from '@theme'
 
 const Badge = styled.div`
   align-items: center;
-  background-color: ${({ backgroundColor }) => palette(backgroundColor.type, backgroundColor.position)};
+  background-color: ${({ backgroundColor: { type, position } }) => palette(type, position)};
   border-radius: 30px;
   box-shadow: ${getShadow('extraSmall')};
   cursor: pointer;
@@ -23,8 +23,8 @@ const Badge = styled.div`
 
 Badge.propTypes = {
   backgroundColor: PropTypes.shape({
-    type: PropTypes.oneOf(getOptionsFrom('palette')),
     position: PropTypes.number,
+    type: PropTypes.oneOf(getOptionsFrom('palette')),
   }),
 }
 

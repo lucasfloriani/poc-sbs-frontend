@@ -12,20 +12,20 @@ import {
   getShadow,
 } from '@theme'
 
-const backgroundColor = ({ backgroundColor, disabled }) => {
-  return disabled ? palette('grayscale', 3) : palette(backgroundColor.type, backgroundColor.position)
+const backgroundColor = ({ backgroundColor: { position, type }, disabled }) => {
+  return disabled ? palette('grayscale', 3) : palette(type, position)
 }
 
-const foregroundColor = ({ color, disabled }) => {
-  return disabled ? palette('grayscale', 2) : palette(color.type, color.position)
+const foregroundColor = ({ color: { position, type }, disabled }) => {
+  return disabled ? palette('grayscale', 2) : palette(type, position)
 }
 
-const hoverBackgroundColor = ({ hoverBackgroundColor, disabled }) => {
-  return disabled ? palette('grayscale', 3) : palette(hoverBackgroundColor.type, hoverBackgroundColor.position)
+const hoverBackgroundColor = ({ hoverBackgroundColor: { position, type }, disabled }) => {
+  return disabled ? palette('grayscale', 3) : palette(type, position)
 }
 
-const hoverForegroundColor = ({ hoverColor = { type: 'grayscale', position: 0 }, disabled }) => {
-  return disabled ? palette('grayscale', 2) : palette(hoverColor.type, hoverColor.position)
+const hoverForegroundColor = ({ hoverColor: { position = 0, type = 'grayscale' }, disabled }) => {
+  return disabled ? palette('grayscale', 2) : palette(type, position)
 }
 
 const styles = css`
@@ -33,8 +33,8 @@ const styles = css`
   background-color: ${backgroundColor};
   border: none;
   border-radius: 10px;
-  box-sizing: border-box;
   box-shadow: ${({ shadow }) => getShadow(shadow)};
+  box-sizing: border-box;
   color: ${foregroundColor};
   cursor: ${ifProp('disabled', 'default', 'pointer')};
   display: inline-flex;
@@ -44,8 +44,8 @@ const styles = css`
   font-weight: ${getFontWeight('medium')};
   justify-content: center;
   padding: .6em 1.2em;
-  transition: background-color .3s ${getCubicBezier()}, color .3s ${getCubicBezier()};
   text-decoration: none;
+  transition: background-color .3s ${getCubicBezier()}, color .3s ${getCubicBezier()};
   white-space: nowrap;
 
   &:hover,
@@ -60,10 +60,6 @@ const styles = css`
   }
 `
 
-const StyledLink = styled(({
-  backgroundColor, color, fontSize, hoverBackgroundColor, hoverColor, shadow, ...props
-}) => <Link {...props} />)`${styles}`
-
 const Anchor = styled(({
   backgroundColor, children, color, fontSize, hoverBackgroundColor, hoverColor, shadow, ...props
 }) => <a {...props}>{children}</a>)`${styles}`
@@ -74,6 +70,10 @@ const StyledButton = styled(({
 }) => <button {...props}>{children}</button>)`${styles}`
 /* eslint-enable react/button-has-type */
 
+const StyledLink = styled(({
+  backgroundColor, color, fontSize, hoverBackgroundColor, hoverColor, shadow, ...props
+}) => <Link {...props} />)`${styles}`
+
 const Button = ({ ...props }) => {
   const { to, href } = props
   if (to) return <StyledLink {...props} />
@@ -82,26 +82,26 @@ const Button = ({ ...props }) => {
 }
 
 Button.propTypes = {
-  color: PropTypes.shape({
-    type: PropTypes.oneOf(getOptionsFrom('palette')),
-    position: PropTypes.number,
-  }),
   backgroundColor: PropTypes.shape({
-    type: PropTypes.oneOf(getOptionsFrom('palette')),
     position: PropTypes.number,
+    type: PropTypes.oneOf(getOptionsFrom('palette')),
+  }),
+  color: PropTypes.shape({
+    position: PropTypes.number,
+    type: PropTypes.oneOf(getOptionsFrom('palette')),
   }),
   disabled: PropTypes.bool,
   fontSize: PropTypes.oneOf(getOptionsFrom('sizes')),
   grow: PropTypes.number,
-  href: PropTypes.string,
-  hoverColor: PropTypes.shape({
-    type: PropTypes.oneOf(getOptionsFrom('palette')),
-    position: PropTypes.number,
-  }),
   hoverBackgroundColor: PropTypes.shape({
-    type: PropTypes.oneOf(getOptionsFrom('palette')),
     position: PropTypes.number,
+    type: PropTypes.oneOf(getOptionsFrom('palette')),
   }),
+  hoverColor: PropTypes.shape({
+    position: PropTypes.number,
+    type: PropTypes.oneOf(getOptionsFrom('palette')),
+  }),
+  href: PropTypes.string,
   shadow: PropTypes.oneOf(getOptionsFrom('shadows')),
   to: PropTypes.string,
 }

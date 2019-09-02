@@ -33,6 +33,7 @@ const bookmarksFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+
 // Create Bookmark
 const createBookmarkRequest = (state = INITIAL_STATE) => ({
   ...state,
@@ -47,6 +48,7 @@ const createBookmarkFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+
 // Delete Bookmark
 const deleteBookmarkRequest = (state = INITIAL_STATE) => ({
   ...state,

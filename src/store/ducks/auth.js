@@ -52,6 +52,7 @@ const createUserFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+
 // Update User
 const updateUserRequest = (state = INITIAL_STATE) => ({
   ...state,
@@ -66,6 +67,7 @@ const updateUserFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+
 // Login logic
 const loginRequest = (state = INITIAL_STATE) => ({
   ...state,
@@ -96,6 +98,7 @@ const logout = () => {
     fuelTypeName: 'Gasolina',
   }
 }
+
 // Forgot password logic
 const forgotPasswordRequest = (state = INITIAL_STATE) => ({
   ...state,
@@ -109,6 +112,7 @@ const forgotPasswordFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+
 // Recovery password logic
 const recoveryPasswordRequest = (state = INITIAL_STATE) => ({
   ...state,
@@ -128,6 +132,7 @@ const updateFuelType = (state = INITIAL_STATE, { fuelTypeName }) => ({
   ...state,
   fuelTypeName,
 })
+
 // UserLocation logic
 const userLocationRequest = (state = INITIAL_STATE) => ({
   ...state,

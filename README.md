@@ -13,4 +13,4 @@ Frontend do projeto Octano
 
 1. Clone o repositório para a sua máquina
 2. Rode **npm install** na linha de comando dentro da pasta do projeto
-3. Rode **npm start** para iniciar a aplicação
+3. Rode **npm start:dev** para iniciar a aplicação

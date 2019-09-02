@@ -3,21 +3,21 @@ import styled, { css } from 'styled-components'
 import { prop } from 'styled-tools'
 
 const Grid = styled.div`
+  ${({ columnLength }) => columnLength && css`grid-column: ${columnLength};`}
   display: grid;
   grid-gap: ${({ gap }) => gap};
   grid-template-columns: ${({ column }) => column};
   ${({ halign }) => halign && css`justify-content: ${halign};`}
-  ${({ valign }) => valign && css`align-items: ${valign};`}
-  ${({ columnLength }) => columnLength && css`grid-column: ${columnLength};`}
   ${({ rows }) => rows && css`grid-template-rows: ${rows}`};
+  ${({ valign }) => valign && css`align-items: ${valign};`}
   width: ${prop('width')};
 `
 
 Grid.propTypes = {
   column: PropTypes.any,
   columnLength: PropTypes.any,
-  halign: PropTypes.string,
   gap: PropTypes.string,
+  halign: PropTypes.string,
   rows: PropTypes.any,
   valign: PropTypes.string,
 }

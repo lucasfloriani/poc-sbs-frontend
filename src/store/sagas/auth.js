@@ -6,7 +6,7 @@ import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as AuthActions } from '../ducks/auth'
 import { Creators as CityActions } from '../ducks/city'
 import { Creators as StateActions } from '../ducks/state'
-import api from '../../services'
+import api from '@service'
 
 export function* loginRequest({ email, password }) {
   try {

@@ -1,6 +1,5 @@
 import { createActions, createReducer } from 'reduxsauce'
 
-
 export const { Types, Creators } = createActions({
   getRatingRequest: ['ratingID'],
   getRatingSuccess: ['rating'],
@@ -36,6 +35,7 @@ const getRatingFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+
 // Create Rating
 const createRatingRequest = (state = INITIAL_STATE) => ({
   ...state,
@@ -50,6 +50,7 @@ const createRatingFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+
 // Update Rating
 const updateRatingRequest = (state = INITIAL_STATE) => ({
   ...state,
@@ -64,6 +65,7 @@ const updateRatingFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+
 // Delete Rating
 const deleteRatingRequest = (state = INITIAL_STATE) => ({
   ...state,

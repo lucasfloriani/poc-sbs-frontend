@@ -1,7 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { media } from '@theme'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { connect } from 'react-redux'
@@ -18,12 +16,7 @@ import {
   StateSelect,
   Text,
 } from 'components'
-
-const FieldWapper = styled(({ ...props }) => <Grid column="1fr 1fr 1fr" valign="flex-start" {...props} />)`
-  ${media.lessThan('small')`
-    grid-template-columns: 1fr;
-  `}
-`
+import { FieldWapper } from './style'
 
 const CreateGasStationForm = ({ createGasStationRequest, isFetching }) => (
   <Formik
@@ -45,10 +38,7 @@ const CreateGasStationForm = ({ createGasStationRequest, isFetching }) => (
       state_id: '',
     }}
     onSubmit={(values) => {
-      const filtredValues = {
-        ...values,
-        geo_location: values.geo_location.join(','),
-      }
+      const filtredValues = { ...values, geo_location: values.geo_location.join(',') }
       createGasStationRequest(filtredValues)
     }}
     validationSchema={
@@ -115,45 +105,25 @@ const CreateGasStationForm = ({ createGasStationRequest, isFetching }) => (
       handleSubmit,
       setFieldValue,
     }) => {
-      const commomEvents = {
-        onChange: handleChange,
-        onBlur: handleBlur,
-        onFocus: handleBlur,
-      }
+      const commomEvents = { onChange: handleChange, onBlur: handleBlur, onFocus: handleBlur }
 
       return (
         <Form
           onSubmit={handleSubmit}
           header={(
             <Block backgroundColor={{ type: 'primary', position: 0 }}>
-              <Heading
-                color={{ type: 'grayscale', position: 4 }}
-                hoverColor={{ type: 'grayscale', position: 4 }}
-              >
+              <Heading color={{ type: 'grayscale', position: 4 }} hoverColor={{ type: 'grayscale', position: 4 }}>
                 Criar Posto
               </Heading>
             </Block>
           )}
           footer={(
-            <Block
-              as="div"
-              fontSize="small"
-              backgroundColor={{ type: 'primary', position: 0 }}
-            >
+            <Block as="div" fontSize="small" backgroundColor={{ type: 'primary', position: 0 }}>
               <Grid halign="flex-end" column="auto auto">
-                <Button
-                  type="reset"
-                  fontSize="small"
-                  onClick={handleReset}
-                  disabled={!dirty || isFetching}
-                >
+                <Button type="reset" fontSize="small" onClick={handleReset} disabled={!dirty || isFetching}>
                   Limpar
                 </Button>
-                <Button
-                  type="submit"
-                  fontSize="small"
-                  disabled={!dirty || isFetching}
-                >
+                <Button type="submit" fontSize="small" disabled={!dirty || isFetching}>
                   Criar
                 </Button>
               </Grid>

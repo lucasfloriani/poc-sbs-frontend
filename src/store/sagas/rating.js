@@ -3,7 +3,7 @@ import { getRequestErrorsFromErrorObj } from '@helpers/error'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as RatingActions } from '../ducks/rating'
 import { Creators as GasStationAction } from '../ducks/gasStation'
-import api from '../../services'
+import api from '@service'
 
 export function* getRatingRequest({ ratingID }) {
   try {

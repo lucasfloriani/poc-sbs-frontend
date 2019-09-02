@@ -6,9 +6,7 @@ import { bindActionCreators } from 'redux'
 import { Creators as RatingActions } from '@store/ducks/rating'
 import { RatingForm } from 'components'
 
-const CreateRatingForm = ({
-  initialValues, createRatingRequest, toggleModal,
-}) => (
+const CreateRatingForm = ({ createRatingRequest, initialValues, toggleModal }) => (
   <RatingForm
     initialValues={initialValues}
     onSubmit={values => createRatingRequest(values)}

@@ -1,6 +1,8 @@
 import { DateTime } from 'luxon'
 
-export const formatTimezoneToSystem = timezone => DateTime.fromString(timezone, 'dd/MM/yyyy HH:mm:ss').toFormat('yyyy-MM-dd TT ZZZ')
+export const formatTimezoneToSystem = timezone => DateTime
+  .fromString(timezone, 'dd/MM/yyyy HH:mm:ss')
+  .toFormat('yyyy-MM-dd TT ZZZ')
 
 export const formatTimezone = timezone => DateTime.fromSQL(timezone).toFormat('dd/MM/yyyy TT')
 

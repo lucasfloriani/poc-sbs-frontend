@@ -9,26 +9,7 @@ import AdminRouter from '@molecules/AdminRouter'
 import PublicRouter from '@molecules/PublicRouter'
 import { ScreenLoader } from './index'
 
-/**
- * ===== Páginas sem login =====
- * - Home page com login do usuário e posto de gasolina junto com cadastro de usuário
- * - Página oculta para o login do administrador
- *
- * ===== Páginas do usuário =====
- * - Home page do usuário com filtro de cidade, estado, tipo de pagamento, tipo de gasolina, nome do posto, etc com o mapa abaixo dele
- * - Listagem dos postos com filtro com visualização individual do mesmo
- * - CRUD dos favoritos
- * - CRUD das denúncias
- * - CRUD dos dados da conta
- *
- * ===== Páginas do posto de gasolina =====
- * - Home page com a listagem dos valores de gasolina e tipos de pagamento do posto (CRUD)
- * - Página pra edição dos dados do usuário
- *
- * ===== Páginas do administrador =====
- * - Dashboard com alguns gráficos
- * - CRUD dos postos de gasolina
- */
+// Public pages
 const HomePage = lazy(() => import('@pages/HomePage/index'))
 const LoginPage = lazy(() => import('@pages/LoginPage/index'))
 const RegisterUserPage = lazy(() => import('@pages/RegisterUserPage/index'))

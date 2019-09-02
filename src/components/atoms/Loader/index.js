@@ -10,12 +10,10 @@ const Wrapper = styled.div`
   min-width: 100%;
 `
 
-const Loader = ({ color, ...props }) => {
-  return (
-    <Wrapper>
-      <PulseLoader {...props} color="#2aa2b0" />
-    </Wrapper>
-  )
-}
+const Loader = ({ color, ...props }) => (
+  <Wrapper>
+    <PulseLoader {...props} color="#2aa2b0" />
+  </Wrapper>
+)
 
 export default Loader

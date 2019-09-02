@@ -9,7 +9,7 @@ const CitySelect = ({
   cities, citiesRequest, stateID, ...props
 }) => {
   useEffect(() => { stateID && citiesRequest(stateID) }, [stateID])
-  return (<Select options={cities} {...props} />)
+  return <Select options={cities} {...props} />
 }
 
 CitySelect.propTypes = {

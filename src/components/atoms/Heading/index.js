@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import {
   getCubicBezier,
@@ -9,8 +9,10 @@ import {
   getOptionsFrom,
 } from '@theme'
 
-const styles = css`
-  color: ${({ color }) => palette(color.type, color.position)};
+const Heading = styled(({
+  children, color, fontSize, hoverColor, level, margin, ...props
+}) => React.createElement(`h${level}`, props, children))`
+  color: ${({ color: { position, type } }) => palette(type, position)};
   font-family: ${font('primary')};
   font-size: ${({ fontSize }) => getSize(fontSize)};
   font-weight: ${getFontWeight('medium')};
@@ -18,33 +20,29 @@ const styles = css`
   transition: color .3s ${getCubicBezier()};
 
   :hover {
-    color: ${({ hoverColor }) => palette(hoverColor.type, hoverColor.position)}
+    color: ${({ hoverColor: { position, type } }) => palette(type, position)}
   }
 `
-
-const Heading = styled(({
-  children, color, fontSize, hoverColor, level, margin, ...props
-}) => React.createElement(`h${level}`, props, children))`${styles}`
 
 Heading.propTypes = {
   children: PropTypes.node,
   color: PropTypes.shape({
-    type: PropTypes.oneOf(getOptionsFrom('palette')),
     position: PropTypes.number,
+    type: PropTypes.oneOf(getOptionsFrom('palette')),
   }),
   fontSize: PropTypes.oneOf(getOptionsFrom('sizes')),
   hoverColor: PropTypes.shape({
-    type: PropTypes.oneOf(getOptionsFrom('palette')),
     position: PropTypes.number,
+    type: PropTypes.oneOf(getOptionsFrom('palette')),
   }),
   level: PropTypes.oneOf([1, 2, 3, 4, 5, 6]),
   margin: PropTypes.string,
 }
 
 Heading.defaultProps = {
-  color: { type: 'grayscale', position: 0 },
+  color: { position: 0, type: 'grayscale' },
   fontSize: 'extraLarge',
-  hoverColor: { type: 'grayscale', position: 1 },
+  hoverColor: { position: 1, type: 'grayscale' },
   level: 1,
   margin: '0',
 }

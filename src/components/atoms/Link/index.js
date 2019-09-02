@@ -7,7 +7,7 @@ import { getOptionsFrom, getCubicBezier } from '@theme'
 
 const StyledLink = styled(({ color, ...props }) => <Link {...props} />)`
   align-items: center;
-  color: ${({ color }) => palette(color.type, color.position)};
+  color: ${({ color: { position, type } }) => palette(type, position)};
   display: inline-flex;
   font-weight: 500;
   text-decoration: none;
@@ -20,13 +20,13 @@ const StyledLink = styled(({ color, ...props }) => <Link {...props} />)`
 
 StyledLink.propTypes = {
   color: PropTypes.shape({
-    type: PropTypes.oneOf(getOptionsFrom('palette')),
     position: PropTypes.number,
+    type: PropTypes.oneOf(getOptionsFrom('palette')),
   }),
 }
 
 StyledLink.defaultProps = {
-  color: { type: 'primary', position: 2 },
+  color: { position: 2, type: 'primary' },
 }
 
 export default StyledLink

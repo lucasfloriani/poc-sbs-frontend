@@ -3,7 +3,7 @@ import { getRequestErrorsFromErrorObj } from '@helpers/error'
 import FileSaver from 'file-saver'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as PriceFuelActions } from '../ducks/priceFuel'
-import api from '../../services'
+import api from '@service'
 
 export function* priceFuelsRequest({ gasStationID }) {
   try {

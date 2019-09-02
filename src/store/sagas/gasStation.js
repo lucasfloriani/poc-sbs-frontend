@@ -4,7 +4,7 @@ import FileSaver from 'file-saver'
 import { cleanFalsy, encodeQueryData } from '@helpers/object'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as GasStationActions } from '../ducks/gasStation'
-import api from '../../services'
+import api from '@service'
 
 export function* gasStationsRequest({ filter }) {
   try {

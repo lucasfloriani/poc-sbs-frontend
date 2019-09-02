@@ -12,7 +12,7 @@ import {
   getShadow,
 } from '@theme'
 
-const focusBorderColor = ({ focusBorderColor }) => palette(focusBorderColor.type, focusBorderColor.position)
+const focusBorderColor = ({ focusBorderColor: { position, type } }) => palette(type, position)
 
 const Input = styled(({
   active,
@@ -30,7 +30,7 @@ const Input = styled(({
   border-radius: 3px;
   box-shadow: ${getShadow('extraSmall')};
   box-sizing: border-box;
-  color: ${({ color }) => palette(color.type, color.position)};
+  color: ${({ color: { position, type } }) => palette(type, position)};
   display: block;
   font-family: ${font('primary')};
   font-size: ${({ fontSize }) => getSize(fontSize)};
@@ -55,20 +55,20 @@ const Input = styled(({
 Input.propTypes = {
   active: PropTypes.bool,
   backgroundColor: PropTypes.shape({
-    type: PropTypes.oneOf(getOptionsFrom('palette')),
     position: PropTypes.number,
+    type: PropTypes.oneOf(getOptionsFrom('palette')),
   }),
   borderColor: PropTypes.shape({
-    type: PropTypes.oneOf(getOptionsFrom('palette')),
     position: PropTypes.number,
+    type: PropTypes.oneOf(getOptionsFrom('palette')),
   }),
   color: PropTypes.shape({
-    type: PropTypes.oneOf(getOptionsFrom('palette')),
     position: PropTypes.number,
+    type: PropTypes.oneOf(getOptionsFrom('palette')),
   }),
   focusBorderColor: PropTypes.shape({
-    type: PropTypes.oneOf(getOptionsFrom('palette')),
     position: PropTypes.number,
+    type: PropTypes.oneOf(getOptionsFrom('palette')),
   }),
   fontSize: PropTypes.string,
   invalid: PropTypes.bool,
@@ -78,10 +78,10 @@ Input.propTypes = {
 }
 
 Input.defaultProps = {
-  backgroundColor: { type: 'grayscale', position: 4 },
-  borderColor: { type: 'grayscale', position: 1 },
-  color: { type: 'grayscale', position: 1 },
-  focusBorderColor: { type: 'primary', position: 0 },
+  backgroundColor: { position: 4, type: 'grayscale' },
+  borderColor: { position: 1, type: 'grayscale' },
+  color: { position: 1, type: 'grayscale' },
+  focusBorderColor: { position: 0, type: 'primary' },
   fontSize: 'extraSmall',
   type: 'text',
 }

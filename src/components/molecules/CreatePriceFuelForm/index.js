@@ -1,7 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { media } from '@theme'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { connect } from 'react-redux'
@@ -17,12 +15,7 @@ import {
   PaymentTypeSelect,
   Text,
 } from 'components'
-
-const FieldWapper = styled(({ ...props }) => <Grid column="1fr 1fr 1fr" {...props} />)`
-  ${media.lessThan('extraSmall')`
-    grid-template-columns: 1fr;
-  `}
-`
+import { FieldWrapper } from './style'
 
 const CreatePriceFuelForm = ({ createPriceFuelRequest, gasStationID, isFetching }) => (
   <Formik
@@ -32,7 +25,7 @@ const CreatePriceFuelForm = ({ createPriceFuelRequest, gasStationID, isFetching 
       payment_type_id: '',
       fuel_type_id: '',
     }}
-    onSubmit={values => createPriceFuelRequest(values)}
+    onSubmit={createPriceFuelRequest}
     validationSchema={
       Yup.object().shape({
         price: Yup.number()
@@ -60,52 +53,32 @@ const CreatePriceFuelForm = ({ createPriceFuelRequest, gasStationID, isFetching 
       handleReset,
       handleSubmit,
     }) => {
-      const commomEvents = {
-        onChange: handleChange,
-        onBlur: handleBlur,
-        onFocus: handleBlur,
-      }
+      const commomEvents = { onChange: handleChange, onBlur: handleBlur, onFocus: handleBlur }
 
       return (
         <Form
           onSubmit={handleSubmit}
           header={(
             <Block backgroundColor={{ type: 'primary', position: 0 }}>
-              <Heading
-                color={{ type: 'grayscale', position: 4 }}
-                hoverColor={{ type: 'grayscale', position: 4 }}
-              >
+              <Heading color={{ type: 'grayscale', position: 4 }} hoverColor={{ type: 'grayscale', position: 4 }}>
                 Criar Produto
               </Heading>
             </Block>
           )}
           footer={(
-            <Block
-              as="div"
-              fontSize="small"
-              backgroundColor={{ type: 'primary', position: 0 }}
-            >
+            <Block as="div" fontSize="small" backgroundColor={{ type: 'primary', position: 0 }}>
               <Grid halign="flex-end" column="auto auto">
-                <Button
-                  type="reset"
-                  fontSize="small"
-                  onClick={handleReset}
-                  disabled={!dirty || isFetching}
-                >
+                <Button type="reset" fontSize="small" onClick={handleReset} disabled={!dirty || isFetching}>
                   Limpar
                 </Button>
-                <Button
-                  type="submit"
-                  fontSize="small"
-                  disabled={!dirty || isFetching}
-                >
+                <Button type="submit" fontSize="small" disabled={!dirty || isFetching}>
                   Criar
                 </Button>
               </Grid>
             </Block>
           )}
         >
-          <FieldWapper>
+          <FieldWrapper>
             <Text
               type="number"
               id="price"
@@ -137,7 +110,7 @@ const CreatePriceFuelForm = ({ createPriceFuelRequest, gasStationID, isFetching 
               required
               {...commomEvents}
             />
-          </FieldWapper>
+          </FieldWrapper>
         </Form>
       )
     }}

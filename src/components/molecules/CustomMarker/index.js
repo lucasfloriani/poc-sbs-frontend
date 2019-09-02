@@ -19,11 +19,11 @@ const CustomMarker = ({
   return (
     <div
       style={{
-        position: 'absolute',
+        height: 94,
         left,
+        position: 'absolute',
         top,
         width: 210,
-        height: 94,
         ...(style || {}),
       }}
     >

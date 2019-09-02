@@ -8,7 +8,9 @@ const AdminRoute = ({
 }) => (
   <Route
     {...rest}
-    render={props => isAuthenticated && user.type === 'admin' ? <Component {...props} /> : <Redirect to={{ pathname: '/' }} />}
+    render={props => isAuthenticated && user.type === 'admin'
+      ? <Component {...props} />
+      : <Redirect to={{ pathname: '/' }} />}
   />
 )
 

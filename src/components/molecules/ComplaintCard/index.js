@@ -1,7 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { media } from '@theme'
 import {
   Button,
   Card,
@@ -11,19 +9,14 @@ import {
   Image,
   Paragraph,
 } from 'components'
-
-const HeaderWrapper = styled(({ ...props }) => <Grid column="1fr auto" valign="center" {...props} />)`
-  ${media.lessThan('extraSmall')`
-    grid-template-columns: 1fr;
-  `}
-`
+import { HeaderWrapper } from './style'
 
 const ComplaintCard = ({
+  createdAt,
   gasStationID,
   gasStationName,
   image,
   message,
-  createdAt,
 }) => (
   <Card padding="medium">
     <Grid gap="25px">
@@ -41,11 +34,11 @@ const ComplaintCard = ({
 )
 
 ComplaintCard.propTypes = {
+  createdAt: PropTypes.string.isRequired,
   gasStationID: PropTypes.string.isRequired,
   gasStationName: PropTypes.string.isRequired,
   image: PropTypes.string,
   message: PropTypes.string.isRequired,
-  createdAt: PropTypes.string.isRequired,
 }
 
 ComplaintCard.defaultProps = {

@@ -9,7 +9,7 @@ const Label = styled(({
 }) => <label htmlFor={htmlFor} {...props} />)`
   background-color: ${palette('grayscale', 4)};
   border-radius: 3px;
-  color: ${({ active, color, focusBorderColor }) => active ? palette(focusBorderColor.type, focusBorderColor.position) : palette(color.type, color.position)};
+  color: ${({ active, color, focusBorderColor: { position, type } }) => active ? palette(type, position) : palette(color.type, color.position)};
   font-family: ${font('primary')};
   font-size: ${({ active }) => active ? '0.6em' : getSize('extraSmall')};
   left: 0;
@@ -24,8 +24,8 @@ const Label = styled(({
 
   ${({ required }) => required && css`
     &::after {
-      content: '*';
       color: ${palette('danger', 0)};
+      content: '*';
       margin-left: 2px;
     }
   `}
@@ -34,18 +34,18 @@ const Label = styled(({
 Label.propTypes = {
   active: PropTypes.bool,
   color: PropTypes.shape({
-    type: PropTypes.oneOf(getOptionsFrom('palette')),
     position: PropTypes.number,
+    type: PropTypes.oneOf(getOptionsFrom('palette')),
   }),
   focusBorderColor: PropTypes.shape({
-    type: PropTypes.oneOf(getOptionsFrom('palette')),
     position: PropTypes.number,
+    type: PropTypes.oneOf(getOptionsFrom('palette')),
   }),
 }
 
 Label.defaultProps = {
-  color: { type: 'grayscale', position: 1 },
-  focusBorderColor: { type: 'primary', position: 0 },
+  color: { position: 1, type: 'grayscale' },
+  focusBorderColor: { position: 0, type: 'primary' },
 }
 
 export default Label

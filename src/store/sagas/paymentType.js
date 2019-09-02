@@ -1,7 +1,7 @@
 import { put, call } from 'redux-saga/effects'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as PaymentTypeActions } from '../ducks/paymentType'
-import api from '../../services'
+import api from '@service'
 
 export function* paymentTypesRequest() {
   try {

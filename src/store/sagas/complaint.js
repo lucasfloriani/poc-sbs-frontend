@@ -4,7 +4,7 @@ import FileSaver from 'file-saver'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as ComplaintActions } from '../ducks/complaint'
 import { Creators as GasStationAction } from '../ducks/gasStation'
-import api from '../../services'
+import api from '@service'
 
 export function* complaintsRequest() {
   try {

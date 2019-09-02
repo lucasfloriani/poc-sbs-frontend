@@ -8,27 +8,27 @@ import { getFontWeight, getSize, getOptionsFrom } from '@theme'
 const Paragraph = styled(({
   align, color, fontSize, hoverColor, ...props
 }) => <p {...props} />)`
+  ${({ align }) => css`text-align: ${align};`}
   font-family: ${font('primary')};
-  color: ${({ color }) => palette(color.type, color.position)};
+  color: ${({ color: { position, type } }) => palette(type, position)};
   font-size: ${({ fontSize }) => getSize(fontSize)};
   font-weight: ${getFontWeight('light')};
   margin: ${prop('margin')};
-  ${({ align }) => css`text-align: ${align};`}
   width: 100%;
 `
 
 Paragraph.propTypes = {
   align: PropTypes.string,
   color: PropTypes.shape({
-    type: PropTypes.oneOf(getOptionsFrom('palette')),
     position: PropTypes.number,
+    type: PropTypes.oneOf(getOptionsFrom('palette')),
   }),
   fontSize: PropTypes.oneOf(getOptionsFrom('sizes')),
   margin: PropTypes.string.isRequired,
 }
 
 Paragraph.defaultProps = {
-  color: { type: 'primary', position: 1 },
+  color: { position: 1, type: 'primary' },
   fontSize: 'extraSmall',
   margin: '0',
 }

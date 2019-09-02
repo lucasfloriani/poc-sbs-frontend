@@ -14,7 +14,7 @@ const INITIAL_STATE = {
 
 const createMultiErrorAlert = (state = INITIAL_STATE, { messages }) => ({
   ...state,
-  alerts: [...state.alerts, ...messages.map(err => ({ id: uuidv4(), message: err, type: 'error' }))],
+  alerts: [...state.alerts, ...messages.map(message => ({ id: uuidv4(), message, type: 'error' }))],
 })
 const createErrorAlert = (state = INITIAL_STATE, { message }) => ({
   ...state,

@@ -2,7 +2,7 @@ import { put, call } from 'redux-saga/effects'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as BookmarkActions } from '../ducks/bookmark'
 import { Creators as GasStationAction } from '../ducks/gasStation'
-import api from '../../services'
+import api from '@service'
 
 export function* bookmarksRequest() {
   try {

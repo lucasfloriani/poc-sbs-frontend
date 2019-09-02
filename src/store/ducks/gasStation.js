@@ -62,6 +62,7 @@ const gasStationsFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+
 // Get All GasStations that only admins can see
 const adminGasStationsRequest = (state = INITIAL_STATE) => ({
   ...state,
@@ -77,6 +78,7 @@ const adminGasStationsFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+
 // Get All Bookmarked GasStations
 const bookmarkedGasStationsRequest = (state = INITIAL_STATE) => ({
   ...state,
@@ -91,6 +93,7 @@ const bookmarkedGasStationsFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+
 // Get All Rating GasStations
 const ratingGasStationsRequest = (state = INITIAL_STATE) => ({
   ...state,
@@ -105,6 +108,7 @@ const ratingGasStationsFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+
 // Get GasStation
 const getGasStationRequest = (state = INITIAL_STATE) => ({
   ...state,
@@ -120,6 +124,7 @@ const getGasStationFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+
 // Create GasStation
 const createGasStationRequest = (state = INITIAL_STATE) => ({
   ...state,
@@ -133,6 +138,7 @@ const createGasStationFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+
 // Public Create GasStation
 const publicCreateGasStationRequest = (state = INITIAL_STATE) => ({
   ...state,
@@ -146,6 +152,7 @@ const publicCreateGasStationFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+
 // Update GasStation
 const updateGasStationRequest = (state = INITIAL_STATE) => ({
   ...state,
@@ -160,6 +167,7 @@ const updateGasStationFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+
 // Bookmark updates
 const createGasStationsBookmark = (state = INITIAL_STATE, { bookmark }) => ({
   ...state,
@@ -168,17 +176,14 @@ const createGasStationsBookmark = (state = INITIAL_STATE, { bookmark }) => ({
     : { ...gasStation, bookmarks: [...gasStation.bookmarks, bookmark] }),
 })
 const deleteGasStationsBookmark = (state = INITIAL_STATE, { bookmark }) => {
-  const updatedGasStations = state.gasStations.map((gasStation) => {
-    if (gasStation.id !== bookmark.gas_station_id) return gasStation
-    return {
-      ...gasStation,
-      bookmarks: gasStation.bookmarks.filter(stateBookmark => stateBookmark.id !== bookmark.id),
-    }
-  })
+  const updatedGasStations = state.gasStations.map(gasStation => gasStation.id !== bookmark.gas_station_id
+    ? gasStation
+    : { ...gasStation, bookmarks: gasStation.bookmarks.filter(stateBookmark => stateBookmark.id !== bookmark.id) })
 
   const updatedBookmarkedGasStations = state.bookmarkedGasStations.filter((gasStation) => {
-    if (gasStation.id !== bookmark.gas_station_id) return true
-    return !gasStation.bookmarks.some(stateBookmark => stateBookmark.id === bookmark.id)
+    return gasStation.id !== bookmark.gas_station_id
+      ? true
+      : !gasStation.bookmarks.some(stateBookmark => stateBookmark.id === bookmark.id)
   })
 
   return {
@@ -187,6 +192,7 @@ const deleteGasStationsBookmark = (state = INITIAL_STATE, { bookmark }) => {
     gasStations: updatedGasStations,
   }
 }
+
 // Rating updates
 const createGasStationsRating = (state = INITIAL_STATE, { rating }) => ({
   ...state,
@@ -222,18 +228,13 @@ const updateGasStationsRating = (state = INITIAL_STATE, { rating }) => {
   }
 }
 const deleteGasStationsRating = (state = INITIAL_STATE, { rating }) => {
-  const updatedGasStations = state.gasStations.map((gasStation) => {
-    if (gasStation.id !== rating.gas_station_id) return gasStation
-    return {
-      ...gasStation,
-      ratings: gasStation.ratings.filter(stateRating => stateRating.id !== rating.id),
-    }
-  })
+  const updatedGasStations = state.gasStations.map(gasStation => gasStation.id !== rating.gas_station_id
+    ? gasStation
+    : { ...gasStation, ratings: gasStation.ratings.filter(stateRating => stateRating.id !== rating.id) })
 
-  const updatedRatingGasStations = state.ratingGasStations.filter((gasStation) => {
-    if (gasStation.id !== rating.gas_station_id) return true
-    return !gasStation.ratings.some(stateRating => stateRating.id === rating.id)
-  })
+  const updatedRatingGasStations = state.ratingGasStations.filter(gasStation => gasStation.id !== rating.gas_station_id
+    ? true
+    : !gasStation.ratings.some(stateRating => stateRating.id === rating.id))
 
   return {
     ...state,
@@ -241,6 +242,7 @@ const deleteGasStationsRating = (state = INITIAL_STATE, { rating }) => {
     ratingGasStations: updatedRatingGasStations,
   }
 }
+
 // Complaint updates
 const createGasStationsComplaint = (state = INITIAL_STATE, { complaint }) => ({
   ...state,
@@ -276,17 +278,14 @@ const updateGasStationsComplaint = (state = INITIAL_STATE, { complaint }) => {
   }
 }
 const deleteGasStationsComplaint = (state = INITIAL_STATE, { complaint }) => {
-  const updatedGasStations = state.gasStations.map((gasStation) => {
-    if (gasStation.id !== complaint.gas_station_id) return gasStation
-    return {
-      ...gasStation,
-      complaints: gasStation.complaints.filter(stateComplaint => stateComplaint.id !== complaint.id),
-    }
-  })
+  const updatedGasStations = state.gasStations.map(gasStation => gasStation.id !== complaint.gas_station_id
+    ? gasStation
+    : { ...gasStation, complaints: gasStation.complaints.filter(stateComplaint => stateComplaint.id !== complaint.id) })
 
   const updatedComplaintGasStations = state.complaintGasStations.filter((gasStation) => {
-    if (gasStation.id !== complaint.gas_station_id) return true
-    return !gasStation.complaints.some(stateComplaint => stateComplaint.id === complaint.id)
+    return gasStation.id !== complaint.gas_station_id
+      ? true
+      : !gasStation.complaints.some(stateComplaint => stateComplaint.id === complaint.id)
   })
 
   return {
@@ -295,6 +294,7 @@ const deleteGasStationsComplaint = (state = INITIAL_STATE, { complaint }) => {
     complaintGasStations: updatedComplaintGasStations,
   }
 }
+
 // Gas Station Relatory
 const gasStationRelatoryRequest = (state = INITIAL_STATE) => ({ ...state })
 const gasStationRelatorySuccess = (state = INITIAL_STATE) => ({ ...state })

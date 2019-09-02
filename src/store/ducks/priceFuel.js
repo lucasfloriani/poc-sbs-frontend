@@ -1,6 +1,5 @@
 import { createActions, createReducer } from 'reduxsauce'
 
-
 export const { Types, Creators } = createActions({
   priceFuelsRequest: ['gasStationID'],
   priceFuelsSuccess: ['priceFuels'],
@@ -43,6 +42,7 @@ const priceFuelsFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+
 // Get PriceFuel
 const getPriceFuelRequest = (state = INITIAL_STATE) => ({
   ...state,
@@ -58,6 +58,7 @@ const getPriceFuelFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+
 // Create PriceFuel
 const createPriceFuelRequest = (state = INITIAL_STATE) => ({
   ...state,
@@ -71,6 +72,7 @@ const createPriceFuelFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+
 // Update PriceFuel
 const updatePriceFuelRequest = (state = INITIAL_STATE) => ({
   ...state,
@@ -85,6 +87,7 @@ const updatePriceFuelFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+
 // Delete PriceFuel
 const deletePriceFuelRequest = (state = INITIAL_STATE) => ({
   ...state,
@@ -99,6 +102,7 @@ const deletePriceFuelFailure = (state = INITIAL_STATE) => ({
   ...state,
   isFetching: false,
 })
+
 // Price Fuel History Relatory
 const priceFuelHistoryRelatoryRequest = (state = INITIAL_STATE) => ({ ...state })
 const priceFuelHistoryRelatorySuccess = (state = INITIAL_STATE) => ({ ...state })

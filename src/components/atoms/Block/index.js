@@ -5,7 +5,7 @@ import { font, palette } from 'styled-theme'
 import { getOptionsFrom, getSize } from '@theme'
 
 const Block = styled(({ backgroundColor, color, ...props }) => <div {...props} />)`
-  background-color: ${({ backgroundColor }) => palette(backgroundColor.type, backgroundColor.position)};
+  background-color: ${({ backgroundColor: { type, position } }) => palette(type, position)};
   color: ${({ color }) => palette(color.type, color.position)};
   font-family: ${font('primary')};
   padding: ${getSize('small')};
@@ -13,12 +13,12 @@ const Block = styled(({ backgroundColor, color, ...props }) => <div {...props} /
 
 Block.propTypes = {
   backgroundColor: PropTypes.shape({
-    type: PropTypes.oneOf(getOptionsFrom('palette')),
     position: PropTypes.number,
+    type: PropTypes.oneOf(getOptionsFrom('palette')),
   }),
   color: PropTypes.shape({
-    type: PropTypes.oneOf(getOptionsFrom('palette')),
     position: PropTypes.number,
+    type: PropTypes.oneOf(getOptionsFrom('palette')),
   }),
 }
 

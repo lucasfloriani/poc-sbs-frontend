@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Dropzone from 'react-dropzone'
 import { Paragraph } from 'components' // Loader
 import { readAsArrayBuffer } from 'promise-file-reader'
-import { getInfoFileByBlob } from '@helpers/file' // getTextFromArrayBuffer
+import { getInfoFileByBlob } from '@helpers/file'
 import {
   Wrapper,
   FieldWrapper,
