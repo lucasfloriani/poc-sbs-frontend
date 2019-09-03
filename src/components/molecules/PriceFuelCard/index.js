@@ -11,13 +11,8 @@ import {
 } from 'components'
 
 const PriceFuelCard = ({
-  fuelType, gasStation, id, paymentType, price,
+  fuelType, id, paymentType, price,
 }) => (
-  // fuelType: {id: 1, name: "Gasolina"}
-  // gasStation: {id: 3, cnpj: "36.337.499/0001-74", business_name: "Razão Social 2", fantasy_name: "Nome Fantasia 2",…}
-  // id: 5
-  // paymentType: {id: 1, name: "Dinheiro"}
-  // price: "4.050"
   <Card padding="medium">
     <Grid valign="flex-start" column="1fr auto">
       <Flex flow="column">
@@ -37,12 +32,6 @@ PriceFuelCard.propTypes = {
   fuelType: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-  }).isRequired,
-  gasStation: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    cnpj: PropTypes.string.isRequired,
-    business_name: PropTypes.string.isRequired,
-    fantasy_name: PropTypes.string.isRequired,
   }).isRequired,
   id: PropTypes.number.isRequired,
   paymentType: PropTypes.shape({

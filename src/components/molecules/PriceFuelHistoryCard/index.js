@@ -1,17 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { palette } from 'styled-theme'
-import historyType from '@enums/historyType'
-import { Card, Grid, Paragraph } from 'components'
-
-const StyledCard = styled(Card)`
-  background-color: ${({ type }) => {
-    if (type === historyType.create) return palette('primary', 4)
-    if (type === historyType.update) return palette('alert', 2)
-    return palette('error', 3)
-  }};
-`
+import { Grid, Paragraph } from 'components'
+import { StyledCard } from './style'
 
 const PriceFuelHistoryCard = ({
   createdAt, fuelTypeName, paymentTypeName, price, type,

@@ -7,14 +7,15 @@ import { Select } from 'components'
 
 const FuelTypeSelect = ({ fuelTypes, fuelTypesRequest, ...props }) => {
   useEffect(() => { fuelTypesRequest() }, [])
-  return (<Select options={fuelTypes} {...props} />)
+  return <Select options={fuelTypes} {...props} />
 }
 
 FuelTypeSelect.propTypes = {
   fuelTypes: PropTypes.array.isRequired,
+  fuelTypesRequest: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = ({ fuelType: { fuelTypes, isFetching } }) => ({ fuelTypes, isFetching })
+const mapStateToProps = ({ fuelType: { fuelTypes } }) => ({ fuelTypes })
 const mapDispatchToProps = dispatch => bindActionCreators(FuelTypeActions, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(FuelTypeSelect)

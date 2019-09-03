@@ -4,12 +4,9 @@ import UserType from '@enums/userType'
 
 const HasPermission = ({
   allowedUserType, children, isAuthenticated, logged, userType,
-}) => {
-  if (isAuthenticated !== logged || (allowedUserType.length !== 0 && !allowedUserType.includes(userType))) {
-    return null
-  }
-  return children
-}
+}) => isAuthenticated !== logged || (allowedUserType.length !== 0 && !allowedUserType.includes(userType))
+  ? null
+  : children
 
 HasPermission.propTypes = {
   allowedUserType: PropTypes.arrayOf(PropTypes.oneOf(Object.values(UserType))).isRequired,
@@ -18,8 +15,8 @@ HasPermission.propTypes = {
 }
 
 HasPermission.defaultProps = {
-  logged: false,
   allowedUserType: [],
+  logged: false,
 }
 
 const mapStateToProps = ({ auth: { user: { type: userType }, isAuthenticated } }) => ({ isAuthenticated, userType })

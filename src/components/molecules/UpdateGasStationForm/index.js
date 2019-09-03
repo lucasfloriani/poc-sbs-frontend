@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { media } from '@theme'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { connect } from 'react-redux'
@@ -20,18 +18,13 @@ import {
   StateSelect,
   Text,
 } from 'components'
-
-const FieldWapper = styled(({ ...props }) => <Grid column="1fr 1fr 1fr" valign="flex-start" {...props} />)`
-  ${media.lessThan('small')`
-    grid-template-columns: 1fr;
-  `}
-`
+import { FieldWrapper } from './style'
 
 const UpdateGasStationForm = ({
-  updateGasStationRequest, gasStation, gasStationID, getGasStationRequest, isFetching,
+  gasStation, gasStationID, getGasStationRequest, isFetching, updateGasStationRequest,
 }) => {
   useEffect(() => { getGasStationRequest(gasStationID) }, [])
-  if (isFetching) return (<ContentLoader />)
+  if (isFetching) return <ContentLoader />
 
   const geoLocation = gasStation.geo_location
     ? gasStation.geo_location.split(',').map(value => parseFloat(value))
@@ -56,10 +49,7 @@ const UpdateGasStationForm = ({
         state_id: gasStation.state_id,
       }}
       onSubmit={(values) => {
-        const filtredValues = {
-          ...values,
-          geo_location: values.geo_location.join(','),
-        }
+        const filtredValues = { ...values, geo_location: values.geo_location.join(',') }
         updateGasStationRequest(filtredValues)
       }}
       validationSchema={
@@ -126,52 +116,32 @@ const UpdateGasStationForm = ({
         handleSubmit,
         setFieldValue,
       }) => {
-        const commomEvents = {
-          onChange: handleChange,
-          onBlur: handleBlur,
-          onFocus: handleBlur,
-        }
+        const commomEvents = { onChange: handleChange, onBlur: handleBlur, onFocus: handleBlur }
 
         return (
           <Form
             onSubmit={handleSubmit}
             header={(
               <Block backgroundColor={{ type: 'primary', position: 0 }}>
-                <Heading
-                  color={{ type: 'grayscale', position: 4 }}
-                  hoverColor={{ type: 'grayscale', position: 4 }}
-                >
+                <Heading color={{ type: 'grayscale', position: 4 }} hoverColor={{ type: 'grayscale', position: 4 }}>
                   Atualizar Posto
                 </Heading>
               </Block>
             )}
             footer={(
-              <Block
-                as="div"
-                fontSize="small"
-                backgroundColor={{ type: 'primary', position: 0 }}
-              >
+              <Block as="div" fontSize="small" backgroundColor={{ type: 'primary', position: 0 }}>
                 <Grid halign="flex-end" column="auto auto">
-                  <Button
-                    type="reset"
-                    fontSize="small"
-                    onClick={handleReset}
-                    disabled={!dirty || isFetching}
-                  >
+                  <Button type="reset" fontSize="small" onClick={handleReset} disabled={!dirty || isFetching}>
                     Limpar
                   </Button>
-                  <Button
-                    type="submit"
-                    fontSize="small"
-                    disabled={!dirty || isFetching}
-                  >
+                  <Button type="submit" fontSize="small" disabled={!dirty || isFetching}>
                     Atualizar
                   </Button>
                 </Grid>
               </Block>
             )}
           >
-            <FieldWapper>
+            <FieldWrapper>
               <Text
                 maskType="CNPJ"
                 id="cnpj"
@@ -309,7 +279,7 @@ const UpdateGasStationForm = ({
                   setValue={value => setFieldValue('geo_location', value)}
                 />
               </Grid>
-            </FieldWapper>
+            </FieldWrapper>
           </Form>
         )
       }}

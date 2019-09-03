@@ -22,7 +22,7 @@ const UserRegisterForm = ({ isFetching, user, updateUserRequest }) => {
         name: user.name,
         cpf: user.cpf,
       }}
-      onSubmit={values => updateUserRequest(values)}
+      onSubmit={updateUserRequest}
       validationSchema={
         Yup.object().shape({
           name: Yup.string()
@@ -45,45 +45,25 @@ const UserRegisterForm = ({ isFetching, user, updateUserRequest }) => {
         handleReset,
         handleSubmit,
       }) => {
-        const commomEvents = {
-          onChange: handleChange,
-          onBlur: handleBlur,
-          onFocus: handleBlur,
-        }
+        const commomEvents = { onChange: handleChange, onBlur: handleBlur, onFocus: handleBlur }
 
         return (
           <Form
             onSubmit={handleSubmit}
             header={(
               <Block backgroundColor={{ type: 'primary', position: 0 }}>
-                <Heading
-                  color={{ type: 'grayscale', position: 4 }}
-                  hoverColor={{ type: 'grayscale', position: 4 }}
-                >
+                <Heading color={{ type: 'grayscale', position: 4 }} hoverColor={{ type: 'grayscale', position: 4 }}>
                   Atualizar Usuário
                 </Heading>
               </Block>
             )}
             footer={(
-              <Block
-                as="div"
-                fontSize="small"
-                backgroundColor={{ type: 'primary', position: 0 }}
-              >
+              <Block as="div" fontSize="small" backgroundColor={{ type: 'primary', position: 0 }}>
                 <Grid halign="flex-end" column="auto auto">
-                  <Button
-                    type="reset"
-                    fontSize="small"
-                    onClick={handleReset}
-                    disabled={!dirty || isFetching}
-                  >
+                  <Button type="reset" fontSize="small" onClick={handleReset} disabled={!dirty || isFetching}>
                     Limpar
                   </Button>
-                  <Button
-                    type="submit"
-                    fontSize="small"
-                    disabled={!dirty || isFetching}
-                  >
+                  <Button type="submit" fontSize="small" disabled={!dirty || isFetching}>
                     Atualizar
                   </Button>
                 </Grid>
@@ -121,7 +101,7 @@ const UserRegisterForm = ({ isFetching, user, updateUserRequest }) => {
 }
 
 UserRegisterForm.propTypes = {
-  createUserRequest: PropTypes.func.isRequired,
+  updateUserRequest: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = ({ auth: { isFetching, user } }) => ({ isFetching, user })

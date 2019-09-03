@@ -46,10 +46,7 @@ const RatingForm = ({
           header={(
             <Block backgroundColor={{ type: 'primary', position: 0 }}>
               <Grid column="auto 1fr" gap="30px" valign="center">
-                <Heading
-                  color={{ type: 'grayscale', position: 4 }}
-                  hoverColor={{ type: 'grayscale', position: 4 }}
-                >
+                <Heading color={{ type: 'grayscale', position: 4 }} hoverColor={{ type: 'grayscale', position: 4 }}>
                   {`${queryType === QueryTypes.Create ? 'Adicionar' : 'Atualizar'} Avaliação`}
                 </Heading>
                 {onDelete && (
@@ -97,7 +94,6 @@ RatingForm.propTypes = {
   queryType: PropTypes.oneOf(Object.values(QueryTypes)),
   toggleModal: PropTypes.func.isRequired,
 }
-
 
 const mapStateToProps = ({ auth: { user }, rating: { isFetching } }) => ({ gasStationID: `${user.id}`, isFetching })
 const mapDispatchToProps = dispatch => bindActionCreators(RatingActions, dispatch)

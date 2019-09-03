@@ -8,7 +8,9 @@ const UserRouter = ({
 }) => (
   <Route
     {...rest}
-    render={props => isAuthenticated && user.type === 'user' ? <Component {...props} /> : <Redirect to={{ pathname: '/' }} />}
+    render={props => isAuthenticated && user.type === 'user'
+      ? <Component {...props} />
+      : <Redirect to={{ pathname: '/' }} />}
   />
 )
 

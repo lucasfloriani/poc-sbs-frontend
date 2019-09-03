@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { CreateRatingForm, UpdateRatingForm, Modal } from 'components'
+import { CreateRatingForm, Modal, UpdateRatingForm } from 'components'
 
 const RatingRender = ({
   children, gasStationID, ratings, userID,

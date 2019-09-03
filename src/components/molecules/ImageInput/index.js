@@ -40,8 +40,10 @@ const ImageInput = ({
           onDropCallback(blob)
         }}
       >
-        {({ getRootProps, getInputProps, isDragActive }) => {
-          const message = isDragActive ? 'Solte o arquivo aqui...' : 'Solte um arquivo aqui ou clique para selecionar um.'
+        {({ getInputProps, getRootProps, isDragActive }) => {
+          const message = isDragActive
+            ? 'Solte o arquivo aqui...'
+            : 'Solte um arquivo aqui ou clique para selecionar um.'
           return (
             <div {...getRootProps()}>
               <FieldWrapper height={height} isDragActive={isDragActive}>

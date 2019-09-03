@@ -9,10 +9,9 @@ const PublicRouter = ({
 }) => (
   <Route
     {...rest}
-    render={
-      props => isAuthenticated && user.type
-        ? <Redirect to={{ pathname: UserTypesURL[user.type] }} />
-        : <Component {...props} />
+    render={props => isAuthenticated && user.type
+      ? <Redirect to={{ pathname: UserTypesURL[user.type] }} />
+      : <Component {...props} />
     }
   />
 )

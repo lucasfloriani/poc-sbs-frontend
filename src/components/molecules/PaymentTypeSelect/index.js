@@ -7,7 +7,7 @@ import { Select } from 'components'
 
 const PaymentTypeSelect = ({ paymentTypes, paymentTypesRequest, ...props }) => {
   useEffect(() => { paymentTypesRequest() }, [])
-  return (<Select options={paymentTypes} {...props} />)
+  return <Select options={paymentTypes} {...props} />
 }
 
 PaymentTypeSelect.propTypes = {

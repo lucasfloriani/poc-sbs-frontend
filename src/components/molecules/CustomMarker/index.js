@@ -48,11 +48,11 @@ const CustomMarker = ({
 }
 
 CustomMarker.propTypes = {
+  left: PropTypes.any,
   name: PropTypes.string.isRequired,
   prices: PropTypes.array.isRequired,
-  left: PropTypes.any,
-  top: PropTypes.any,
   style: PropTypes.any,
+  top: PropTypes.any,
 }
 
 const mapStateToProps = ({ auth: { fuelTypeName } }) => ({ fuelTypeName })

@@ -1,13 +1,6 @@
 import React from 'react'
-import styled from 'styled-components'
 import { Loader } from 'components'
-
-const Wrapper = styled.div`
-  display: 'flex';
-  height: '100vh';
-  justify-content: 'center';
-  width: '100%';
-`
+import { Wrapper } from './style'
 
 const ScreenLoader = ({ ...props }) => (
   <Wrapper {...props}>

@@ -1,15 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Toast } from 'components'
 import { connect } from 'react-redux'
-
-const Wrapper = styled.div`
-  bottom: 0;
-  right: 10px;
-  position: fixed;
-  z-index: 1000;
-`
+import { Wrapper } from './style'
 
 const ToastContainer = ({ alerts }) => (
   <Wrapper>

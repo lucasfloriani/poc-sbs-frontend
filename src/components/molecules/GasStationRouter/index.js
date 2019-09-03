@@ -8,7 +8,9 @@ const GasStationRouter = ({
 }) => (
   <Route
     {...rest}
-    render={props => isAuthenticated && user.type === 'gas-station' ? <Component {...props} /> : <Redirect to={{ pathname: '/' }} />}
+    render={props => isAuthenticated && user.type === 'gas-station'
+      ? <Component {...props} />
+      : <Redirect to={{ pathname: '/' }} />}
   />
 )
 

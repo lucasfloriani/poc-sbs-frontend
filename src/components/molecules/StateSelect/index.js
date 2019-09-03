@@ -7,7 +7,7 @@ import { Select } from 'components'
 
 const StateSelect = ({ states, statesRequest, ...props }) => {
   useEffect(() => { statesRequest() }, [])
-  return (<Select options={states} {...props} />)
+  return <Select options={states} {...props} />
 }
 
 StateSelect.propTypes = {

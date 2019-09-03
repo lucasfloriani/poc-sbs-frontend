@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { media } from '@theme'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { connect } from 'react-redux'
@@ -18,22 +16,17 @@ import {
   ScreenLoader,
   Text,
 } from 'components'
-
-const FieldWapper = styled(({ ...props }) => <Grid column="1fr 1fr 1fr" {...props} />)`
-  ${media.lessThan('extraSmall')`
-    grid-template-columns: 1fr;
-  `}
-`
+import { FieldWrapper } from './style'
 
 const UpdatePriceFuelForm = ({
-  updatePriceFuelRequest,
   getPriceFuelRequest,
   isFetching,
   priceFuel,
   priceFuelID,
+  updatePriceFuelRequest,
 }) => {
   useEffect(() => { getPriceFuelRequest(priceFuelID) }, [])
-  if (isFetching) return (<ScreenLoader />)
+  if (isFetching) return <ScreenLoader />
 
   return (
     <Formik
@@ -44,7 +37,7 @@ const UpdatePriceFuelForm = ({
         payment_type_id: priceFuel.payment_type_id,
         fuel_type_id: priceFuel.fuel_type_id,
       }}
-      onSubmit={values => updatePriceFuelRequest(values)}
+      onSubmit={updatePriceFuelRequest}
       validationSchema={
         Yup.object().shape({
           price: Yup.number()
@@ -72,52 +65,32 @@ const UpdatePriceFuelForm = ({
         handleReset,
         handleSubmit,
       }) => {
-        const commomEvents = {
-          onChange: handleChange,
-          onBlur: handleBlur,
-          onFocus: handleBlur,
-        }
+        const commomEvents = { onChange: handleChange, onBlur: handleBlur, onFocus: handleBlur }
 
         return (
           <Form
             onSubmit={handleSubmit}
             header={(
               <Block backgroundColor={{ type: 'primary', position: 0 }}>
-                <Heading
-                  color={{ type: 'grayscale', position: 4 }}
-                  hoverColor={{ type: 'grayscale', position: 4 }}
-                >
+                <Heading color={{ type: 'grayscale', position: 4 }} hoverColor={{ type: 'grayscale', position: 4 }}>
                   Atualizar Preço
                 </Heading>
               </Block>
             )}
             footer={(
-              <Block
-                as="div"
-                fontSize="small"
-                backgroundColor={{ type: 'primary', position: 0 }}
-              >
+              <Block as="div" fontSize="small" backgroundColor={{ type: 'primary', position: 0 }}>
                 <Grid halign="flex-end" column="auto auto">
-                  <Button
-                    type="reset"
-                    fontSize="small"
-                    onClick={handleReset}
-                    disabled={!dirty || isFetching}
-                  >
+                  <Button type="reset" fontSize="small" onClick={handleReset} disabled={!dirty || isFetching}>
                     Limpar
                   </Button>
-                  <Button
-                    type="submit"
-                    fontSize="small"
-                    disabled={!dirty || isFetching}
-                  >
+                  <Button type="submit" fontSize="small" disabled={!dirty || isFetching}>
                     Atualizar
                   </Button>
                 </Grid>
               </Block>
             )}
           >
-            <FieldWapper>
+            <FieldWrapper>
               <Text
                 type="number"
                 id="price"
@@ -149,7 +122,7 @@ const UpdatePriceFuelForm = ({
                 required
                 {...commomEvents}
               />
-            </FieldWapper>
+            </FieldWrapper>
           </Form>
         )
       }}
@@ -158,8 +131,8 @@ const UpdatePriceFuelForm = ({
 }
 
 UpdatePriceFuelForm.propTypes = {
-  updatePriceFuelRequest: PropTypes.func.isRequired,
   priceFuelID: PropTypes.string.isRequired,
+  updatePriceFuelRequest: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = ({ priceFuel: { isFetching, priceFuel } }) => ({ isFetching, priceFuel })

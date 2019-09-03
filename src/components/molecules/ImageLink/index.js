@@ -1,18 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import { Image, Link } from 'components'
-
-const Anchor = styled.a`
-  outline: none;
-`
+import { Anchor } from './style'
 
 const ImageLink = ({
-  href, to, target, ...props
-}) => {
-  if (to) return <Link to={to}><Image {...props} /></Link>
-  return <Anchor href={href} target={target}><Image {...props} /></Anchor>
-}
+  href, target, to, ...props
+}) => to
+  ? <Link to={to}><Image {...props} /></Link>
+  : <Anchor href={href} target={target}><Image {...props} /></Anchor>
 
 Image.propTypes = {
   alt: PropTypes.string,

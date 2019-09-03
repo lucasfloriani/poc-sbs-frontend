@@ -14,8 +14,8 @@ const UpdateRatingForm = ({
 }) => (
   <RatingForm
     initialValues={initialValues}
-    onDelete={values => deleteRatingRequest(values)}
-    onSubmit={values => updateRatingRequest(values)}
+    onDelete={deleteRatingRequest}
+    onSubmit={updateRatingRequest}
     queryType={QueryTypes.Update}
     toggleModal={toggleModal}
   />

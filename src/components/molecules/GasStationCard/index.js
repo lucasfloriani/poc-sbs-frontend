@@ -1,7 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { media } from '@theme'
 import { connect } from 'react-redux'
 import paymentType from '@enums/paymentType'
 import UserType from '@enums/userType'
@@ -20,12 +18,7 @@ import {
   Paragraph,
   RatingRender,
 } from 'components'
-
-const CardWrapper = styled(({ length, ...props }) => <Grid column="1fr auto" valign="flex-start" {...props} />)`
-  ${media.lessThan('extraSmall')`
-    grid-template-columns: 1fr;
-  `}
-`
+import { CardWrapper } from './style'
 
 const GasStationCard = ({
   actions,
@@ -140,10 +133,7 @@ GasStationCard.propTypes = {
   fantasyName: PropTypes.string.isRequired,
   fuelTypeName: PropTypes.string.isRequired,
   geoLocation: PropTypes.string.isRequired,
-  id: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]).isRequired,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   neighborhood: PropTypes.string.isRequired,
   priceFuels: PropTypes.array.isRequired,
   ratings: PropTypes.array.isRequired,
