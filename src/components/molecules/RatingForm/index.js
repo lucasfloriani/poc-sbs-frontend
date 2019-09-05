@@ -25,66 +25,64 @@ const RatingForm = ({
   onSubmit,
   queryType,
   toggleModal,
-}) => {
-  return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={async (values) => {
-        onSubmit(values)
-        toggleModal()
-      }}
-      validationSchema={
-        Yup.object().shape({
-          rating: Yup.number()
-            .typeError('Avaliação precisa ser um número')
-            .integer('Avaliação precisa ser um número inteiro'),
-        })
-      }
-      render={({ values, handleSubmit, setFieldValue }) => (
-        <Form
-          onSubmit={handleSubmit}
-          header={(
-            <Block backgroundColor={{ type: 'primary', position: 0 }}>
-              <Grid column="auto 1fr" gap="30px" valign="center">
-                <Heading color={{ type: 'grayscale', position: 4 }} hoverColor={{ type: 'grayscale', position: 4 }}>
-                  {`${queryType === QueryTypes.Create ? 'Adicionar' : 'Atualizar'} Avaliação`}
-                </Heading>
-                {onDelete && (
-                  <Badge
-                    onClick={() => {
-                      onDelete(initialValues.id)
-                      toggleModal()
-                    }}
-                  >
-                    <Icon icon="delete" />
-                  </Badge>
-                )}
-              </Grid>
-            </Block>
-          )}
-          footer={(
-            <Block as="div" fontSize="small" backgroundColor={{ type: 'primary', position: 0 }}>
-              <Flex halign="flex-end">
-                <Button type="submit" fontSize="small" disabled={isFetching}>
-                  {`${queryType === QueryTypes.Create ? 'Adicionar' : 'Atualizar'}`}
-                </Button>
-              </Flex>
-            </Block>
-          )}
-        >
-          <Grid valign="flex-start">
-            <Rating
-              labelTitle="Rating"
-              name="rating"
-              onChange={value => setFieldValue('rating', value)}
-              value={values.rating}
-            />
-          </Grid>
-        </Form>
-      )}
-    />
-  )
-}
+}) => (
+  <Formik
+    initialValues={initialValues}
+    onSubmit={async (values) => {
+      onSubmit(values)
+      toggleModal()
+    }}
+    validationSchema={
+      Yup.object().shape({
+        rating: Yup.number()
+          .typeError('Avaliação precisa ser um número')
+          .integer('Avaliação precisa ser um número inteiro'),
+      })
+    }
+    render={({ values, handleSubmit, setFieldValue }) => (
+      <Form
+        onSubmit={handleSubmit}
+        header={(
+          <Block backgroundColor={{ type: 'primary', position: 0 }}>
+            <Grid column="auto 1fr" gap="30px" valign="center">
+              <Heading color={{ type: 'grayscale', position: 4 }} hoverColor={{ type: 'grayscale', position: 4 }}>
+                {`${queryType === QueryTypes.Create ? 'Adicionar' : 'Atualizar'} Avaliação`}
+              </Heading>
+              {onDelete && (
+                <Badge
+                  onClick={() => {
+                    onDelete(initialValues.id)
+                    toggleModal()
+                  }}
+                >
+                  <Icon icon="delete" />
+                </Badge>
+              )}
+            </Grid>
+          </Block>
+        )}
+        footer={(
+          <Block as="div" fontSize="small" backgroundColor={{ type: 'primary', position: 0 }}>
+            <Flex halign="flex-end">
+              <Button type="submit" fontSize="small" disabled={isFetching}>
+                {`${queryType === QueryTypes.Create ? 'Adicionar' : 'Atualizar'}`}
+              </Button>
+            </Flex>
+          </Block>
+        )}
+      >
+        <Grid valign="flex-start">
+          <Rating
+            labelTitle="Rating"
+            name="rating"
+            onChange={value => setFieldValue('rating', value)}
+            value={values.rating}
+          />
+        </Grid>
+      </Form>
+    )}
+  />
+)
 
 RatingForm.propTypes = {
   initialValues: PropTypes.object.isRequired,
