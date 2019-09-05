@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { media } from '@theme'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as PriceFuelActions } from '@store/ducks/priceFuel'
@@ -17,33 +15,23 @@ import {
   Paragraph,
   ScreenLoader,
 } from 'components'
-
-const ListWrapper = styled(({ length, ...props }) => <Grid column={length ? '1fr 1fr' : '1fr'} {...props} />)`
-  ${media.lessThan('medium')`
-    grid-template-columns: 1fr;
-  `}
-`
+import { ListWrapper } from './style'
 
 const ListPriceFuels = ({
   deletePriceFuelRequest,
   gasStationID,
+  isFetching,
   priceFuels,
   priceFuelsRequest,
-  isFetching,
 }) => {
-  useEffect(() => {
-    priceFuelsRequest(gasStationID)
-  }, [])
-  if (isFetching) return (<ScreenLoader />)
+  useEffect(() => { priceFuelsRequest(gasStationID) }, [])
+  if (isFetching) return <ScreenLoader />
 
   return (
     <Grid>
       <Block>
         <Flex halign="space-between" valign="center">
-          <Heading
-            color={{ type: 'grayscale', position: 4 }}
-            hoverColor={{ type: 'grayscale', position: 4 }}
-          >
+          <Heading color={{ type: 'grayscale', position: 4 }} hoverColor={{ type: 'grayscale', position: 4 }}>
             Preços de combustível
           </Heading>
           <Button
@@ -91,15 +79,15 @@ const ListPriceFuels = ({
 ListPriceFuels.propTypes = {
   deletePriceFuelRequest: PropTypes.func.isRequired,
   gasStationID: PropTypes.string.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   priceFuels: PropTypes.array.isRequired,
   priceFuelsRequest: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = ({
-  priceFuel: { priceFuels, isFetching },
   auth: { user },
-}) => ({ gasStationID: `${user.id}`, priceFuels, isFetching })
+  priceFuel: { isFetching, priceFuels },
+}) => ({ gasStationID: `${user.id}`, isFetching, priceFuels })
 const mapDispatchToProps = dispatch => bindActionCreators(PriceFuelActions, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListPriceFuels)

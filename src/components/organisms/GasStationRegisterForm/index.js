@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import { withRouter } from 'react-router'
-import { media } from '@theme'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { connect } from 'react-redux'
@@ -20,12 +18,7 @@ import {
   StateSelect,
   Text,
 } from 'components'
-
-const FieldWapper = styled(({ ...props }) => <Grid column="1fr 1fr 1fr" valign="flex-start" {...props} />)`
-  ${media.lessThan('small')`
-    grid-template-columns: 1fr;
-  `}
-`
+import { FieldWapper } from './style'
 
 const GasStationRegisterForm = ({ history, isFetching, publicCreateGasStationRequest }) => (
   <Formik
@@ -113,11 +106,7 @@ const GasStationRegisterForm = ({ history, isFetching, publicCreateGasStationReq
       handleSubmit,
       setFieldValue,
     }) => {
-      const commomEvents = {
-        onChange: handleChange,
-        onBlur: handleBlur,
-        onFocus: handleBlur,
-      }
+      const commomEvents = { onChange: handleChange, onBlur: handleBlur, onFocus: handleBlur }
 
       return (
         <Form

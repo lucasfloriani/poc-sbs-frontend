@@ -39,11 +39,7 @@ const LoginForm = ({ isFetching, loginRequest }) => (
       handleChange,
       handleSubmit,
     }) => {
-      const commomEvents = {
-        onChange: handleChange,
-        onBlur: handleBlur,
-        onFocus: handleBlur,
-      }
+      const commomEvents = { onChange: handleChange, onBlur: handleBlur, onFocus: handleBlur }
 
       return (
         <Form onSubmit={handleSubmit} style={{ margin: 'auto', maxWidth: '400px', width: '100%' }}>
@@ -80,11 +76,7 @@ const LoginForm = ({ isFetching, loginRequest }) => (
             <Link to="/">
               <Paragraph align="center">Voltar</Paragraph>
             </Link>
-            <Button
-              type="submit"
-              fontSize="small"
-              disabled={!dirty || isFetching}
-            >
+            <Button type="submit" fontSize="small" disabled={!dirty || isFetching}>
               Entrar
             </Button>
           </Grid>

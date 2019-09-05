@@ -1,31 +1,21 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { media } from '@theme'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as GasStationActions } from '@store/ducks/gasStation'
 import {
   Block,
   GasStationCard,
-  Grid,
   Paragraph,
   ScreenLoader,
 } from 'components'
-
-const ListWrapper = styled(({ length, ...props }) => <Grid column={length ? '1fr 1fr' : '1fr'} {...props} />)`
-  ${media.lessThan('medium')`
-    grid-template-columns: 1fr;
-  `}
-`
+import { ListWrapper } from './style'
 
 const ListRatingGasStations = ({
-  actions, ratingGasStations, ratingGasStationsRequest, isFetching,
+  actions, isFetching, ratingGasStations, ratingGasStationsRequest,
 }) => {
-  useEffect(() => {
-    ratingGasStationsRequest()
-  }, [])
-  if (isFetching) return (<ScreenLoader />)
+  useEffect(() => { ratingGasStationsRequest() }, [])
+  if (isFetching) return <ScreenLoader />
 
   return (
     <ListWrapper length={ratingGasStations.length}>
@@ -73,16 +63,16 @@ const ListRatingGasStations = ({
 
 ListRatingGasStations.propTypes = {
   actions: PropTypes.array.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   ratingGasStationsRequest: PropTypes.func.isRequired,
   ratingGasStations: PropTypes.array.isRequired,
-  isFetching: PropTypes.bool.isRequired,
 }
 
 ListRatingGasStations.defaultProps = {
   actions: ['alert', 'bookmark', 'navigation', 'rating'],
 }
 
-const mapStateToProps = ({ gasStation: { ratingGasStations, isFetching } }) => ({ ratingGasStations, isFetching })
+const mapStateToProps = ({ gasStation: { isFetching, ratingGasStations } }) => ({ isFetching, ratingGasStations })
 const mapDispatchToProps = dispatch => bindActionCreators(GasStationActions, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListRatingGasStations)

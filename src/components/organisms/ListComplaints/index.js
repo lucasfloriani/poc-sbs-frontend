@@ -1,29 +1,21 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { media } from '@theme'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as ComplaintActions } from '@store/ducks/complaint'
 import {
   Block,
   ComplaintCard,
-  Grid,
   Paragraph,
   ScreenLoader,
 } from 'components'
-
-const ListWrapper = styled(({ length, ...props }) => <Grid column={length ? '1fr 1fr' : '1fr'} {...props} />)`
-  ${media.lessThan('medium')`
-    grid-template-columns: 1fr;
-  `}
-`
+import { ListWrapper } from './style'
 
 const ListComplaint = ({
   complaints, complaintsRequest, isFetching,
 }) => {
   useEffect(() => { complaintsRequest() }, [])
-  if (isFetching) return (<ScreenLoader />)
+  if (isFetching) return <ScreenLoader />
 
   return (
     <ListWrapper length={complaints.length}>
@@ -49,8 +41,8 @@ const ListComplaint = ({
 }
 
 ListComplaint.propTypes = {
-  complaintsRequest: PropTypes.func.isRequired,
   complaints: PropTypes.array.isRequired,
+  complaintsRequest: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
 }
 

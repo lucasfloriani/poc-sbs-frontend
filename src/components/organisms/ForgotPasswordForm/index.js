@@ -16,7 +16,7 @@ import {
   Text,
 } from 'components'
 
-const ForgotPassworForm = ({ isFetching, forgotPasswordRequest }) => (
+const ForgotPassworForm = ({ forgotPasswordRequest, isFetching }) => (
   <Formik
     initialValues={{ email: '' }}
     onSubmit={({ email }) => forgotPasswordRequest(email)}

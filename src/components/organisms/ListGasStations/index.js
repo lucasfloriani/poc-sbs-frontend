@@ -1,22 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { media } from '@theme'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as GasStationActions } from '@store/ducks/gasStation'
 import {
   Block,
   GasStationCard,
-  Grid,
   Paragraph,
 } from 'components'
-
-const ListWrapper = styled(({ length, ...props }) => <Grid column={length ? '1fr 1fr' : '1fr'} {...props} />)`
-  ${media.lessThan('medium')`
-    grid-template-columns: 1fr;
-  `}
-`
+import { ListWrapper } from './style'
 
 const ListGasStations = ({ actions, gasStations }) => (
   <ListWrapper length={gasStations.length}>

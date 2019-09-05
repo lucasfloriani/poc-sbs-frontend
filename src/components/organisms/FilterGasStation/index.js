@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import styled from 'styled-components'
-import { media } from '@theme'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as AuthActions } from '@store/ducks/auth'
@@ -25,12 +23,7 @@ import {
   Select,
   Text,
 } from 'components'
-
-const WrapperForm = styled(({ ...props }) => <Grid column="1fr 1fr 1fr" {...props} />)`
-  ${media.lessThan('small')`
-    grid-template-columns: 1fr;
-  `}
-`
+import { WrapperForm } from './style'
 
 const FilterGasStation = ({
   fuelTypeName,
@@ -93,11 +86,7 @@ const FilterGasStation = ({
         handleSubmit,
         setFieldValue,
       }) => {
-        const commomEvents = {
-          onChange: handleChange,
-          onBlur: handleBlur,
-          onFocus: handleBlur,
-        }
+        const commomEvents = { onChange: handleChange, onBlur: handleBlur, onFocus: handleBlur }
 
         return (
           <Form
@@ -240,7 +229,7 @@ FilterGasStation.propTypes = {
 }
 
 const mapStateToProps = ({
-  auth: { fuelTypeName, userLocation, isFetchingLocation },
+  auth: { fuelTypeName, isFetchingLocation, userLocation },
   city: { cities },
   gasStation: { isFetching: isFetchingGasStation },
   state: { isFetching: isFetchingStates, states },
