@@ -20,17 +20,14 @@ const AdminGasStationPriceHistoric = ({
   gasStation, getGasStationRequest, isFetching, match,
 }) => {
   useEffect(() => { getGasStationRequest(match.params.gasStationID) }, [])
-  if (isFetching) return (<ContentLoader />)
+  if (isFetching) return <ContentLoader />
 
   return (
     <FullPageTemplate header={<AdminMenu />} footer={<AdminFooter />}>
       <Container align="center">
         <Grid>
           <Block>
-            <Heading
-              color={{ type: 'grayscale', position: 4 }}
-              hoverColor={{ type: 'grayscale', position: 4 }}
-            >
+            <Heading color={{ type: 'grayscale', position: 4 }} hoverColor={{ type: 'grayscale', position: 4 }}>
               {gasStation.fantasy_name}
             </Heading>
           </Block>

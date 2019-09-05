@@ -29,7 +29,7 @@ const AdminListGasStations = ({ adminGasStationsRequest, isFetching }) => {
     }
     adminGasStationsRequest(filterValues)
   }, [])
-  if (isFetching) return (<ScreenLoader />)
+  if (isFetching) return <ScreenLoader />
 
   return (
     <FullPageTemplate header={<AdminMenu />} footer={<AdminFooter />}>

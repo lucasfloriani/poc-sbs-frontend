@@ -14,17 +14,13 @@ import {
   Grid,
 } from 'components'
 
-const AdminRelatories = ({
-  complaintRelatoryRequest,
-  gasStationRelatoryRequest,
-  priceFuelHistoryRelatoryRequest,
-}) => (
+const AdminRelatories = ({ complaintRelatoryRequest, gasStationRelatoryRequest, priceFuelHistoryRelatoryRequest }) => (
   <FullPageTemplate header={<AdminMenu />} footer={<AdminFooter />}>
     <Container align="center">
       <Grid>
-        <Button onClick={() => complaintRelatoryRequest()}>Baixar denúncias</Button>
-        <Button onClick={() => gasStationRelatoryRequest()}>Baixar postos</Button>
-        <Button onClick={() => priceFuelHistoryRelatoryRequest()}>Baixar históricos de preços</Button>
+        <Button onClick={complaintRelatoryRequest}>Baixar denúncias</Button>
+        <Button onClick={gasStationRelatoryRequest}>Baixar postos</Button>
+        <Button onClick={priceFuelHistoryRelatoryRequest}>Baixar históricos de preços</Button>
       </Grid>
     </Container>
   </FullPageTemplate>

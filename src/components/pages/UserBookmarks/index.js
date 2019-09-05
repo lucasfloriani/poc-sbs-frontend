@@ -15,10 +15,7 @@ const UserBookmarks = () => (
     <Container align="center">
       <Grid>
         <Block>
-          <Heading
-            color={{ type: 'grayscale', position: 4 }}
-            hoverColor={{ type: 'grayscale', position: 4 }}
-          >
+          <Heading color={{ type: 'grayscale', position: 4 }} hoverColor={{ type: 'grayscale', position: 4 }}>
             Meus Favoritos
           </Heading>
         </Block>

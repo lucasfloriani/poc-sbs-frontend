@@ -15,10 +15,7 @@ const AdminComplaints = () => (
     <Container align="center">
       <Grid>
         <Block>
-          <Heading
-            color={{ type: 'grayscale', position: 4 }}
-            hoverColor={{ type: 'grayscale', position: 4 }}
-          >
+          <Heading color={{ type: 'grayscale', position: 4 }} hoverColor={{ type: 'grayscale', position: 4 }}>
             Denúncias dos usuários
           </Heading>
         </Block>
