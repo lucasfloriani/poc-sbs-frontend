@@ -1,7 +1,7 @@
 const fuelType = Object.freeze({
-  gasoline: 'Gasolina',
+  commumgasoline: 'Gasolina Comum',
+  additiveGasoline: 'Gasolina Aditivada',
   ethanol: 'Etanol',
-  premiumGasoline: 'Gasolina Premium',
   dieselS10: 'Diesel S10',
   dieselS500: 'Diesel S500',
 })
