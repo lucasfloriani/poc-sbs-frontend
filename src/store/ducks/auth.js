@@ -28,7 +28,7 @@ const INITIAL_STATE = {
   isFetching: false,
   isFetchingLocation: false,
   token: sessionStorage.getItem('token') || '',
-  fuelTypeName: 'Gasolina',
+  fuelTypeName: 'Gasolina Comum',
   user: (sessionStorage.getItem('user') && JSON.parse(sessionStorage.getItem('user'))) || {},
   userLocation: {
     cityID: '',
