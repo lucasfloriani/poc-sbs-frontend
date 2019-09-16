@@ -11,9 +11,10 @@ import {
   Block,
   CitySelect,
   Flex,
-  Heading,
   Form,
   Grid,
+  Heading,
+  Icon,
   MapInput,
   StateSelect,
   Text,
@@ -275,7 +276,8 @@ const GasStationRegisterForm = ({ history, isFetching, publicCreateGasStationReq
                 hoverColor={{ type: 'grayscale', position: 0 }}
                 level={3}
               >
-                Selecione a localização do posto
+                Selecione a localização do posto arrastando o icone
+                <Icon icon="mapPin" />
               </Heading>
               <MapInput
                 value={values.geo_location}

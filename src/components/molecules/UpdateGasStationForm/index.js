@@ -10,9 +10,10 @@ import {
   Block,
   CitySelect,
   ContentLoader,
-  Heading,
   Form,
+  Heading,
   Grid,
+  Icon,
   MapInput,
   Select,
   StateSelect,
@@ -271,7 +272,8 @@ const UpdateGasStationForm = ({
                   hoverColor={{ type: 'grayscale', position: 0 }}
                   level={3}
                 >
-                  Selecione a localização do posto
+                  Selecione a localização do posto arrastando o icone
+                  <Icon icon="mapPin" />
                 </Heading>
                 <MapInput
                   value={values.geo_location}
