@@ -50,7 +50,7 @@ MapInput.propTypes = {
 MapInput.defaultProps = {
   centerValue: [-26.244383377008926, -49.384092876981356],
   value: [-26.244383377008926, -49.384092876981356],
-  zoomValue: 15,
+  zoomValue: 16,
 }
 
 export default MapInput

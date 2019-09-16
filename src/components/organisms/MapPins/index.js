@@ -11,7 +11,7 @@ const MapPins = ({ pins = [] }) => {
   }
 
   return (
-    <Map center={[latitude, longitude]} zoom={15} height={400} defaultWidth={600}>
+    <Map center={[latitude, longitude]} zoom={16} height={400} defaultWidth={600}>
       {pins.length !== 0 && pins.map((pin, index) => {
         const formatedLocation = pin.location.split(',').map(value => parseFloat(value))
         return (
