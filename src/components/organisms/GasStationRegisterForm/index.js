@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
+import { isCNPJ } from 'brazilian-values'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as GasStationActions } from '@store/ducks/gasStation'
@@ -56,6 +57,7 @@ const GasStationRegisterForm = ({ history, isFetching, publicCreateGasStationReq
           .typeError('CNPJ precisa ser um texto')
           .matches(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}-?[0-9]{2}/, 'CNPJ é inválido')
           .length(18, 'CNPJ é inválido')
+          .test('cnpj', 'CNPJ é inválido', value => value && isCNPJ(value))
           .required('Campo cnpj é obrigatório'),
         business_name: Yup.string()
           .typeError('Razão social precisa ser um texto')
@@ -166,6 +168,7 @@ const GasStationRegisterForm = ({ history, isFetching, publicCreateGasStationReq
               error={touched.cnpj && errors.cnpj}
               active={touched.cnpj}
               value={values.cnpj}
+              required
               {...commomEvents}
             />
             <Text

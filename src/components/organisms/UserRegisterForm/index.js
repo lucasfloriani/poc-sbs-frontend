@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
+import { isCPF } from 'brazilian-values'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as AuthActions } from '@store/ducks/auth'
@@ -38,6 +39,7 @@ const UserRegisterForm = ({ createUserRequest, isFetching }) => (
           .typeError('CPF precisa ser um texto')
           .matches(/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}-?[0-9]{2}/, 'CPF é inválido')
           .length(14, 'CPF é inválido')
+          .test('cpf', 'CPF é inválido', value => value && isCPF(value))
           .required('Campo cpf é obrigatório'),
         email: Yup.string()
           .typeError('E-mail precisa ser um texto')
