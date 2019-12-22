@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { formatToFuelPrice } from '@helpers/string'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as PriceFuelActions } from '@store/ducks/priceFuel'
@@ -52,7 +53,7 @@ const ListPriceFuels = ({
               <Flex flow="column">
                 <Heading margin="4px 0 8px">{fuelType.name}</Heading>
                 <Paragraph fontSize="small">{paymentType.name}</Paragraph>
-                <Paragraph fontSize="small">{`R$ ${price}`}</Paragraph>
+                <Paragraph fontSize="small">{formatToFuelPrice(price)}</Paragraph>
               </Flex>
               <Flex>
                 <Link to={`/gas-station/price-fuel/${id}`}><BadgeIcon icon="edit" /></Link>

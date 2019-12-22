@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { formatToFuelPrice } from '@helpers/string'
 import { connect } from 'react-redux'
 import paymentType from '@enums/paymentType'
 import { Grid, Paragraph } from 'components'
@@ -36,7 +37,7 @@ const CustomMarker = ({
               <FuelCardInfo backgroundColor={{ type: 'grayscale', position: 1 }} padding="small" key={key}>
                 <Paragraph align="center" color={{ type: 'grayscale', position: 4 }}>{key}</Paragraph>
                 <Paragraph align="center" color={{ type: 'grayscale', position: 4 }}>
-                  {value !== '-----' ? `R$ ${value.replace('.', ',')}` : value}
+                  {value !== '-----' ? formatToFuelPrice(value) : value}
                 </Paragraph>
               </FuelCardInfo>
             ))}

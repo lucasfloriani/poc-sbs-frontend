@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { formatToFuelPrice } from '@helpers/string'
 import paymentType from '@enums/paymentType'
 import UserType from '@enums/userType'
 import {
@@ -110,7 +111,7 @@ const GasStationCard = ({
             Object.entries(priceFuelValues).map(([key, value]) => (
               <Card backgroundColor={{ type: 'grayscale', position: 1 }} key={key} padding="small">
                 <Paragraph align="center" color={{ type: 'grayscale', position: 4 }} fontSize="medium">
-                  {value !== '-----' ? `R$ ${value.replace('.', ',')}` : value}
+                  {value !== '-----' ? formatToFuelPrice(value) : value}
                 </Paragraph>
                 <Paragraph align="center" color={{ type: 'grayscale', position: 4 }}>{key}</Paragraph>
               </Card>

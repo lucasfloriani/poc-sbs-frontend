@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { formatToFuelPrice } from '@helpers/string'
 import { Grid, Paragraph } from 'components'
 import { StyledCard } from './style'
 
@@ -12,7 +13,7 @@ const PriceFuelHistoryCard = ({
         <Paragraph fontSize="medium">{`${fuelTypeName} - ${paymentTypeName}`}</Paragraph>
         <Paragraph fontSize="extraSmall">{createdAt}</Paragraph>
       </Grid>
-      <Paragraph fontSize="small">{`R$ ${price}`}</Paragraph>
+      <Paragraph fontSize="small">{formatToFuelPrice(price)}</Paragraph>
     </Grid>
   </StyledCard>
 )

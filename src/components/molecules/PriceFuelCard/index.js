@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { formatToFuelPrice } from '@helpers/string'
 import {
   BadgeIcon,
   Card,
@@ -18,7 +19,7 @@ const PriceFuelCard = ({
       <Flex flow="column">
         <Heading margin="4px 0 8px">{fuelType.name}</Heading>
         <Paragraph fontSize="small">{paymentType.name}</Paragraph>
-        <Paragraph fontSize="small">{`R$ ${price}`}</Paragraph>
+        <Paragraph fontSize="small">{formatToFuelPrice(price)}</Paragraph>
       </Flex>
       <Flex>
         <Link to={`/admin/gas-stations/${id}`}><BadgeIcon icon="edit" /></Link>
