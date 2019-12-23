@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Map from 'pigeon-maps'
+import Marker from 'pigeon-marker'
 import { usePosition } from 'use-position'
 import { CustomMarker } from 'components'
 
@@ -26,6 +27,7 @@ const MapPins = ({ pins = [] }) => {
           />
         )
       })}
+      {latitude && longitude && <Marker anchor={[latitude, longitude]} />}
     </Map>
   )
 }
