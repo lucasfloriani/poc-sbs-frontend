@@ -96,7 +96,7 @@ const GasStationCard = ({
               onClick={() => {
                 navigator.geolocation.getCurrentPosition((position) => {
                   const { latitude, longitude } = position.coords
-                  const url = `http://maps.google.com/?saddr=${latitude},${longitude}&daddr=${geoLocation}`
+                  const url = `http://maps.google.com/?saddr=${latitude},${longitude}&daddr=${geoLocation}&dirflg=d&f=d`
                   window.open(url)
                 })
               }}

@@ -8,7 +8,7 @@ import { CustomMarker } from 'components'
 const MapPins = ({ pins = [] }) => {
   const { latitude = -26.244383377008926, longitude = -49.384092876981356 } = usePosition()
   const showDirections = (location) => {
-    window.open(`http://maps.google.com/?saddr=${latitude},${longitude}&daddr=${location}`)
+    window.open(`http://maps.google.com/?saddr=${latitude},${longitude}&daddr=${location}&dirflg=d&f=d`)
   }
 
   return (
