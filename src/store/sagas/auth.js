@@ -21,7 +21,7 @@ export function* loginRequest({ email, password }) {
   } catch (err) {
     console.log('SAGA LOGIN ERR: ', err)
     yield put(AuthActions.loginFailure())
-    yield put(AlertActions.createErrorAlert('Erro ao realizar o login, verifique o e-mail e a senha'))
+    yield put(AlertActions.createMultiErrorAlert(getRequestErrorsFromErrorObj(err))) // 'Erro ao realizar o login, verifique o e-mail e a senha'
   }
 }
 
