@@ -73,6 +73,9 @@ const LoginForm = ({ isFetching, loginRequest }) => (
             <Link to="/register/gas-station">
               <Paragraph align="center">Cadastre-se como posto</Paragraph>
             </Link>
+            <Link to="/forgot-password">
+              <Paragraph align="center">Recuperar Senha</Paragraph>
+            </Link>
             <Link to="/">
               <Paragraph align="center">Voltar</Paragraph>
             </Link>
