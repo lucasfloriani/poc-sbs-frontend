@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { formatToFuelPrice } from '@helpers/string'
 import { connect } from 'react-redux'
-import paymentType from '@enums/paymentType'
-import { Grid, Paragraph } from 'components'
 import { Marker, FuelCardInfo, Title } from './styled'
+import { formatToFuelPrice } from '@helpers/string'
+import paymentType from '@enums/paymentType'
+import Grid from '@atoms/Grid'
+import Paragraph from '@atoms/Paragraph'
 
 const CustomMarker = ({
   fuelTypeName, left, name, prices, style, top, ...props
@@ -54,6 +55,7 @@ CustomMarker.propTypes = {
   prices: PropTypes.array.isRequired,
   style: PropTypes.any,
   top: PropTypes.any,
+  fuelTypeName: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = ({ auth: { fuelTypeName } }) => ({ fuelTypeName })

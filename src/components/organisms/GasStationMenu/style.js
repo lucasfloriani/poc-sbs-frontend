@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { getShadow, media } from '@theme'
-import { Block } from 'components'
+import Block from '@atoms/Block'
 
 export const InnerWrapper = styled.div`
   align-items: center;

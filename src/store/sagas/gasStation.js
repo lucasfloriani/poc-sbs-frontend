@@ -1,10 +1,11 @@
+/* eslint-disable no-console */
 import { put, call } from 'redux-saga/effects'
-import { getRequestErrorsFromErrorObj } from '@helpers/error'
 import FileSaver from 'file-saver'
-import { cleanFalsy, encodeQueryData } from '@helpers/object'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as GasStationActions } from '../ducks/gasStation'
 import api from '@service'
+import { getRequestErrorsFromErrorObj } from '@helpers/error'
+import { cleanFalsy, encodeQueryData } from '@helpers/object'
 
 export function* gasStationsRequest({ filter }) {
   try {
@@ -78,7 +79,7 @@ export function* publicCreateGasStationRequest({ gasStationData, successCallback
     yield call(api.post, 'gas-stations', gasStationData)
     yield put(GasStationActions.publicCreateGasStationSuccess())
     yield put(AlertActions.createSuccessAlert(
-      'Pedido para criação da conta do posto de combustível foi enviado com sucesso'
+      'Pedido para criação da conta do posto de combustível foi enviado com sucesso',
     ))
     successCallback()
   } catch (err) {
@@ -110,6 +111,8 @@ export function* gasStationRelatoryRequest() {
   } catch (err) {
     console.log('SAGA GAS STATION ERR: ', err)
     yield put(GasStationActions.gasStationRelatoryFailure())
-    yield put(AlertActions.createErrorAlert('Erro ao baixar o relatório dos postos de combustível, tente novamente mais tarde'))
+    yield put(AlertActions.createErrorAlert(
+      'Erro ao baixar o relatório dos postos de combustível, tente novamente mais tarde',
+    ))
   }
 }

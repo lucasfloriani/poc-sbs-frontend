@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { media } from '@theme'
-import { Grid } from 'components'
+import Grid from '@atoms/Grid'
 
 export const WrapperForm = styled(({ ...props }) => <Grid column="1fr 1fr 1fr" {...props} />)`
   ${media.lessThan('small')`

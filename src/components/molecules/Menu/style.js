@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { palette } from 'styled-theme'
 import { getCubicBezier } from '@theme'
-import { Button } from 'components'
+import Button from '@atoms/Button'
 
 export const Wrapper = styled.div`
   height: 100vh;

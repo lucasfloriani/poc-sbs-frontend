@@ -6,14 +6,12 @@ import { isCPF } from 'brazilian-values'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as AuthActions } from '@store/ducks/auth'
-import {
-  Block,
-  Button,
-  Form,
-  Grid,
-  Heading,
-  Text,
-} from 'components'
+import Block from '@atoms/Block'
+import Button from '@atoms/Button'
+import Form from '@molecules/Form'
+import Grid from '@atoms/Grid'
+import Heading from '@atoms/Heading'
+import Text from '@atoms/Text'
 
 const UserRegisterForm = ({ isFetching, user, updateUserRequest }) => {
   return (
@@ -37,7 +35,8 @@ const UserRegisterForm = ({ isFetching, user, updateUserRequest }) => {
             .required('Campo cpf é obrigatório'),
         })
       }
-      render={({
+    >
+      {({
         values,
         dirty,
         touched,
@@ -98,12 +97,14 @@ const UserRegisterForm = ({ isFetching, user, updateUserRequest }) => {
           </Form>
         )
       }}
-    />
+    </Formik>
   )
 }
 
 UserRegisterForm.propTypes = {
   updateUserRequest: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  user: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = ({ auth: { isFetching, user } }) => ({ isFetching, user })

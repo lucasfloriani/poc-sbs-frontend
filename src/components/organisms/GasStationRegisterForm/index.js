@@ -6,21 +6,19 @@ import * as Yup from 'yup'
 import { isCNPJ } from 'brazilian-values'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Creators as GasStationActions } from '@store/ducks/gasStation'
-import {
-  Button,
-  Block,
-  CitySelect,
-  Flex,
-  Form,
-  Grid,
-  Heading,
-  Icon,
-  MapInput,
-  StateSelect,
-  Text,
-} from 'components'
 import { FieldWapper } from './style'
+import { Creators as GasStationActions } from '@store/ducks/gasStation'
+import Button from '@atoms/Button'
+import Block from '@atoms/Block'
+import Flex from '@atoms/Flex'
+import Form from '@molecules/Form'
+import Grid from '@atoms/Grid'
+import Heading from '@atoms/Heading'
+import Icon from '@atoms/Icon'
+import Text from '@atoms/Text'
+import CitySelect from '@molecules/CitySelect'
+import MapInput from '@molecules/MapInput'
+import StateSelect from '@molecules/StateSelect'
 
 const GasStationRegisterForm = ({ history, isFetching, publicCreateGasStationRequest }) => (
   <Formik
@@ -98,7 +96,8 @@ const GasStationRegisterForm = ({ history, isFetching, publicCreateGasStationReq
           .required('Campo estado é obrigatório'),
       })
     }
-    render={({
+  >
+    {({
       values,
       dirty,
       touched,
@@ -280,7 +279,7 @@ const GasStationRegisterForm = ({ history, isFetching, publicCreateGasStationReq
                 level={3}
               >
                 Selecione a localização do posto arrastando o icone
-                <Icon icon="mapPin" />
+                <Icon name="MapPin" />
               </Heading>
               <MapInput
                 value={values.geo_location}
@@ -292,11 +291,13 @@ const GasStationRegisterForm = ({ history, isFetching, publicCreateGasStationReq
         </Form>
       )
     }}
-  />
+  </Formik>
 )
 
 GasStationRegisterForm.propTypes = {
   publicCreateGasStationRequest: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  isFetching: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = ({ gasStation: { isFetching } }) => ({ isFetching })

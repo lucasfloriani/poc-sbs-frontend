@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Container, FullPageTemplate, RecoveryPasswordForm } from 'components'
+import Container from '@atoms/Container'
+import RecoveryPasswordForm from '@organisms/RecoveryPasswordForm'
+import FullPageTemplate from '@templates/FullPageTemplate'
 
 const RecoveryPassword = ({ match }) => (
   <FullPageTemplate mainPadding="0">

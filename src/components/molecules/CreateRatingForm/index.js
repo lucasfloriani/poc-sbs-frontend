@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import QueryTypes from '@enums/queryTypes'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import QueryTypes from '@enums/queryTypes'
 import { Creators as RatingActions } from '@store/ducks/rating'
-import { RatingForm } from 'components'
+import RatingForm from '@molecules/RatingForm'
 
 const CreateRatingForm = ({ createRatingRequest, initialValues, toggleModal }) => (
   <RatingForm

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as FuelTypeActions } from '@store/ducks/fuelType'
-import { Select } from 'components'
+import Select from '@atoms/Select'
 
 const FuelTypeSelect = ({ fuelTypes, fuelTypesRequest, ...props }) => {
-  useEffect(() => { fuelTypesRequest() }, [])
+  useEffect(() => { fuelTypesRequest() }, [fuelTypesRequest])
   return <Select options={fuelTypes} {...props} />
 }
 

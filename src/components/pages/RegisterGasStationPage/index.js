@@ -1,5 +1,7 @@
 import React from 'react'
-import { Container, FullPageTemplate, GasStationRegisterForm } from 'components'
+import Container from '@atoms/Container'
+import GasStationRegisterForm from '@organisms/GasStationRegisterForm'
+import FullPageTemplate from '@templates/FullPageTemplate'
 
 const RegisterGasStationPage = () => (
   <FullPageTemplate mainPadding="0">

@@ -9,8 +9,8 @@ const Paragraph = styled(({
   align, color, fontSize, hoverColor, ...props
 }) => <p {...props} />)`
   ${({ align }) => css`text-align: ${align};`}
-  font-family: ${font('primary')};
   color: ${({ color: { position, type } }) => palette(type, position)};
+  font-family: ${font('primary')};
   font-size: ${({ fontSize }) => getSize(fontSize)};
   font-weight: ${getFontWeight('light')};
   margin: ${prop('margin')};

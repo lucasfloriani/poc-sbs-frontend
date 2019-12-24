@@ -1,25 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { CardWrapper } from './style'
 import { formatToFuelPrice } from '@helpers/string'
 import paymentType from '@enums/paymentType'
 import UserType from '@enums/userType'
-import {
-  Badge,
-  BadgeIcon,
-  BookmarkBadge,
-  Card,
-  ComplaintRender,
-  Flex,
-  Grid,
-  HasPermission,
-  Heading,
-  Icon,
-  Link,
-  Paragraph,
-  RatingRender,
-} from 'components'
-import { CardWrapper } from './style'
+import Badge from '@atoms/Badge'
+import Card from '@atoms/Card'
+import Flex from '@atoms/Flex'
+import Grid from '@atoms/Grid'
+import Heading from '@atoms/Heading'
+import Icon from '@atoms/Icon'
+import Link from '@atoms/Link'
+import Paragraph from '@atoms/Paragraph'
+import BadgeIcon from '@molecules/BadgeIcon'
+import BookmarkBadge from '@molecules/BookmarkBadge'
+import ComplaintRender from '@molecules/ComplaintRender'
+import HasPermission from '@molecules/HasPermission'
+import RatingRender from '@molecules/RatingRender'
 
 const GasStationCard = ({
   actions,
@@ -56,7 +54,7 @@ const GasStationCard = ({
           <Paragraph>{`${stateName}/${cityName}, CEP ${cep}`}</Paragraph>
         </Flex>
         <Flex>
-          {actions.includes('edit') && <Link to={`/admin/gas-stations/${id}`}><BadgeIcon icon="edit" /></Link>}
+          {actions.includes('edit') && <Link to={`/admin/gas-stations/${id}`}><BadgeIcon name="Edit" /></Link>}
           <HasPermission logged allowedUserType={[UserType.user]}>
             {actions.includes('rating') && (
               <RatingRender ratings={ratings} gasStationID={`${id}`}>
@@ -64,7 +62,7 @@ const GasStationCard = ({
                   <Badge>
                     <Icon
                       cursor="pointer"
-                      icon="star"
+                      name="Star"
                       color={userRating ? { type: 'alert', position: 0 } : { type: 'primary', position: 0 }}
                       hoverColor={userRating ? { type: 'alert', position: 0 } : { type: 'primary', position: 0 }}
                       onClick={toggleModal}
@@ -79,7 +77,7 @@ const GasStationCard = ({
                   <Badge>
                     <Icon
                       cursor="pointer"
-                      icon="alert"
+                      name="Alert"
                       color={{ type: 'primary', position: 0 }}
                       hoverColor={{ type: 'primary', position: 0 }}
                       onClick={toggleModal}
@@ -92,7 +90,7 @@ const GasStationCard = ({
           </HasPermission>
           {actions.includes('navigation') && (
             <BadgeIcon
-              icon="navigation"
+              name="Navigation"
               onClick={() => {
                 navigator.geolocation.getCurrentPosition((position) => {
                   const { latitude, longitude } = position.coords

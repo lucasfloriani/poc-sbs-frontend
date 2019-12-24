@@ -5,16 +5,14 @@ import * as Yup from 'yup'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as AuthActions } from '@store/ducks/auth'
-import logo from '@public/img/logo-verde.png'
-import {
-  Button,
-  Form,
-  Grid,
-  Image,
-  Link,
-  Paragraph,
-  Text,
-} from 'components'
+import logo from '@assets/img/logo-verde.png'
+import Button from '@atoms/Button'
+import Form from '@molecules/Form'
+import Grid from '@atoms/Grid'
+import Image from '@atoms/Image'
+import Link from '@atoms/Link'
+import Paragraph from '@atoms/Paragraph'
+import Text from '@atoms/Text'
 
 const RecoveryPasswordForm = ({ isFetching, recoveryPasswordRequest, token }) => (
   <Formik
@@ -30,7 +28,8 @@ const RecoveryPasswordForm = ({ isFetching, recoveryPasswordRequest, token }) =>
           .required('Token é obrigatório'),
       })
     }
-    render={({
+  >
+    {({
       values,
       dirty,
       touched,
@@ -64,7 +63,7 @@ const RecoveryPasswordForm = ({ isFetching, recoveryPasswordRequest, token }) =>
         </Grid>
       </Form>
     )}
-  />
+  </Formik>
 )
 
 RecoveryPasswordForm.propTypes = {

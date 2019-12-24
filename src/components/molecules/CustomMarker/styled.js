@@ -1,10 +1,11 @@
 import styled from 'styled-components'
-import { Card, Heading } from 'components'
+import Card from '@atoms/Card'
+import Heading from '@atoms/Heading'
 
 export const Marker = styled(Card)`
   overflow: visible;
-  position: relative;
   padding: 6px;
+  position: relative;
 
   &:after {
     border-color: transparent transparent #ffffff #ffffff;
@@ -27,11 +28,11 @@ export const FuelCardInfo = styled(Card)`
 `
 
 export const Title = styled(Heading)`
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
   display: block;
   display: -webkit-box;
   font-size: 1em;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
 `

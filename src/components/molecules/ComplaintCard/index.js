@@ -1,15 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {
-  Button,
-  Card,
-  Flex,
-  Grid,
-  Heading,
-  Image,
-  Paragraph,
-} from 'components'
 import { HeaderWrapper } from './style'
+import Button from '@atoms/Button'
+import Card from '@atoms/Card'
+import Flex from '@atoms/Flex'
+import Grid from '@atoms/Grid'
+import Heading from '@atoms/Heading'
+import Image from '@atoms/Image'
+import Paragraph from '@atoms/Paragraph'
 
 const ComplaintCard = ({
   createdAt,

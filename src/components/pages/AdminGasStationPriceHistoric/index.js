@@ -3,23 +3,23 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as GasStationActions } from '@store/ducks/gasStation'
-import {
-  AdminFooter,
-  AdminMenu,
-  Block,
-  Container,
-  ContentLoader,
-  FullPageTemplate,
-  Grid,
-  Heading,
-  Paragraph,
-  PriceFuelHistoryCard,
-} from 'components'
+import Block from '@atoms/Block'
+import Container from '@atoms/Container'
+import Grid from '@atoms/Grid'
+import Heading from '@atoms/Heading'
+import Paragraph from '@atoms/Paragraph'
+import ContentLoader from '@molecules/ContentLoader'
+import PriceFuelHistoryCard from '@molecules/PriceFuelHistoryCard'
+import AdminFooter from '@organisms/AdminFooter'
+import AdminMenu from '@organisms/AdminMenu'
+import FullPageTemplate from '@templates/FullPageTemplate'
 
 const AdminGasStationPriceHistoric = ({
   gasStation, getGasStationRequest, isFetching, match,
 }) => {
-  useEffect(() => { getGasStationRequest(match.params.gasStationID) }, [])
+  useEffect(() => {
+    getGasStationRequest(match.params.gasStationID)
+  }, [getGasStationRequest, match.params.gasStationID])
   if (isFetching) return <ContentLoader />
 
   return (

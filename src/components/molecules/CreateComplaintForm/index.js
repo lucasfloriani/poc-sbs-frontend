@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import QueryTypes from '@enums/queryTypes'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import QueryTypes from '@enums/queryTypes'
 import { Creators as ComplaintActions } from '@store/ducks/complaint'
-import { ComplaintForm } from 'components'
+import ComplaintForm from '@molecules/ComplaintForm'
 
 const CreateComplaintForm = ({
   initialValues, createComplaintRequest, toggleModal,

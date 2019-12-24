@@ -1,22 +1,20 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { formatToFuelPrice } from '@helpers/string'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Creators as PriceFuelActions } from '@store/ducks/priceFuel'
-import {
-  BadgeIcon,
-  Block,
-  Button,
-  Card,
-  Flex,
-  Grid,
-  Heading,
-  Link,
-  Paragraph,
-  ScreenLoader,
-} from 'components'
 import { ListWrapper } from './style'
+import { formatToFuelPrice } from '@helpers/string'
+import { Creators as PriceFuelActions } from '@store/ducks/priceFuel'
+import Block from '@atoms/Block'
+import Button from '@atoms/Button'
+import Card from '@atoms/Card'
+import Flex from '@atoms/Flex'
+import Grid from '@atoms/Grid'
+import Heading from '@atoms/Heading'
+import Link from '@atoms/Link'
+import Paragraph from '@atoms/Paragraph'
+import BadgeIcon from '@molecules/BadgeIcon'
+import ScreenLoader from '@molecules/ScreenLoader'
 
 const ListPriceFuels = ({
   deletePriceFuelRequest,
@@ -25,7 +23,7 @@ const ListPriceFuels = ({
   priceFuels,
   priceFuelsRequest,
 }) => {
-  useEffect(() => { priceFuelsRequest(gasStationID) }, [])
+  useEffect(() => { priceFuelsRequest(gasStationID) }, [gasStationID, priceFuelsRequest])
   if (isFetching) return <ScreenLoader />
 
   return (
@@ -56,8 +54,8 @@ const ListPriceFuels = ({
                 <Paragraph fontSize="small">{formatToFuelPrice(price)}</Paragraph>
               </Flex>
               <Flex>
-                <Link to={`/gas-station/price-fuel/${id}`}><BadgeIcon icon="edit" /></Link>
-                <BadgeIcon icon="delete" onClick={() => deletePriceFuelRequest(`${id}`)} />
+                <Link to={`/gas-station/price-fuel/${id}`}><BadgeIcon name="Edit" /></Link>
+                <BadgeIcon name="Delete" onClick={() => deletePriceFuelRequest(`${id}`)} />
               </Flex>
             </Grid>
           </Card>

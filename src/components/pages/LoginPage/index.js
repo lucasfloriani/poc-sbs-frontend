@@ -1,5 +1,7 @@
 import React from 'react'
-import { Container, FullPageTemplate, LoginForm } from 'components'
+import Container from '@atoms/Container'
+import LoginForm from '@organisms/LoginForm'
+import FullPageTemplate from '@templates/FullPageTemplate'
 
 const LoginPage = () => (
   <FullPageTemplate mainPadding="0">

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { getShadow, media } from '@theme'
-import { Block, Flex } from 'components'
+import Block from '@atoms/Block'
+import Flex from '@atoms/Flex'
 
 export const Wrapper = styled(Block)`
   box-shadow: ${getShadow('small')};

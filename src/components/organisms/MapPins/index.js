@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Map from 'pigeon-maps'
 import Marker from 'pigeon-marker'
 import { usePosition } from 'use-position'
-import { CustomMarker } from 'components'
+import CustomMarker from '@molecules/CustomMarker'
 
 const MapPins = ({ pins = [] }) => {
   const { latitude = -26.244383377008926, longitude = -49.384092876981356 } = usePosition()
@@ -37,7 +37,7 @@ MapPins.propTypes = {
     PropTypes.shape({
       location: PropTypes.string,
       name: PropTypes.string,
-    })
+    }),
   ),
 }
 

@@ -2,19 +2,17 @@ import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Creators as ComplaintActions } from '@store/ducks/complaint'
-import {
-  Block,
-  ComplaintCard,
-  Paragraph,
-  ScreenLoader,
-} from 'components'
 import { ListWrapper } from './style'
+import { Creators as ComplaintActions } from '@store/ducks/complaint'
+import Block from '@atoms/Block'
+import Paragraph from '@atoms/Paragraph'
+import ComplaintCard from '@molecules/ComplaintCard'
+import ScreenLoader from '@molecules/ScreenLoader'
 
 const ListComplaint = ({
   complaints, complaintsRequest, isFetching,
 }) => {
-  useEffect(() => { complaintsRequest() }, [])
+  useEffect(() => { complaintsRequest() }, [complaintsRequest])
   if (isFetching) return <ScreenLoader />
 
   return (

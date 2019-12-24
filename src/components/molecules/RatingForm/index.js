@@ -6,17 +6,15 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as RatingActions } from '@store/ducks/rating'
 import QueryTypes from '@enums/queryTypes'
-import {
-  Badge,
-  Button,
-  Block,
-  Flex,
-  Form,
-  Grid,
-  Heading,
-  Icon,
-  Rating,
-} from 'components'
+import Badge from '@atoms/Badge'
+import Button from '@atoms/Button'
+import Block from '@atoms/Block'
+import Flex from '@atoms/Flex'
+import Form from '@molecules/Form'
+import Grid from '@atoms/Grid'
+import Heading from '@atoms/Heading'
+import Icon from '@atoms/Icon'
+import Rating from '@atoms/Rating'
 
 const RatingForm = ({
   initialValues,
@@ -39,7 +37,8 @@ const RatingForm = ({
           .integer('Avaliação precisa ser um número inteiro'),
       })
     }
-    render={({ values, handleSubmit, setFieldValue }) => (
+  >
+    {({ values, handleSubmit, setFieldValue }) => (
       <Form
         onSubmit={handleSubmit}
         header={(
@@ -55,7 +54,7 @@ const RatingForm = ({
                     toggleModal()
                   }}
                 >
-                  <Icon icon="delete" />
+                  <Icon name="Delete" />
                 </Badge>
               )}
             </Grid>
@@ -81,7 +80,7 @@ const RatingForm = ({
         </Grid>
       </Form>
     )}
-  />
+  </Formik>
 )
 
 RatingForm.propTypes = {

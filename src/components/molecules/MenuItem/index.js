@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Link from 'react-router-dom/Link'
+import { Link } from 'react-router-dom'
 import { Wrapper } from './style'
 
 const MenuItem = ({ children, icon, ...props }) => (
@@ -11,6 +11,7 @@ const MenuItem = ({ children, icon, ...props }) => (
 )
 
 MenuItem.propTypes = {
+  children: PropTypes.any.isRequired,
   icon: PropTypes.node,
 }
 

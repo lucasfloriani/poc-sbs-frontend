@@ -1,11 +1,9 @@
 import React from 'react'
-import {
-  AboutUs,
-  AdminFooter,
-  AdminMenu,
-  Container,
-  FullPageTemplate,
-} from 'components'
+import Container from '@atoms/Container'
+import AboutUs from '@organisms/AboutUs'
+import AdminFooter from '@organisms/AdminFooter'
+import AdminMenu from '@organisms/AdminMenu'
+import FullPageTemplate from '@templates/FullPageTemplate'
 
 const AdminAboutUs = () => (
   <FullPageTemplate header={<AdminMenu />} footer={<AdminFooter />}>

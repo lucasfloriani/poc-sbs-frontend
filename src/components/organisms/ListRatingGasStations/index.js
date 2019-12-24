@@ -2,19 +2,17 @@ import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Creators as GasStationActions } from '@store/ducks/gasStation'
-import {
-  Block,
-  GasStationCard,
-  Paragraph,
-  ScreenLoader,
-} from 'components'
 import { ListWrapper } from './style'
+import { Creators as GasStationActions } from '@store/ducks/gasStation'
+import Block from '@atoms/Block'
+import Paragraph from '@atoms/Paragraph'
+import GasStationCard from '@molecules/GasStationCard'
+import ScreenLoader from '@molecules/ScreenLoader'
 
 const ListRatingGasStations = ({
   actions, isFetching, ratingGasStations, ratingGasStationsRequest,
 }) => {
-  useEffect(() => { ratingGasStationsRequest() }, [])
+  useEffect(() => { ratingGasStationsRequest() }, [ratingGasStationsRequest])
   if (isFetching) return <ScreenLoader />
 
   return (

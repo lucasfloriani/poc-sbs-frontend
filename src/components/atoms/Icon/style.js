@@ -1,17 +1,17 @@
 import React from 'react'
-import styled from 'styled-components'
-import { palette } from 'styled-theme'
-import { getCubicBezier, getSize } from '@theme'
+import styled, { css } from 'styled-components'
+import { key, palette } from 'styled-theme'
 
 export const Wrapper = styled(({
   color, hoverColor, size, ...props
 }) => <span {...props} />)`
   box-sizing: border-box;
   color: ${({ color: { position, type } }) => palette(type, position)};
+  ${({ onClick }) => onClick && css`cursor: pointer;`}
   display: inline-block;
-  font-size: ${({ size }) => getSize(size)};
+  font-size: ${({ size }) => key(['sizes', size])};
   height: 1em;
-  transition: .3s color ${getCubicBezier()};
+  transition: .3s color ${key(['cubicBezier', 'standard'])};
   width: 1em;
 
   :hover {

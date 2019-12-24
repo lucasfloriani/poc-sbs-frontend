@@ -1,5 +1,7 @@
 import React from 'react'
-import { Container, FullPageTemplate, UserRegisterForm } from 'components'
+import Container from '@atoms/Container'
+import FullPageTemplate from '@templates/FullPageTemplate'
+import UserRegisterForm from '@organisms/UserRegisterForm'
 
 const RegisterUserPage = () => (
   <FullPageTemplate mainPadding="0">

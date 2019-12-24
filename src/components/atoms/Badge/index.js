@@ -11,9 +11,9 @@ const Badge = styled.div`
   cursor: pointer;
   display: flex;
   justify-content: center;
+  margin: 3px;
   padding: 8px;
   transition: 0.4s box-shadow ${getCubicBezier()}, 0.4s transform ${getCubicBezier()};
-  margin: 3px;
 
   &:hover {
     box-shadow: ${getShadow('small')};

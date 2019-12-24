@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import StarRatings from 'react-star-ratings'
-import { Flex, Paragraph } from 'components'
+import Flex from '@atoms/Flex'
+import Paragraph from '@atoms/Paragraph'
 
 const Rating = ({
   labelTitle, name, onChange, value,

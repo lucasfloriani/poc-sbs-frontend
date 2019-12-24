@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { formatToFuelPrice } from '@helpers/string'
-import { Grid, Paragraph } from 'components'
 import { StyledCard } from './style'
+import { formatToFuelPrice } from '@helpers/string'
+import Grid from '@atoms/Grid'
+import Paragraph from '@atoms/Paragraph'
 
 const PriceFuelHistoryCard = ({
   createdAt, fuelTypeName, paymentTypeName, price, type,

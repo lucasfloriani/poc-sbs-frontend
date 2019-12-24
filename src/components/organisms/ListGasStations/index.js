@@ -2,13 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Creators as GasStationActions } from '@store/ducks/gasStation'
-import {
-  Block,
-  GasStationCard,
-  Paragraph,
-} from 'components'
 import { ListWrapper } from './style'
+import { Creators as GasStationActions } from '@store/ducks/gasStation'
+import Block from '@atoms/Block'
+import Paragraph from '@atoms/Paragraph'
+import GasStationCard from '@molecules/GasStationCard'
 
 const ListGasStations = ({ actions, gasStations }) => (
   <ListWrapper length={gasStations.length}>

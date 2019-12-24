@@ -1,12 +1,13 @@
+/* eslint-disable no-console */
 import { call, put } from 'redux-saga/effects'
-import { accessType } from '@helpers/auth'
-import { getUserLocation } from '@helpers/geoLocation'
-import { getRequestErrorsFromErrorObj } from '@helpers/error'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as AuthActions } from '../ducks/auth'
 import { Creators as CityActions } from '../ducks/city'
 import { Creators as StateActions } from '../ducks/state'
 import api from '@service'
+import { accessType } from '@helpers/auth'
+import { getUserLocation } from '@helpers/geoLocation'
+import { getRequestErrorsFromErrorObj } from '@helpers/error'
 
 export function* loginRequest({ email, password }) {
   try {
@@ -21,7 +22,7 @@ export function* loginRequest({ email, password }) {
   } catch (err) {
     console.log('SAGA LOGIN ERR: ', err)
     yield put(AuthActions.loginFailure())
-    yield put(AlertActions.createMultiErrorAlert(getRequestErrorsFromErrorObj(err))) // 'Erro ao realizar o login, verifique o e-mail e a senha'
+    yield put(AlertActions.createMultiErrorAlert(getRequestErrorsFromErrorObj(err)))
   }
 }
 
@@ -29,7 +30,9 @@ export function* forgotPasswordRequest({ email }) {
   try {
     yield call(api.post, 'forgot-password', { email })
     yield put(AuthActions.forgotPasswordSuccess())
-    yield put(AlertActions.createSuccessAlert('Solicitado a troca da senha com successo, e-mail com o link da troca de senha chegará em breve'))
+    yield put(AlertActions.createSuccessAlert(
+      'Solicitado a troca da senha com successo, e-mail com o link da troca de senha chegará em breve',
+    ))
   } catch (err) {
     console.log('SAGA LOGIN ERR: ', err)
     yield put(AuthActions.forgotPasswordFailure())
@@ -88,7 +91,10 @@ export function* userLocationRequest() {
     const stateResponse = yield call(api.get, 'states')
     const states = stateResponse.data.map(({ id, name }) => [name, id])
 
-    const reverseGeoLocation = yield call(api.get, `https://nominatim.openstreetmap.org/reverse.php?lat=${latitude}&lon=${longitude}&format=json`)
+    const reverseGeoLocation = yield call(
+      api.get,
+      `https://nominatim.openstreetmap.org/reverse.php?lat=${latitude}&lon=${longitude}&format=json`,
+    )
     const { state = 'Santa Catarina', town: city = 'São Bento do Sul' } = reverseGeoLocation.data.address
     const stateID = states.find(([name]) => name === state)[1]
 
@@ -104,6 +110,9 @@ export function* userLocationRequest() {
     yield put(StateActions.statesFailure())
     yield put(CityActions.citiesFailure())
     yield put(AuthActions.userLocationFailure())
-    yield put(AlertActions.createErrorAlert('Não foi possível buscar sua localização, libere o acesso para filtrar os postos e outras funcionalidades corretamente'))
+    yield put(AlertActions.createErrorAlert(`
+      Não foi possível buscar sua localização,libere o acesso para filtrar os postos e
+      outras funcionalidades corretamente
+    `))
   }
 }

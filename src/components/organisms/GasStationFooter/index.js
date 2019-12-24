@@ -1,6 +1,6 @@
 import React from 'react'
-import { Copyright } from 'components'
 import { StyledFooter, Wrapper } from './style'
+import Copyright from '@molecules/Copyright'
 
 const GasStationFooter = ({ ...props }) => (
   <StyledFooter>

@@ -1,4 +1,14 @@
 import { all, takeLatest } from 'redux-saga/effects'
+import { Types as AuthTypes } from '../ducks/auth'
+import { Types as BookmarkTypes } from '../ducks/bookmark'
+import { Types as CityTypes } from '../ducks/city'
+import { Types as ComplaintTypes } from '../ducks/complaint'
+import { Types as FuelTypes } from '../ducks/fuelType'
+import { Types as GasStationTypes } from '../ducks/gasStation'
+import { Types as PaymentTypes } from '../ducks/paymentType'
+import { Types as PriceFuelTypes } from '../ducks/priceFuel'
+import { Types as RatingTypes } from '../ducks/rating'
+import { Types as StatesTypes } from '../ducks/state'
 import {
   createUserRequest,
   loginRequest,
@@ -42,17 +52,6 @@ import {
   deleteRatingRequest,
 } from './rating'
 import { statesRequest } from './state'
-
-import { Types as AuthTypes } from '../ducks/auth'
-import { Types as BookmarkTypes } from '../ducks/bookmark'
-import { Types as CityTypes } from '../ducks/city'
-import { Types as ComplaintTypes } from '../ducks/complaint'
-import { Types as FuelTypes } from '../ducks/fuelType'
-import { Types as GasStationTypes } from '../ducks/gasStation'
-import { Types as PaymentTypes } from '../ducks/paymentType'
-import { Types as PriceFuelTypes } from '../ducks/priceFuel'
-import { Types as RatingTypes } from '../ducks/rating'
-import { Types as StatesTypes } from '../ducks/state'
 
 export default function* root() {
   return yield all([

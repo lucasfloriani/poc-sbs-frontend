@@ -24,10 +24,10 @@ export const Content = styled.div`
   flex-direction: column;
   left: 50%;
   max-height: 90vh;
+  max-width: 90vw;
   overflow-y: auto;
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
   transition: .5s transform ${getCubicBezier()};
-  max-width: 90vw;
 `

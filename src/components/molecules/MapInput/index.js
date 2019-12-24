@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import Map from 'pigeon-maps'
 import Draggable from 'pigeon-draggable'
 import mapPin from '@atoms/Icon/icons/mapPin.svg'
-import { Error, Grid } from 'components'
+import Grid from '@atoms/Grid'
+import Error from '@molecules/Error'
 
 const MapInput = ({
   error, setValue, value, zoomValue,

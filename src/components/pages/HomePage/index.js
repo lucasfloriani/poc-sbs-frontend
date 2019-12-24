@@ -3,17 +3,15 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as GasStationActions } from '@store/ducks/gasStation'
-import {
-  Container,
-  FullPageTemplate,
-  FilterGasStation,
-  Grid,
-  ListGasStations,
-  MapPins,
-  ScreenLoader,
-  UserFooter,
-  UserMenu,
-} from 'components'
+import Container from '@atoms/Container'
+import Grid from '@atoms/Grid'
+import ScreenLoader from '@molecules/ScreenLoader'
+import FilterGasStation from '@organisms/FilterGasStation'
+import ListGasStations from '@organisms/ListGasStations'
+import MapPins from '@organisms/MapPins'
+import UserFooter from '@organisms/UserFooter'
+import UserMenu from '@organisms/UserMenu'
+import FullPageTemplate from '@templates/FullPageTemplate'
 
 const HomePage = ({ gasStations, gasStationsRequest, isFetching }) => {
   useEffect(() => {
@@ -29,7 +27,7 @@ const HomePage = ({ gasStations, gasStationsRequest, isFetching }) => {
       rating: 0,
     }
     gasStationsRequest(filterValues)
-  }, [])
+  }, [gasStationsRequest])
   if (isFetching) return <ScreenLoader />
 
   const gasStationsPins = gasStations.map(gasStation => ({

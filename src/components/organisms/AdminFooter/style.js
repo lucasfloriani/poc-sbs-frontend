@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { palette } from 'styled-theme'
 import { getShadow, getSize } from '@theme'
-import { Container } from 'components'
+import Container from '@atoms/Container'
 
 export const StyledFooter = styled.footer`
   background-color: ${palette('primary', 1)};

@@ -3,16 +3,14 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as GasStationActions } from '@store/ducks/gasStation'
-import {
-  AdminFooter,
-  AdminMenu,
-  Container,
-  FullPageTemplate,
-  FilterGasStation,
-  Grid,
-  ListGasStations,
-  ScreenLoader,
-} from 'components'
+import Container from '@atoms/Container'
+import Grid from '@atoms/Grid'
+import ScreenLoader from '@molecules/ScreenLoader'
+import AdminFooter from '@organisms/AdminFooter'
+import AdminMenu from '@organisms/AdminMenu'
+import FilterGasStation from '@organisms/FilterGasStation'
+import ListGasStations from '@organisms/ListGasStations'
+import FullPageTemplate from '@templates/FullPageTemplate'
 
 const AdminListGasStations = ({ adminGasStationsRequest, isFetching }) => {
   useEffect(() => {
@@ -28,7 +26,7 @@ const AdminListGasStations = ({ adminGasStationsRequest, isFetching }) => {
       rating: 0,
     }
     adminGasStationsRequest(filterValues)
-  }, [])
+  }, [adminGasStationsRequest])
   if (isFetching) return <ScreenLoader />
 
   return (

@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { getOptionsFrom } from '@theme'
-import { Paragraph } from 'components'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Creators as AlertActions } from '@store/ducks/alert'
 import { StyledToast } from './style'
+import Paragraph from '@atoms/Paragraph'
+import { getOptionsFrom } from '@theme'
+import { Creators as AlertActions } from '@store/ducks/alert'
 
 const Toast = ({
   color, children, id, removeAlert, type, ...props

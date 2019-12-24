@@ -1,10 +1,11 @@
+/* eslint-disable no-console */
 import { put, call } from 'redux-saga/effects'
-import { getRequestErrorsFromErrorObj } from '@helpers/error'
 import FileSaver from 'file-saver'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as ComplaintActions } from '../ducks/complaint'
 import { Creators as GasStationAction } from '../ducks/gasStation'
 import api from '@service'
+import { getRequestErrorsFromErrorObj } from '@helpers/error'
 
 export function* complaintsRequest() {
   try {

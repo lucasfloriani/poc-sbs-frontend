@@ -1,5 +1,7 @@
 import React from 'react'
-import { Container, FullPageTemplate, ForgotPasswordForm } from 'components'
+import Container from '@atoms/Container'
+import FullPageTemplate from '@templates/FullPageTemplate'
+import ForgotPasswordForm from '@organisms/ForgotPasswordForm'
 
 const ForgotPassword = () => (
   <FullPageTemplate mainPadding="0">

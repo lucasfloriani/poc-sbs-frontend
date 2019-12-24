@@ -4,26 +4,24 @@ import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { WrapperForm } from './style'
 import { Creators as AuthActions } from '@store/ducks/auth'
 import { Creators as GasStationActions } from '@store/ducks/gasStation'
 import { Creators as StateActions } from '@store/ducks/state'
 import orderType from '@enums/orderType'
 import paymentType from '@enums/paymentType'
-import {
-  Block,
-  Button,
-  CitySelect,
-  ContentLoader,
-  Flex,
-  Form,
-  Heading,
-  Grid,
-  BadgeIcon,
-  Rating,
-  Select,
-  Text,
-} from 'components'
-import { WrapperForm } from './style'
+import Block from '@atoms/Block'
+import Button from '@atoms/Button'
+import Flex from '@atoms/Flex'
+import Form from '@molecules/Form'
+import Heading from '@atoms/Heading'
+import Grid from '@atoms/Grid'
+import Rating from '@atoms/Rating'
+import Select from '@atoms/Select'
+import Text from '@atoms/Text'
+import CitySelect from '@molecules/CitySelect'
+import ContentLoader from '@molecules/ContentLoader'
+import BadgeIcon from '@molecules/BadgeIcon'
 
 const FilterGasStation = ({
   fuelTypeName,
@@ -40,7 +38,7 @@ const FilterGasStation = ({
   useEffect(() => {
     statesRequest()
     userLocationRequest()
-  }, [])
+  }, [statesRequest, userLocationRequest])
   if (isFetchingGasStation || isFetchingLocation || isFetchingStates) return <ContentLoader />
 
   return (
@@ -76,7 +74,8 @@ const FilterGasStation = ({
             .integer('Avaliação precisa ser um número inteiro'),
         })
       }
-      render={({
+    >
+      {({
         values,
         touched,
         errors,
@@ -97,7 +96,7 @@ const FilterGasStation = ({
                   <Heading color={{ type: 'grayscale', position: 4 }} hoverColor={{ type: 'grayscale', position: 4 }}>
                     Filtro
                   </Heading>
-                  <BadgeIcon icon="downArrow" onClick={() => setShowFields(!showFields)} />
+                  <BadgeIcon name="DownArrow" onClick={() => setShowFields(!showFields)} />
                 </Flex>
               </Block>
             )}
@@ -213,7 +212,7 @@ const FilterGasStation = ({
           </Form>
         )
       }}
-    />
+    </Formik>
   )
 }
 
@@ -226,6 +225,8 @@ FilterGasStation.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   states: PropTypes.array.isRequired,
   userLocation: PropTypes.object.isRequired,
+  statesRequest: PropTypes.func.isRequired,
+  userLocationRequest: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = ({

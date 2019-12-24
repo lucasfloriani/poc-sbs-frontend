@@ -5,14 +5,12 @@ import { bindActionCreators } from 'redux'
 import { Creators as ComplaintActions } from '@store/ducks/complaint'
 import { Creators as GasStationActions } from '@store/ducks/gasStation'
 import { Creators as PriceFuelActions } from '@store/ducks/priceFuel'
-import {
-  AdminFooter,
-  AdminMenu,
-  Button,
-  Container,
-  FullPageTemplate,
-  Grid,
-} from 'components'
+import Button from '@atoms/Button'
+import Container from '@atoms/Container'
+import Grid from '@atoms/Grid'
+import AdminFooter from '@organisms/AdminFooter'
+import AdminMenu from '@organisms/AdminMenu'
+import FullPageTemplate from '@templates/FullPageTemplate'
 
 const AdminRelatories = ({ complaintRelatoryRequest, gasStationRelatoryRequest, priceFuelHistoryRelatoryRequest }) => (
   <FullPageTemplate header={<AdminMenu />} footer={<AdminFooter />}>

@@ -1,5 +1,6 @@
 import React from 'react'
-import { FullPageTemplate, NotFound } from 'components'
+import NotFound from '@organisms/NotFound'
+import FullPageTemplate from '@templates/FullPageTemplate'
 
 const NotFoundPage = () => (
   <FullPageTemplate mainPadding="0">

@@ -1,5 +1,7 @@
 import React from 'react'
-import { Flex, Heading, Paragraph } from 'components'
+import Flex from '@atoms/Flex'
+import Heading from '@atoms/Heading'
+import Paragraph from '@atoms/Paragraph'
 
 const NotFound = () => (
   <Flex flow="column" halign="center" style={{ minHeight: '100vh' }} valign="center">

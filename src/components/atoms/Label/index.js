@@ -9,7 +9,9 @@ const Label = styled(({
 }) => <label htmlFor={htmlFor} {...props} />)`
   background-color: ${palette('grayscale', 4)};
   border-radius: 3px;
-  color: ${({ active, color, focusBorderColor: { position, type } }) => active ? palette(type, position) : palette(color.type, color.position)};
+  color: ${({ active, color, focusBorderColor: { position, type } }) => {
+    return active ? palette(type, position) : palette(color.type, color.position)
+  }};
   font-family: ${font('primary')};
   font-size: ${({ active }) => active ? '0.6em' : getSize('extraSmall')};
   left: 0;

@@ -5,27 +5,25 @@ import * as Yup from 'yup'
 import { isCNPJ } from 'brazilian-values'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Creators as GasStationActions } from '@store/ducks/gasStation'
-import {
-  Button,
-  Block,
-  CitySelect,
-  ContentLoader,
-  Form,
-  Heading,
-  Grid,
-  Icon,
-  MapInput,
-  Select,
-  StateSelect,
-  Text,
-} from 'components'
 import { FieldWrapper } from './style'
+import { Creators as GasStationActions } from '@store/ducks/gasStation'
+import Button from '@atoms/Button'
+import Block from '@atoms/Block'
+import Form from '@molecules/Form'
+import Heading from '@atoms/Heading'
+import Grid from '@atoms/Grid'
+import Icon from '@atoms/Icon'
+import Select from '@atoms/Select'
+import Text from '@atoms/Text'
+import CitySelect from '@molecules/CitySelect'
+import ContentLoader from '@molecules/ContentLoader'
+import MapInput from '@molecules/MapInput'
+import StateSelect from '@molecules/StateSelect'
 
 const UpdateGasStationForm = ({
   gasStation, gasStationID, getGasStationRequest, isFetching, updateGasStationRequest,
 }) => {
-  useEffect(() => { getGasStationRequest(gasStationID) }, [])
+  useEffect(() => { getGasStationRequest(gasStationID) }, [gasStationID, getGasStationRequest])
   if (isFetching) return <ContentLoader />
 
   const geoLocation = gasStation.geo_location
@@ -108,7 +106,8 @@ const UpdateGasStationForm = ({
             .required('Campo estado é obrigatório'),
         })
       }
-      render={({
+    >
+      {({
         values,
         dirty,
         touched,
@@ -276,7 +275,7 @@ const UpdateGasStationForm = ({
                   level={3}
                 >
                   Selecione a localização do posto arrastando o icone
-                  <Icon icon="mapPin" />
+                  <Icon name="MapPin" />
                 </Heading>
                 <MapInput
                   value={values.geo_location}
@@ -288,11 +287,15 @@ const UpdateGasStationForm = ({
           </Form>
         )
       }}
-    />
+    </Formik>
   )
 }
 
 UpdateGasStationForm.propTypes = {
+  gasStation: PropTypes.object.isRequired,
+  gasStationID: PropTypes.string.isRequired,
+  getGasStationRequest: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   updateGasStationRequest: PropTypes.func.isRequired,
 }
 

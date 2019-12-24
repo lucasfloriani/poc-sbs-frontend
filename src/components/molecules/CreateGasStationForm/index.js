@@ -5,20 +5,18 @@ import * as Yup from 'yup'
 import { isCNPJ } from 'brazilian-values'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Creators as GasStationActions } from '@store/ducks/gasStation'
-import {
-  Button,
-  Block,
-  CitySelect,
-  Form,
-  Grid,
-  Heading,
-  Icon,
-  MapInput,
-  StateSelect,
-  Text,
-} from 'components'
 import { FieldWapper } from './style'
+import { Creators as GasStationActions } from '@store/ducks/gasStation'
+import Button from '@atoms/Button'
+import Block from '@atoms/Block'
+import Form from '@molecules/Form'
+import Grid from '@atoms/Grid'
+import Heading from '@atoms/Heading'
+import Icon from '@atoms/Icon'
+import Text from '@atoms/Text'
+import CitySelect from '@molecules/CitySelect'
+import MapInput from '@molecules/MapInput'
+import StateSelect from '@molecules/StateSelect'
 
 const CreateGasStationForm = ({ createGasStationRequest, isFetching }) => (
   <Formik
@@ -97,7 +95,8 @@ const CreateGasStationForm = ({ createGasStationRequest, isFetching }) => (
           .required('Campo estado é obrigatório'),
       })
     }
-    render={({
+  >
+    {({
       values,
       dirty,
       touched,
@@ -276,7 +275,7 @@ const CreateGasStationForm = ({ createGasStationRequest, isFetching }) => (
                 level={3}
               >
                 Selecione a localização do posto arrastando o icone
-                <Icon icon="mapPin" />
+                <Icon name="MapPin" />
               </Heading>
               <MapInput
                 value={values.geo_location}
@@ -288,11 +287,12 @@ const CreateGasStationForm = ({ createGasStationRequest, isFetching }) => (
         </Form>
       )
     }}
-  />
+  </Formik>
 )
 
 CreateGasStationForm.propTypes = {
   createGasStationRequest: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = ({ gasStation: { isFetching } }) => ({ isFetching })

@@ -1,9 +1,10 @@
+/* eslint-disable no-console */
 import { put, call } from 'redux-saga/effects'
-import { getRequestErrorsFromErrorObj } from '@helpers/error'
 import FileSaver from 'file-saver'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as PriceFuelActions } from '../ducks/priceFuel'
 import api from '@service'
+import { getRequestErrorsFromErrorObj } from '@helpers/error'
 
 export function* priceFuelsRequest({ gasStationID }) {
   try {
@@ -73,6 +74,8 @@ export function* priceFuelHistoryRelatoryRequest() {
   } catch (err) {
     console.log('SAGA PRICE FUEL ERR: ', err)
     yield put(PriceFuelActions.priceFuelHistoryRelatoryFailure())
-    yield put(AlertActions.createErrorAlert('Erro ao baixar o relatório de histórico de preços, tente novamente mais tarde'))
+    yield put(AlertActions.createErrorAlert(
+      'Erro ao baixar o relatório de histórico de preços, tente novamente mais tarde',
+    ))
   }
 }

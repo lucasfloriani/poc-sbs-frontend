@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Toast } from 'components'
 import { connect } from 'react-redux'
 import { Wrapper } from './style'
+import Toast from '@atoms/Toast'
 
 const ToastContainer = ({ alerts }) => (
   <Wrapper>

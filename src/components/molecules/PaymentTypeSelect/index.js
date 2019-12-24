@@ -3,15 +3,16 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as PaymentTypeActions } from '@store/ducks/paymentType'
-import { Select } from 'components'
+import Select from '@atoms/Select'
 
 const PaymentTypeSelect = ({ paymentTypes, paymentTypesRequest, ...props }) => {
-  useEffect(() => { paymentTypesRequest() }, [])
+  useEffect(() => { paymentTypesRequest() }, [paymentTypesRequest])
   return <Select options={paymentTypes} {...props} />
 }
 
 PaymentTypeSelect.propTypes = {
   paymentTypes: PropTypes.array.isRequired,
+  paymentTypesRequest: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = ({ paymentType: { paymentTypes, isFetching } }) => ({ paymentTypes, isFetching })

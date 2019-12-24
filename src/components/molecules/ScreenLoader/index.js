@@ -1,6 +1,6 @@
 import React from 'react'
-import { Loader } from 'components'
 import { Wrapper } from './style'
+import Loader from '@atoms/Loader'
 
 const ScreenLoader = ({ ...props }) => (
   <Wrapper {...props}>

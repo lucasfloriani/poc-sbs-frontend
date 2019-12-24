@@ -1,12 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {
-  Container,
-  FullPageTemplate,
-  GasStationMenu,
-  GasStationFooter,
-  UpdatePriceFuelForm,
-} from 'components'
+import Container from '@atoms/Container'
+import UpdatePriceFuelForm from '@molecules/UpdatePriceFuelForm'
+import GasStationMenu from '@organisms/GasStationMenu'
+import GasStationFooter from '@organisms/GasStationFooter'
+import FullPageTemplate from '@templates/FullPageTemplate'
 
 const GasStationEditPriceFuel = ({ match }) => (
   <FullPageTemplate header={<GasStationMenu />} footer={<GasStationFooter />}>

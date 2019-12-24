@@ -7,8 +7,8 @@ export const StyledToast = styled.div`
   border-radius: 3px;
   box-shadow: ${getShadow()};
   cursor: pointer;
-  padding: .6em 1.2em;
   margin: 10px 0;
+  padding: .6em 1.2em;
   text-align: center;
   width: 250px;
 `

@@ -53,7 +53,9 @@ export const theme = {
 
 export const getOptionsFrom = option => Object.keys(theme[option])
 export const getSize = (name = 'normal') => theme.sizes[name] ? theme.sizes[name] : theme.sizes.small
-export const getFontWeight = (name = 'regular') => theme.fontWeight[name] ? theme.fontWeight[name] : theme.fontWeight.regular
+export const getFontWeight = (name = 'regular') => {
+  return theme.fontWeight[name] ? theme.fontWeight[name] : theme.fontWeight.regular
+}
 export const getShadow = (size = 'extraSmall') => theme.shadows[size]
 export const getPadding = (type = 'secondary') => theme.padding[type]
 export const getMediaQuery = (size = 'maxMedium') => theme.medias[size]

@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { font, palette } from 'styled-theme'
 import InputMask from 'react-input-mask'
-import withFormWrapper from '@containers/inputWrapper'
+import withFormWrapper from '@hocs/inputWrapper'
 import maskTypes from '@enums/maskTypes'
+
 import {
   getSize,
   getOptionsFrom,

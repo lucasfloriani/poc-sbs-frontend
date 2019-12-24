@@ -1,5 +1,4 @@
 import axios from 'axios'
-import store from '@store'
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -10,7 +9,7 @@ const api = axios.create({
 })
 
 api.interceptors.request.use((config) => {
-  const { token } = store.getState().auth
+  const token = sessionStorage.getItem('token')
   const headers = { ...config.headers, Authorization: token && `Bearer ${token}` }
   return { ...config, headers }
 })

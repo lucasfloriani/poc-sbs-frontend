@@ -1,15 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { formatToFuelPrice } from '@helpers/string'
-import {
-  BadgeIcon,
-  Card,
-  Flex,
-  Grid,
-  Heading,
-  Link,
-  Paragraph,
-} from 'components'
+import Card from '@atoms/Card'
+import Flex from '@atoms/Flex'
+import Grid from '@atoms/Grid'
+import Heading from '@atoms/Heading'
+import Link from '@atoms/Link'
+import Paragraph from '@atoms/Paragraph'
+import BadgeIcon from '@molecules/BadgeIcon'
 
 const PriceFuelCard = ({
   fuelType, id, paymentType, price,
@@ -22,8 +20,8 @@ const PriceFuelCard = ({
         <Paragraph fontSize="small">{formatToFuelPrice(price)}</Paragraph>
       </Flex>
       <Flex>
-        <Link to={`/admin/gas-stations/${id}`}><BadgeIcon icon="edit" /></Link>
-        <BadgeIcon icon="delete" />
+        <Link to={`/admin/gas-stations/${id}`}><BadgeIcon name="Edit" /></Link>
+        <BadgeIcon name="Delete" />
       </Flex>
     </Grid>
   </Card>

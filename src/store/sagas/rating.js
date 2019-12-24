@@ -1,9 +1,10 @@
+/* eslint-disable no-console */
 import { put, call } from 'redux-saga/effects'
-import { getRequestErrorsFromErrorObj } from '@helpers/error'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as RatingActions } from '../ducks/rating'
 import { Creators as GasStationAction } from '../ducks/gasStation'
 import api from '@service'
+import { getRequestErrorsFromErrorObj } from '@helpers/error'
 
 export function* getRatingRequest({ ratingID }) {
   try {

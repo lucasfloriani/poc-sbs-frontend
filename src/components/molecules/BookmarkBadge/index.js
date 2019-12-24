@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Creators as BookmarkActions } from '@store/ducks/bookmark'
-import { Badge, Icon } from 'components'
+import Badge from '@atoms/Badge'
+import Icon from '@atoms/Icon'
 
 const BookmarkBadge = ({
   bookmarks,
@@ -20,8 +21,7 @@ const BookmarkBadge = ({
   return (
     <Badge>
       <Icon
-        cursor="pointer"
-        icon="bookmark"
+        name="Bookmark"
         color={hasUserBookmark ? { type: 'error', position: 1 } : { type: 'primary', position: 0 }}
         hoverColor={hasUserBookmark ? { type: 'error', position: 1 } : { type: 'primary', position: 0 }}
         onClick={onToggle}

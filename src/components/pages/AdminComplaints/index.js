@@ -1,14 +1,12 @@
 import React from 'react'
-import {
-  AdminFooter,
-  AdminMenu,
-  Block,
-  Container,
-  FullPageTemplate,
-  Grid,
-  Heading,
-  ListComplaints,
-} from 'components'
+import Block from '@atoms/Block'
+import Container from '@atoms/Container'
+import Grid from '@atoms/Grid'
+import Heading from '@atoms/Heading'
+import AdminFooter from '@organisms/AdminFooter'
+import AdminMenu from '@organisms/AdminMenu'
+import ListComplaints from '@organisms/ListComplaints'
+import FullPageTemplate from '@templates/FullPageTemplate'
 
 const AdminComplaints = () => (
   <FullPageTemplate header={<AdminMenu />} footer={<AdminFooter />}>

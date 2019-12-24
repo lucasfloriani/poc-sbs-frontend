@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import Dropzone from 'react-dropzone'
-import { Paragraph } from 'components' // Loader
 import { readAsArrayBuffer } from 'promise-file-reader'
-import { getInfoFileByBlob } from '@helpers/file'
 import {
   Wrapper,
   FieldWrapper,
@@ -11,6 +9,8 @@ import {
   StyledImage,
   Error,
 } from './style'
+import Paragraph from '@atoms/Paragraph'
+import { getInfoFileByBlob } from '@helpers/file'
 
 const ImageInput = ({
   accept, error, height, image, onDropCallback,

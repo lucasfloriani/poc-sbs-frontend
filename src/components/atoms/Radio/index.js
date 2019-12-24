@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { getOptionsFrom } from '@theme'
 import { CheckboxWrapper } from './style'
+import { getOptionsFrom } from '@theme'
 
 const Checkbox = ({ name, children, ...props }) => {
   const { disabled } = props
@@ -29,6 +29,7 @@ Checkbox.propTypes = {
     position: PropTypes.number,
     type: PropTypes.oneOf(getOptionsFrom('palette')),
   }),
+  children: PropTypes.any.isRequired,
   disabled: PropTypes.bool,
   disabledColor: PropTypes.shape({
     position: PropTypes.number,

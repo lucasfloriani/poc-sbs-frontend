@@ -1,15 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import withFormWrapper from '@containers/inputWrapper'
-import { getOptionsFrom } from '@theme'
 import { StyledSelect } from './style'
+import withFormWrapper from '@hocs/inputWrapper'
+import { getOptionsFrom } from '@theme'
 
+/* eslint-disable jsx-a11y/control-has-associated-label */
 const Select = ({ options, ...props }) => (
   <StyledSelect {...props}>
     <option value="" />
     {options.map(([name, value]) => <option value={value} key={value}>{name}</option>)}
   </StyledSelect>
 )
+/* eslint-enable jsx-a11y/control-has-associated-label */
 
 Select.propTypes = {
   active: PropTypes.bool,

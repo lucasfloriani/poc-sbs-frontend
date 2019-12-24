@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { palette } from 'styled-theme'
 import historyType from '@enums/historyType'
-import { Card } from 'components'
+import Card from '@atoms/Card'
 
 export const StyledCard = styled(Card)`
   background-color: ${({ type }) => {

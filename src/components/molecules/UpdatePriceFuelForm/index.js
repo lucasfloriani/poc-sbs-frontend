@@ -4,19 +4,17 @@ import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Creators as PriceFuelActions } from '@store/ducks/priceFuel'
-import {
-  Button,
-  Block,
-  FuelTypeSelect,
-  Heading,
-  Form,
-  Grid,
-  PaymentTypeSelect,
-  ScreenLoader,
-  Text,
-} from 'components'
 import { FieldWrapper } from './style'
+import { Creators as PriceFuelActions } from '@store/ducks/priceFuel'
+import Button from '@atoms/Button'
+import Block from '@atoms/Block'
+import Heading from '@atoms/Heading'
+import Form from '@molecules/Form'
+import Grid from '@atoms/Grid'
+import Text from '@atoms/Text'
+import FuelTypeSelect from '@molecules/FuelTypeSelect'
+import PaymentTypeSelect from '@molecules/PaymentTypeSelect'
+import ScreenLoader from '@molecules/ScreenLoader'
 
 const UpdatePriceFuelForm = ({
   getPriceFuelRequest,
@@ -25,7 +23,7 @@ const UpdatePriceFuelForm = ({
   priceFuelID,
   updatePriceFuelRequest,
 }) => {
-  useEffect(() => { getPriceFuelRequest(priceFuelID) }, [])
+  useEffect(() => { getPriceFuelRequest(priceFuelID) }, [getPriceFuelRequest, priceFuelID])
   if (isFetching) return <ScreenLoader />
 
   return (
@@ -55,7 +53,8 @@ const UpdatePriceFuelForm = ({
             .required('Campo do tipo de combustível é obrigatório'),
         })
       }
-      render={({
+    >
+      {({
         values,
         dirty,
         touched,
@@ -126,13 +125,16 @@ const UpdatePriceFuelForm = ({
           </Form>
         )
       }}
-    />
+    </Formik>
   )
 }
 
 UpdatePriceFuelForm.propTypes = {
   priceFuelID: PropTypes.string.isRequired,
   updatePriceFuelRequest: PropTypes.func.isRequired,
+  getPriceFuelRequest: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  priceFuel: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = ({ priceFuel: { isFetching, priceFuel } }) => ({ isFetching, priceFuel })

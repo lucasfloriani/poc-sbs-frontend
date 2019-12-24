@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { CreateComplaintForm, Modal } from 'components'
+import Modal from '@atoms/Modal'
+import CreateComplaintForm from '@molecules/CreateComplaintForm'
 
 const ComplaintRender = ({ children, gasStationID }) => {
   const [open, setOpen] = useState(false)

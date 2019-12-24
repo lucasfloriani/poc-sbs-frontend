@@ -36,9 +36,13 @@ export const CheckboxWrapper = styled.div`
 
   label > i {
     align-items: center;
-    background-color: ${({ disabledColor, backgroundColor: bgColor, disabled }) => disabled ? palette(disabledColor.type, disabledColor.position) : palette(bgColor.type, bgColor.position)};
+    background-color: ${({ disabledColor, backgroundColor: bgColor, disabled }) => {
+    return disabled ? palette(disabledColor.type, disabledColor.position) : palette(bgColor.type, bgColor.position)
+  }};
     border-radius: 50%;
-    border: 1px solid ${({ disabled, disabledColor }) => disabled ? palette(disabledColor.type, disabledColor.position) : 'transparent'};
+    border: 1px solid ${({ disabled, disabledColor }) => {
+    return disabled ? palette(disabledColor.type, disabledColor.position) : 'transparent'
+  }};
     box-shadow: ${getShadow('extraSmall')};
     display: inline-flex;
     height: ${getSize('normal')};
@@ -54,7 +58,9 @@ export const CheckboxWrapper = styled.div`
   }
 
   label > span {
-    color: ${({ disabled, disabledColor }) => disabled ? palette(disabledColor.type, disabledColor.position) : palette('grayscale', 1)};
+    color: ${({ disabled, disabledColor }) => {
+    return disabled ? palette(disabledColor.type, disabledColor.position) : palette('grayscale', 1)
+  }};
     font-family: ${font('primary')};
     font-size: ${getSize('extraSmall')};
     line-height: 0.7;
@@ -66,13 +72,15 @@ export const CheckboxWrapper = styled.div`
   }
 
   input:checked + label > i {
-    background-color: ${({ checkedBackgroundColor }) => palette(checkedBackgroundColor.type, checkedBackgroundColor.position)};
+    background-color: ${({ checkedBackgroundColor }) => {
+    return palette(checkedBackgroundColor.type, checkedBackgroundColor.position)
+  }};
   }
 
   input:checked + label > i:after {
     animation: ${check} 0.8s;
-    border-radius: 50%;
     background-color: ${({ bubbleColor }) => palette(bubbleColor.type, bubbleColor.position)};
+    border-radius: 50%;
     content: '';
     height: .6em;
     width: .6em;

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { put, call } from 'redux-saga/effects'
 import { Creators as AlertActions } from '../ducks/alert'
 import { Creators as PaymentTypeActions } from '../ducks/paymentType'

@@ -2,7 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { ifProp, prop } from 'styled-tools'
 import { font, key, palette } from 'styled-theme'
-import { Image, Paragraph } from 'components'
+import Image from '@atoms/Image'
+import Paragraph from '@atoms/Paragraph'
 
 export const Wrapper = styled.div`
   align-items: center;
@@ -20,10 +21,11 @@ export const FieldWrapper = styled(({ isDragActive, height, ...props }) => <div 
   flex-direction: column;
   justify-content: center;
   min-height: ${prop('height')};
-  padding: 10px 12px;
   outline: none;
   overflow: hidden;
-  transition: .6s background-color ${key(['cubicBezier', 'standard'])}, .3s box-shadow ${key(['cubicBezier', 'standard'])};
+  padding: 10px 12px;
+  transition: .6s background-color ${key(['cubicBezier', 'standard'])},
+              .3s box-shadow ${key(['cubicBezier', 'standard'])};
 
   &:hover {
     box-shadow: ${key(['shadows', 'medium'])};
@@ -39,8 +41,8 @@ export const Message = styled(({ isDragActive, ...props }) => <Paragraph {...pro
 
 export const StyledImage = styled(Image)`
   display: ${ifProp('src', 'block', 'none')};
-  max-width: 100%;
   max-height: ${prop('maxHeight')};
+  max-width: 100%;
 `
 
 export const Error = styled.div`

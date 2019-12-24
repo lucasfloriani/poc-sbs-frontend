@@ -3,16 +3,14 @@ import PropTypes from 'prop-types'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { connect } from 'react-redux'
-import {
-  Button,
-  Block,
-  Flex,
-  Form,
-  Grid,
-  Heading,
-  ImageInput,
-  Text,
-} from 'components'
+import Button from '@atoms/Button'
+import Block from '@atoms/Block'
+import Flex from '@atoms/Flex'
+import Form from '@molecules/Form'
+import Grid from '@atoms/Grid'
+import Heading from '@atoms/Heading'
+import Text from '@atoms/Text'
+import ImageInput from '@molecules/ImageInput'
 
 const ComplaintForm = ({
   initialValues,
@@ -36,7 +34,8 @@ const ComplaintForm = ({
         image: Yup.string().typeError('Imagem fornecida é inválida'),
       })
     }
-    render={({
+  >
+    {({
       values,
       touched,
       errors,
@@ -72,7 +71,6 @@ const ComplaintForm = ({
       >
         <Grid valign="flex-start">
           <Text
-            id="message"
             name="message"
             labelTitle="Mensagem"
             error={touched.message && errors.message}
@@ -103,7 +101,7 @@ const ComplaintForm = ({
         </Grid>
       </Form>
     )}
-  />
+  </Formik>
 )
 
 ComplaintForm.propTypes = {
