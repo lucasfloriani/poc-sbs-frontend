@@ -35,6 +35,7 @@
     "styled-theme": "^0.3.3",
     "styled-tools": "^1.7.1",
     "use-position": "0.0.6",
+    "use-via-cep": "^1.0.2",
     "uuid": "^3.3.3",
     "webfontloader": "^1.6.28",
     "yup": "^0.28.0"
