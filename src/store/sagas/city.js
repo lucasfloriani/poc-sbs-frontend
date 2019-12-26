@@ -7,7 +7,7 @@ import api from '@service'
 export function* citiesRequest({ stateID }) {
   try {
     const response = yield call(api.get, `states/${stateID}/cities`)
-    const cities = response.data.map(({ id, name }) => [name, id])
+    const cities = response.data
     yield put(CityActions.citiesSuccess(cities))
   } catch (err) {
     console.log('SAGA CITY ERR: ', err)

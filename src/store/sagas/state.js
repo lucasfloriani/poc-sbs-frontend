@@ -7,7 +7,7 @@ import api from '@service'
 export function* statesRequest() {
   try {
     const response = yield call(api.get, 'states')
-    const states = response.data.map(({ id, name }) => [name, id])
+    const states = response.data
     yield put(StateActions.statesSuccess(states))
   } catch (err) {
     console.log('SAGA STATE ERR: ', err)
