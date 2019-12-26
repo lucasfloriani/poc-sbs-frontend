@@ -2,11 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Map from 'pigeon-maps'
 import Marker from 'pigeon-marker'
-import { usePosition } from 'use-position'
 import CustomMarker from '@molecules/CustomMarker'
 
-const MapPins = ({ pins = [] }) => {
-  const { latitude = -26.244383377008926, longitude = -49.384092876981356 } = usePosition()
+const MapPins = ({ pins = [], latitude, longitude }) => {
   const showDirections = (location) => {
     window.open(`http://maps.google.com/?saddr=${latitude},${longitude}&daddr=${location}&dirflg=d&f=d`)
   }
@@ -33,6 +31,8 @@ const MapPins = ({ pins = [] }) => {
 }
 
 MapPins.propTypes = {
+  latitude: PropTypes.number.isRequired,
+  longitude: PropTypes.number.isRequired,
   pins: PropTypes.arrayOf(
     PropTypes.shape({
       location: PropTypes.string,

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { usePosition } from 'use-position'
 import { Creators as GasStationActions } from '@store/ducks/gasStation'
 import Container from '@atoms/Container'
 import Grid from '@atoms/Grid'
@@ -14,6 +15,7 @@ import UserMenu from '@organisms/UserMenu'
 import FullPageTemplate from '@templates/FullPageTemplate'
 
 const HomePage = ({ gasStations, gasStationsRequest, isFetching }) => {
+  const { latitude = -26.244383377008926, longitude = -49.384092876981356 } = usePosition()
   useEffect(() => {
     const filterValues = {
       name: '',
@@ -40,7 +42,7 @@ const HomePage = ({ gasStations, gasStationsRequest, isFetching }) => {
     <FullPageTemplate header={<UserMenu />} footer={<UserFooter />}>
       <Container align="center">
         <Grid>
-          <MapPins pins={gasStationsPins} />
+          <MapPins latitude={latitude} longitude={longitude} pins={gasStationsPins} />
           <FilterGasStation onSubmit={filterPayload => gasStationsRequest(filterPayload)} />
           <ListGasStations />
         </Grid>
