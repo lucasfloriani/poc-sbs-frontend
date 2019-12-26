@@ -2,11 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Container from '@atoms/Container'
 import RecoveryPasswordForm from '@organisms/RecoveryPasswordForm'
+import UserFooter from '@organisms/UserFooter'
+import UserMenu from '@organisms/UserMenu'
 import FullPageTemplate from '@templates/FullPageTemplate'
 
 const RecoveryPassword = ({ match }) => (
-  <FullPageTemplate mainPadding="0">
-    <Container align="center" windowHeight>
+  <FullPageTemplate header={<UserMenu />} footer={<UserFooter />}>
+    <Container align="center">
       <RecoveryPasswordForm token={match.params.token} />
     </Container>
   </FullPageTemplate>

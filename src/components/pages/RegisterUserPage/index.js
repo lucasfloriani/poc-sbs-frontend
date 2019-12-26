@@ -1,11 +1,13 @@
 import React from 'react'
 import Container from '@atoms/Container'
 import FullPageTemplate from '@templates/FullPageTemplate'
+import UserFooter from '@organisms/UserFooter'
+import UserMenu from '@organisms/UserMenu'
 import UserRegisterForm from '@organisms/UserRegisterForm'
 
 const RegisterUserPage = () => (
-  <FullPageTemplate mainPadding="0">
-    <Container align="center" windowHeight>
+  <FullPageTemplate header={<UserMenu />} footer={<UserFooter />}>
+    <Container align="center">
       <UserRegisterForm />
     </Container>
   </FullPageTemplate>

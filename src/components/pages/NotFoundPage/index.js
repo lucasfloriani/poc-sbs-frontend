@@ -1,9 +1,11 @@
 import React from 'react'
 import NotFound from '@organisms/NotFound'
+import UserFooter from '@organisms/UserFooter'
+import UserMenu from '@organisms/UserMenu'
 import FullPageTemplate from '@templates/FullPageTemplate'
 
 const NotFoundPage = () => (
-  <FullPageTemplate mainPadding="0">
+  <FullPageTemplate header={<UserMenu />} footer={<UserFooter />}>
     <NotFound />
   </FullPageTemplate>
 )

@@ -13,6 +13,6 @@ export const Header = styled.header``
 
 export const MainContent = styled.main`
   box-sizing: border-box;
-  padding: ${({ mainPadding }) => mainPadding};
+  padding: 15px 0;
   width: 100%;
 `
