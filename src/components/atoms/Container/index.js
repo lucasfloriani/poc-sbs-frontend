@@ -11,13 +11,11 @@ const Container = styled.div`
   padding: 0 8px;
   width: 100%;
   ${({ wrap }) => wrap && css`flex-wrap: ${wrap};`}
-  ${({ windowHeight }) => windowHeight && css`min-height: 100vh;`}
 `
 
 Container.propTypes = {
   align: PropTypes.string,
   direction: PropTypes.string,
-  windowHeight: PropTypes.bool,
   wrap: PropTypes.string,
 }
 
