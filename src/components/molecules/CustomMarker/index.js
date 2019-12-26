@@ -37,7 +37,11 @@ const CustomMarker = ({
             {Object.entries(priceFuelValues).map(([key, value]) => (
               <FuelCardInfo backgroundColor={{ type: 'grayscale', position: 1 }} padding="small" key={key}>
                 <Paragraph align="center" color={{ type: 'grayscale', position: 4 }}>{key}</Paragraph>
-                <Paragraph align="center" color={{ type: 'grayscale', position: 4 }}>
+                <Paragraph
+                  align="center"
+                  color={{ type: 'grayscale', position: 4 }}
+                  style={{ letterSpacing: '-0.4px' }}
+                >
                   {value !== '-----' ? formatToFuelPrice(value) : value}
                 </Paragraph>
               </FuelCardInfo>
